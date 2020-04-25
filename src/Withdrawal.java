@@ -1,4 +1,7 @@
-package PACKAGE_NAME;
+public class Withdrawal extends Transaction {
 
-public class Withdrawal {
+    public static void main(String[] args)
+    {
+
+    }
 }

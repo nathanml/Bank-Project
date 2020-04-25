@@ -1,10 +1,13 @@
+import java.util.ArrayList;
+
 public abstract class Account {
 
     /*
     * Abstract class for various types of accounts. All accounts have a name, balance, and customer
     * */
-    String name;
-    int balance;
+    protected String name;
+    protected int balance;
+    protected ArrayList<Transaction> transactions;
     //I think the customer should have the account. Not the account have the customer. 
 
     //Constructor
@@ -17,9 +20,8 @@ public abstract class Account {
     //no args constructor
     public Account()
     {
-    this.name= "account";
-    this.balance= 0;
-
+        this.name= "account";
+        this.balance= 0;
     }
     //getters and setters
     public int getMoney()

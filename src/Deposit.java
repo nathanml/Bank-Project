@@ -1,4 +1,7 @@
-package PACKAGE_NAME;
+public class Deposit extends Transaction {
 
-public class Deposit {
+    public static void main(String[] args)
+    {
+
+    }
 }

@@ -1,10 +1,13 @@
+import java.util.ArrayList;
+
 public class Customer extends User {
     /*
     * Customer class: Customers have accounts, stocks (if they have enough)
     * */
 
-    Account[] accounts= new Account[3]; //list of all of the users' accounts. For now, can have at most 3 accounts
-    int numberOfaccounts=0;
+    ArrayList<Account> accounts= new ArrayList<Account> (); //list of all of the users' accounts. For now, can have at most 3 accounts
+    ArrayList<Loan> loans = new ArrayList<Loan> (); //list of customer's loans
+    private int numberOfaccounts=0;
     //need to add stocks
 
     //Constructor 
@@ -21,17 +24,17 @@ public class Customer extends User {
     //add account
     public void addAccount(Account account)
     {
-        accounts[numberOfaccounts]= account;
+        accounts.add (account);
         numberOfaccounts++;
     }
     //display account
     public void displayAccount(Account account)
     {
-        for(int i=0; i< accounts.length; i++)
+        for(int i=0; i< accounts.size (); i++)
         {
-            if ( accounts[i] != null)
+            if ( accounts.get (i) != null)
             {
-                System.out.println(accounts[i]);
+                System.out.println(accounts.get (i));
             }
         }
 
