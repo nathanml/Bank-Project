@@ -90,7 +90,6 @@ public class SignUp extends JFrame implements ActionListener
 		if (!username.equals("") && !password.equals(""))
 		{
 			Customer c1= new Customer(username, password);
-
 		}
 		else {
 		System.out.println("Incorrect input, please try again");

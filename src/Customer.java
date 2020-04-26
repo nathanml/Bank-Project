@@ -5,8 +5,11 @@ public class Customer extends User {
     * Customer class: Customers have accounts, stocks (if they have enough)
     * */
 
-    ArrayList<Account> accounts= new ArrayList<Account> (); //list of all of the users' accounts. For now, can have at most 3 accounts
-    ArrayList<Loan> loans = new ArrayList<Loan> (); //list of customer's loans
+    private ArrayList<CheckingAccount> checkingAccounts= new ArrayList<CheckingAccount> ();
+    private ArrayList<SavingsAccount> savingsAccounts = new ArrayList<SavingsAccount> ();
+    private ArrayList<SecuritiesAccount> securitiesAccounts = new ArrayList<SecuritiesAccount> ();
+    private ArrayList<Loan> loans = new ArrayList<Loan> (); //list of customer's loans
+    private ArrayList<Stock> stocks = new ArrayList<Stock> ();
     private int numberOfaccounts=0;
     //need to add stocks
 
@@ -22,9 +25,21 @@ public class Customer extends User {
     }
 
     //add account
-    public void addAccount(Account account)
+    public void addCheckingAccount(CheckingAccount account)
     {
-        accounts.add (account);
+        checkingAccounts.add (account);
+        numberOfaccounts++;
+    }
+
+    public void addSavingsAccount(SavingsAccount account)
+    {
+        savingsAccounts.add (account);
+        numberOfaccounts++;
+    }
+
+    public void addSecuritiesAccount(SecuritiesAccount account)
+    {
+        securitiesAccounts.add (account);
         numberOfaccounts++;
     }
 
@@ -33,17 +48,6 @@ public class Customer extends User {
         loans.add(loan);
     }
 
-    //display account
-    public void displayAccount(Account account)
-    {
-        for(int i=0; i< accounts.size (); i++)
-        {
-            if ( accounts.get (i) != null)
-            {
-                System.out.println(accounts.get (i));
-            }
-        }
 
-    }
 
 }
