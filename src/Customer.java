@@ -27,6 +27,12 @@ public class Customer extends User {
         accounts.add (account);
         numberOfaccounts++;
     }
+
+    public void requestLoan(Loan loan)
+    {
+        loans.add(loan);
+    }
+
     //display account
     public void displayAccount(Account account)
     {

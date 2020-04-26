@@ -21,6 +21,18 @@ public abstract class User {
         this.username= "user";
         this.password= "password";
     }
+
+    public void updateUsername(String u)
+    {
+        username = u;
+    }
+
+    public void updatePassword(String p)
+    {
+        password = p;
+    }
+
+
     //getters and setters
     public String getUsername()
     {

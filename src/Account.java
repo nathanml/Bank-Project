@@ -7,15 +7,30 @@ public abstract class Account {
     * */
     protected String name;
     protected int balance;
+    protected Currency currency;
     protected ArrayList<Transaction> transactions;
     //I think the customer should have the account. Not the account have the customer. 
 
     //Constructor
-    public Account(String name, int balance)
+    public Account(String name, int balance, Currency c)
     {
-    this.name= name;
-    this.balance= balance;
+        this.name= name;
+        this.balance= balance;
+        currency = c;
+    }
 
+    public void deposit(int amount)
+    {
+        balance += amount;
+    }
+
+    public void withdrawal(int amount)
+    {
+        if(amount > balance)
+        {
+            System.out.println("You cannot withdrawal more than " + balance + " dollars.");
+        }
+        else balance -= amount;
     }
     //no args constructor
     public Account()
