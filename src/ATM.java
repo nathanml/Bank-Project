@@ -29,7 +29,7 @@ public class ATM extends JFrame {
         JButton loan = new JButton ("Request Loan");
         loan.setBounds(10, 90, 80, 25);
         panel.add(loan);
-        LoanListener loanL = new LoanListener ();
+        RequestLoan loanL = new RequestLoan (customer);
         loan.addActionListener (loanL);
         JButton transaction = new JButton ("View Transactions");
         transaction.setBounds(10, 100, 80, 25);
@@ -42,14 +42,6 @@ public class ATM extends JFrame {
         BalanceListener balanceL = new BalanceListener ();
         balance.addActionListener (balanceL);
         setVisible( true );
-    }
-
-    class LoanListener implements ActionListener{
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-
-        }
     }
 
     class TransactionListener implements ActionListener{

@@ -19,8 +19,8 @@ public class CheckingAccount extends Account {
         balance += money; 
     } 
 
-    //withdrawl
-    public void withdraw(int money)
+    //withdrawal
+    public void withdrawal(int money)
     {
         balance -= money; 
     } 

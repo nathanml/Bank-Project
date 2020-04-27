@@ -8,8 +8,8 @@ public class Customer extends User {
     private ArrayList<CheckingAccount> checkingAccounts= new ArrayList<CheckingAccount> ();
     private ArrayList<SavingsAccount> savingsAccounts = new ArrayList<SavingsAccount> ();
     private ArrayList<SecuritiesAccount> securitiesAccounts = new ArrayList<SecuritiesAccount> ();
-    private ArrayList<Loan> loans = new ArrayList<Loan> (); //list of customer's loans
-    private ArrayList<Stock> stocks = new ArrayList<Stock> ();
+    private ArrayList<Loan> loans = new ArrayList<>(); //list of customer's loans
+    private ArrayList<Stock> stocks = new ArrayList<> ();
     private int numberOfaccounts=0;
     //need to add stocks
 
