@@ -1,16 +1,10 @@
 public class CheckingAccount extends Account {
 
-
     //Constructor
     public CheckingAccount(String name, int balance, Currency c)
     {
     super(name, balance, c);
 
-    }
-    //no args constructor
-    public CheckingAccount()
-    {
-    super();
     }
 
     //deposit money 
