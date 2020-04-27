@@ -1,9 +1,9 @@
 public class SavingsAccount extends Account {
 
     //Constructor
-    public SavingsAccount(String name, int balance)
+    public SavingsAccount(String name, int balance, Currency c)
     {
-    super(name, balance);
+    super(name, balance, c);
 
     }
     //no args constructor

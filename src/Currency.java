@@ -1,28 +1,28 @@
 public class Currency {
     private String name;
-    private int conversionFactor;     //Conversion factor * universal rate = currency rate
+    private double conversionFactor;     //Conversion factor * universal rate = currency rate
 
     /*
     * Should a name and contain methods for conversion
     * */
 
-    public Currency(String n, int cf)
+    public Currency(String n, double cf)
     {
         name = n;
         conversionFactor = cf;
     }
 
-    public int convertFromDollar(int x)
+    public int convertFromDollar(double x)
     {
-        return (conversionFactor * x);
+        return (int) (conversionFactor * x);
     }
 
-    public int convertToDollar(int x)
+    public int convertToDollar(double x)
     {
-        return (x / conversionFactor);
+        return (int) (x / conversionFactor);
     }
 
-    public void setConversionFactor(int x)
+    public void setConversionFactor(double x)
     {
         conversionFactor = x;
     }

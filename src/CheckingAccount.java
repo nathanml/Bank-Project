@@ -2,9 +2,9 @@ public class CheckingAccount extends Account {
 
 
     //Constructor
-    public CheckingAccount(String name, int balance)
+    public CheckingAccount(String name, int balance, Currency c)
     {
-    super(name, balance);
+    super(name, balance, c);
 
     }
     //no args constructor

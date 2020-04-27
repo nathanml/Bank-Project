@@ -1,11 +1,14 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 
-public class CreateNewCheckingAccount extends CreateNewAccount implements ActionListener {
+public class CreateNewCheckingAccount extends CreateNewAccount implements ActionListener, ItemListener {
     private static JLabel name;
     private static JTextField nameText;
-    private static JCheckBox currency;
+    private static Currency accountCurrency;
+    private static JComboBox<Currency> currency;
     private static JLabel balance;
     private static JTextField balanceText;
 
@@ -21,7 +24,8 @@ public class CreateNewCheckingAccount extends CreateNewAccount implements Action
         nameText.setBounds(100,20,165,25);
         panel.add(nameText);
 
-        currency= new JCheckBox ("Currency");
+        Currency currencies[] = {Bank.Euro, Bank.Pound, Bank.USD, Bank.Yen};
+        currency = new JComboBox<> (currencies);
 
         balance= new JLabel("Enter starting balance:");
         balance.setBounds(10, 20, 80, 25);
@@ -30,15 +34,32 @@ public class CreateNewCheckingAccount extends CreateNewAccount implements Action
         balanceText = new JTextField();
         balanceText.setBounds(100,20,165,25);
         panel.add(balanceText);
+
+        JButton submit = new JButton ();
+        submit.setBounds(10, 80, 80, 25);
+        panel.add(submit);
+        submit.addActionListener (this);
+        setVisible (true);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         String name = nameText.getText ();
-        String currency = currencyText.getText ();
         int balance = Integer.parseInt (balanceText.getText());
-        CheckingAccount a = new CheckingAccount (name, balance, currency);
-        currentCustomer.addCheckingAccount (a);
-        setVisible (true);
+        if(accountCurrency != null)
+        {
+            CheckingAccount a = new CheckingAccount (name, balance, accountCurrency);
+            currentCustomer.addCheckingAccount (a);
+        }
+    }
+
+    @Override
+    public void itemStateChanged(ItemEvent e) {
+        accountCurrency = (Currency) currency.getSelectedItem ();
+    }
+
+    public static void main(String[] args)
+    {
+
     }
 }
