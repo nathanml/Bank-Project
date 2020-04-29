@@ -9,6 +9,7 @@ public abstract class Account {
     protected double balance;
     protected Currency currency;
     protected ArrayList<Transaction> transactions;
+    protected int accountID;
     //I think the customer should have the account. Not the account have the customer. 
 
     //Constructor
@@ -17,6 +18,7 @@ public abstract class Account {
         this.name= name;
         this.balance= balance;
         currency = c;
+        accountID = java.lang.System.identityHashCode(this);
     }
 
     public void deposit(double amount)

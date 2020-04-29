@@ -5,6 +5,9 @@ public class Customer extends User {
     * Customer class: Customers have accounts, stocks (if they have enough)
     * */
 
+    private String firstName;
+    private String lastName;
+    private int customerID;
     private ArrayList<CheckingAccount> checkingAccounts= new ArrayList<CheckingAccount> ();
     private ArrayList<SavingsAccount> savingsAccounts = new ArrayList<SavingsAccount> ();
     private ArrayList<SecuritiesAccount> securitiesAccounts = new ArrayList<SecuritiesAccount> ();
@@ -14,9 +17,12 @@ public class Customer extends User {
     //need to add stocks
 
     //Constructor 
-    public Customer(String username, String password)
+    public Customer(String f, String l, String username, String password)
     {
         super(username, password);
+        firstName = f;
+        lastName = l;
+        customerID = System.identityHashCode (this);
     }
     //no args constructor
     public Customer()

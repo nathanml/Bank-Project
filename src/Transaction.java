@@ -5,6 +5,8 @@ public abstract class Transaction {
     protected LocalDate date;
     protected double amount;
     protected String memo;
+    protected int transactionID;
+    protected Currency currency;
 
     public Transaction(Account a, Double x, String s)
     {
@@ -12,6 +14,7 @@ public abstract class Transaction {
         date = java.time.LocalDate.now();
         amount = x;
         memo = s;
+        transactionID = java.lang.System.identityHashCode(this);
     }
 
     public abstract void updateBalance();
