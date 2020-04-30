@@ -8,8 +8,9 @@ public class Loan {
     protected Currency currency;
     protected Date dueDate;
     protected Customer customer;
+    protected String collateral;
 
-    public Loan(String n, int a, int r, Currency cur, Date d, Customer c)
+    public Loan(String n, int a, int r, Currency cur, Date d, Customer c, String col)
     {
         loanID = System.identityHashCode (this);
         name = n;
@@ -18,6 +19,7 @@ public class Loan {
         currency = cur;
         dueDate = d;
         customer = c;
+        collateral = col;
     }
 
     public static void main(String[] args)

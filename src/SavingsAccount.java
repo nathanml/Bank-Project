@@ -7,9 +7,9 @@ public class SavingsAccount extends Account {
 
     }
     //no args constructor
-    public SavingsAccount()
+    public SavingsAccount(String name, double balance, Currency c)
     {
-    super();
+        super(name, balance, c);
     }
 
     //deposit money 
