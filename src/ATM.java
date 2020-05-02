@@ -71,6 +71,9 @@ public class ATM extends JFrame {
 
     public static void main(String[] args)
     {
-
+        //for testing purposes only
+        Customer customer= new Customer();
+        ATM driver= new ATM(customer);
+        
     }
 }
