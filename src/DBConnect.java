@@ -17,11 +17,8 @@ public class DBConnect {
         Connection conn = null;
         try {
             conn =
-                    DriverManager.getConnection("jdbc:mysql://localhost/bankdb",
-                            "root", "password");
-
-            Statement stmt = conn.createStatement ();
-            ResultSet Res = stmt.executeQuery ("s");
+                    DriverManager.getConnection("jdbc:mysql://bank591.cblwfdq4pfu2.us-east-1.rds.amazonaws.com",
+                            "admin", "password");
         }
         catch (SQLException ex) {
             // handle any errors
