@@ -1,3 +1,4 @@
+import java.sql.SQLException;
 import java.time.LocalDate;
 
 public abstract class Transaction {
@@ -8,8 +9,7 @@ public abstract class Transaction {
     protected int transactionID;
     protected Currency currency;
 
-    public Transaction(Account a, Double x, String s)
-    {
+    public Transaction(Account a, Double x, String s) throws SQLException {
         account = a;
         date = java.time.LocalDate.now();
         amount = x;

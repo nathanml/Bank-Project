@@ -1,3 +1,4 @@
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public abstract class Account {
@@ -10,11 +11,11 @@ public abstract class Account {
     protected Currency currency;
     protected ArrayList<Transaction> transactions;
     protected int accountID;
+    protected Customer owner;
     //I think the customer should have the account. Not the account have the customer. 
 
     //Constructor
-    public Account(String name, double balance, Currency c)
-    {
+    public Account(String name, double balance, Currency c) {
         this.name= name;
         this.balance= balance;
         currency = c;
@@ -54,5 +55,8 @@ public abstract class Account {
     } 
 
     public abstract String print();
-   
+
+    public int getID(){
+        return accountID;
+    }
 }

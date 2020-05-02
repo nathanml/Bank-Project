@@ -1,5 +1,6 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 import javax.swing.*;
     /*
@@ -105,8 +106,12 @@ public class SignUp extends JFrame implements ActionListener
 		if (!username.equals("") && !password.equals(""))
 		{
 			//add user to database
-			Customer c1= new Customer(firstname, lastname, username, password);
-			System.out.println("You have successfully signed up!");
+            try {
+                Customer c1= new Customer(firstname, lastname, username, password);
+            } catch (SQLException ex) {
+                ex.printStackTrace ();
+            }
+            System.out.println("You have successfully signed up!");
 			
 			//alert listener
 		}
