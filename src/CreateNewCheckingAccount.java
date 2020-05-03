@@ -3,6 +3,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.sql.SQLException;
 
 public class CreateNewCheckingAccount extends CreateNewAccount implements ActionListener, ItemListener {
     private static JLabel name;
@@ -49,19 +50,25 @@ public class CreateNewCheckingAccount extends CreateNewAccount implements Action
 
     @Override
     public void actionPerformed(ActionEvent e) {
+
     	if (initialize==true){
     		initialize();
     		initialize=false;
     	}else {
-	        String name = nameText.getText();
-	        int balance = Integer.parseInt (balanceText.getText());
-	        if(accountCurrency != null)
-	        {
-	            CheckingAccount a = new CheckingAccount (name, balance, accountCurrency);
-	            currentCustomer.addCheckingAccount(a);
-	        }
-	        initialize=true;
+            String name = nameText.getText ();
+            int balance = Integer.parseInt (balanceText.getText());
+            if(accountCurrency != null)
+            {
+                CheckingAccount a = null;
+                try {
+                    a = new CheckingAccount (name, balance, accountCurrency);
+                } catch (SQLException ex) {
+                    ex.printStackTrace ();
+                }
+                currentCustomer.addCheckingAccount (a);
+            }
     }
+
     }
 
     @Override

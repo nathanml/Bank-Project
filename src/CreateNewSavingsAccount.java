@@ -3,6 +3,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.sql.SQLException;
 
 public class CreateNewSavingsAccount extends CreateNewAccount implements ActionListener, ItemListener {
 
@@ -55,14 +56,20 @@ public class CreateNewSavingsAccount extends CreateNewAccount implements ActionL
     		initialize=false;
     	}else {
 	        String name = nameText.getText ();
-	        int balance = Integer.parseInt (balanceText.getText());
-	        if(accountCurrency != null)
-	        {
-	            SavingsAccount a = new SavingsAccount (name, balance, accountCurrency);
-	            currentCustomer.addSavingsAccount (a);
-	        }
-	    }
-    }
+        int balance = Integer.parseInt (balanceText.getText());
+        if(accountCurrency != null)
+        {
+            SavingsAccount a = null;
+            try {
+                a = new SavingsAccount (name, balance, accountCurrency);
+            } catch (SQLException ex) {
+                ex.printStackTrace ();
+            }
+            currentCustomer.addSavingsAccount (a);
+        }
+        }
+        }
+
 
     @Override
     public void itemStateChanged(ItemEvent e) {

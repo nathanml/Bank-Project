@@ -17,9 +17,9 @@ public class Currency {
         return (int) (conversionFactor * x);
     }
 
-    public int convertToDollar(double x)
+    public double convertToDollar(double x)
     {
-        return (int) (x / conversionFactor);
+        return (x / conversionFactor);
     }
 
     public void setConversionFactor(double x)

@@ -1,3 +1,4 @@
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class Customer extends User {
@@ -17,12 +18,12 @@ public class Customer extends User {
     //need to add stocks
 
     //Constructor 
-    public Customer(String f, String l, String username, String password)
-    {
+    public Customer(String f, String l, String username, String password) throws SQLException {
         super(username, password);
         firstName = f;
         lastName = l;
         customerID = System.identityHashCode (this);
+        DBConnect.addCustomer(customerID, firstName, lastName, username, password);
     }
     //no args constructor
     public Customer()
@@ -57,5 +58,7 @@ public class Customer extends User {
     
 
 
-
+    public int getID() {
+        return customerID;
+    }
 }
