@@ -10,6 +10,7 @@ public class CreateNewAccount extends JFrame implements ActionListener {
     {
         currentCustomer = c;
         panel = new JPanel ();
+        panel.setLayout(null);
         add(panel);
         setTitle ("Create a new Account");
         setSize( 500, 500 );
@@ -19,24 +20,33 @@ public class CreateNewAccount extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+    	//ATM.setVisible( true );
         JButton checking = new JButton ("Create Checking Account");
-        checking.setBounds(10, 80, 80, 25);
+        checking.setBounds(10, 20, 400, 25);
         panel.add(checking);
+        
         ActionListener checkingL = new CreateNewCheckingAccount (currentCustomer);
-        checking.addActionListener (checkingL);
+        checking.addActionListener(checkingL);
+        
         JButton savings = new JButton ("Create Savings Account");
-        savings.setBounds(10, 80, 80, 25);
+        savings.setBounds(10, 50, 400, 25);
         panel.add(savings);
+        
         ActionListener savingsL = new CreateNewSavingsAccount (currentCustomer);
         savings.addActionListener (savingsL);
+        
         JButton securities = new JButton ("Create Securities Account");
-        securities.setBounds(10, 80, 80, 25);
+        securities.setBounds(10, 80, 400, 25);
         panel.add(securities);
+        
         ActionListener securitiesL = new CreateNewSecuritiesAccount (currentCustomer);
         securities.addActionListener (securitiesL);
+        
         setVisible( true );
+        
     }
 
+    
     public static void main(String[] args)
     {
 

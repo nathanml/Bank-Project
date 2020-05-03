@@ -11,46 +11,57 @@ public class CreateNewCheckingAccount extends CreateNewAccount implements Action
     private static JComboBox<Currency> currency;
     private static JLabel balance;
     private static JTextField balanceText;
+    private static boolean initialize= true;
 
     public CreateNewCheckingAccount(Customer customer) {
         super(customer);
         setTitle ("Create New Checking Account");
-
+    }
+    public void initialize() {
         name= new JLabel("Account Name:");
-        name.setBounds(10, 20, 80, 25);
+        name.setBounds(10, 20, 200, 25);
         panel.add(name);
+        
 
         nameText = new JTextField();
-        nameText.setBounds(100,20,165,25);
+        nameText.setBounds(150, 20, 165, 25);
         panel.add(nameText);
 
         Currency currencies[] = {Bank.Euro, Bank.Pound, Bank.USD, Bank.Yen};
         currency = new JComboBox<> (currencies);
 
         balance= new JLabel("Enter starting balance:");
-        balance.setBounds(10, 20, 80, 25);
+        balance.setBounds(10, 50, 200, 25);
         panel.add(balance);
 
         balanceText = new JTextField();
-        balanceText.setBounds(100,20,165,25);
+        balanceText.setBounds(150,50,165,25);
         panel.add(balanceText);
 
-        JButton submit = new JButton ();
+        JButton submit = new JButton ("Submit");
         submit.setBounds(10, 80, 80, 25);
         panel.add(submit);
-        submit.addActionListener (this);
+        
+        submit.addActionListener(this);
+        
         setVisible (true);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        String name = nameText.getText ();
-        int balance = Integer.parseInt (balanceText.getText());
-        if(accountCurrency != null)
-        {
-            CheckingAccount a = new CheckingAccount (name, balance, accountCurrency);
-            currentCustomer.addCheckingAccount (a);
-        }
+    	if (initialize==true){
+    		initialize();
+    		initialize=false;
+    	}else {
+	        String name = nameText.getText();
+	        int balance = Integer.parseInt (balanceText.getText());
+	        if(accountCurrency != null)
+	        {
+	            CheckingAccount a = new CheckingAccount (name, balance, accountCurrency);
+	            currentCustomer.addCheckingAccount(a);
+	        }
+	        initialize=true;
+    }
     }
 
     @Override

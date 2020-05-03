@@ -21,6 +21,6 @@ public class CheckingAccount extends Account {
 
     public String print()
     {
-        return "Account Name: " + name + "/n Account Balance: " + balance + "/n Account type: Checking Account";
+        return "Account Name: " + name + ", Account Balance: " + balance +  ", Account type: Checking Account";
     }
 }

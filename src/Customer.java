@@ -8,9 +8,9 @@ public class Customer extends User {
     private String firstName;
     private String lastName;
     private int customerID;
-    private ArrayList<CheckingAccount> checkingAccounts= new ArrayList<CheckingAccount> ();
-    private ArrayList<SavingsAccount> savingsAccounts = new ArrayList<SavingsAccount> ();
-    private ArrayList<SecuritiesAccount> securitiesAccounts = new ArrayList<SecuritiesAccount> ();
+    public ArrayList<CheckingAccount> checkingAccounts= new ArrayList<CheckingAccount> ();
+    public ArrayList<SavingsAccount> savingsAccounts = new ArrayList<SavingsAccount> ();
+    public ArrayList<SecuritiesAccount> securitiesAccounts = new ArrayList<SecuritiesAccount> ();
     private ArrayList<Loan> loans = new ArrayList<>(); //list of customer's loans
     private ArrayList<Stock> stocks = new ArrayList<> ();
     private int numberOfaccounts=0;
@@ -53,6 +53,8 @@ public class Customer extends User {
     {
         loans.add(loan);
     }
+    
+    
 
 
 

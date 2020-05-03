@@ -16,40 +16,27 @@ public class ATM extends JFrame {
     {
         customer = c;
         panel = new JPanel ();
+        panel.setLayout(null);
         add(panel);
         setTitle ("Bank ATM");
         setSize( 500, 500 );
         setLocation( 400, 100 );
         setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
-        JButton acct = new JButton ("Open Account");
-        acct.setBounds(10, 80, 80, 25);
-        panel.add(acct);
-        JButton removeAcc = new JButton("Remove Account");
-        removeAcc.setBounds(10, 80, 80, 25);
-        panel.add(removeAcc);
-        JButton withdraw = new JButton("Withdraw");
-        withdraw.setBounds(10, 80, 80, 25);
-        panel.add(withdraw);
-        JButton deposit = new JButton("Deposit");
-        deposit.setBounds(10, 80, 80, 25);
-        panel.add(deposit);
-        ActionListener acctL = new CreateNewAccount (customer);
-        acct.addActionListener (acctL);
-        JButton loan = new JButton ("Request Loan");
-        loan.setBounds(10, 90, 80, 25);
-        panel.add(loan);
-        RequestLoan loanL = new RequestLoan (customer);
-        loan.addActionListener (loanL);
-        JButton transaction = new JButton ("View Transactions");
-        transaction.setBounds(10, 100, 80, 25);
-        panel.add(transaction);
-        TransactionListener transactionL = new TransactionListener ();
-        transaction.addActionListener (transactionL);
-        JButton balance = new JButton ("View Balances");
-        balance.setBounds(10, 110, 80, 25);
-        panel.add(balance);
-        BalanceListener balanceL = new BalanceListener ();
-        balance.addActionListener (balanceL);
+        
+        JButton newacct = new JButton ("Open new Account");
+        newacct.setBounds(10, 20, 400, 25);
+        panel.add(newacct);
+        JButton viewacct = new JButton ("View Accounts");
+        viewacct.setBounds(10, 50, 400, 25);
+        panel.add(viewacct);
+
+        
+        ActionListener acctL = new CreateNewAccount(customer);
+        newacct.addActionListener(acctL);
+        
+        ActionListener viewacctL = new viewAccounts(customer);
+        viewacct.addActionListener(viewacctL);
+        
         setVisible( true );
     }
 
@@ -73,6 +60,8 @@ public class ATM extends JFrame {
     {
         //for testing purposes only
         Customer customer= new Customer();
+        customer.addCheckingAccount(new CheckingAccount("check1", 200, new Currency("USD", 0.12)));
+        customer.addCheckingAccount(new CheckingAccount("check2", 500, new Currency("USD", 0.12)));
         ATM driver= new ATM(customer);
         
     }
