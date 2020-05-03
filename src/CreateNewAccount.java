@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 public class CreateNewAccount extends JFrame implements ActionListener {
     protected Customer currentCustomer;
     protected JPanel panel;
+    private static JButton back;
 
     public CreateNewAccount(Customer c)
     {
@@ -41,6 +42,12 @@ public class CreateNewAccount extends JFrame implements ActionListener {
         
         ActionListener securitiesL = new CreateNewSecuritiesAccount (currentCustomer);
         securities.addActionListener (securitiesL);
+        
+        back = new JButton ("back");
+        back.setBounds(10, 110, 400, 25);
+        panel.add(back);
+        
+        back.addActionListener(new ATM(currentCustomer));
         
         setVisible( true );
         

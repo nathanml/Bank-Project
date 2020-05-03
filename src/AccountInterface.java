@@ -4,11 +4,12 @@ import javax.swing.JPanel;
 
 public class AccountInterface extends JFrame{
 
-	private Customer customer;
+	private Customer currentCustomer;
     private static JPanel panel;
+    private static JButton back;
     
     public AccountInterface(Customer c){
-    	this.customer = c;
+    	this.currentCustomer = c;
         panel = new JPanel();
         panel.setLayout(null);
         add(panel);
@@ -34,22 +35,28 @@ public class AccountInterface extends JFrame{
         loan.setBounds(10, 110, 400, 25);
         panel.add(loan);
         
-        RequestLoan loanL = new RequestLoan (customer);
+        RequestLoan loanL = new RequestLoan (currentCustomer);
         loan.addActionListener (loanL);
         
         JButton transaction = new JButton ("View Transactions");
         transaction.setBounds(10, 140, 400, 25);
         panel.add(transaction);
-        
-        //TransactionListener transactionL = new TransactionListener ();
-        //transaction.addActionListener (transactionL);
+        /*
+        TransactionListener transactionL = new TransactionListener ();
+        transaction.addActionListener (transactionL);
         
         JButton balance = new JButton ("View Balances");
-        balance.setBounds(10, 110, 80, 25);
+        balance.setBounds(10, 110, 400, 25);
         panel.add(balance);
         
-        //BalanceListener balanceL = new BalanceListener ();
-        //balance.addActionListener (balanceL);
+        BalanceListener balanceL = new BalanceListener ();
+        balance.addActionListener (balanceL);
+        */
+        back = new JButton ("back");
+        back.setBounds(10, 170, 400, 25);
+        panel.add(back);
+        
+        back.addActionListener(new viewAccounts(currentCustomer));
         
         setVisible(true);
     }

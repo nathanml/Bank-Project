@@ -10,7 +10,8 @@ public class CheckingAccount extends Account {
         double balancePound = Bank.Pound.convertFromDollar (balanceUSD);
         double balanceYen = Bank.Yen.convertFromDollar (balanceUSD);
         String type = "Checking";
-        DBConnect.addAccount(accountID, name, owner.getID(),balanceEuro, balancePound, balanceUSD, balanceYen, type);
+        //removed this line so I can test and run
+        //DBConnect.addAccount(accountID, name, owner.getID(),balanceEuro, balancePound, balanceUSD, balanceYen, type);
     }
 
     //deposit money 

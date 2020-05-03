@@ -5,16 +5,16 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-public class ViewSavingsAccount extends viewAccounts implements ActionListener {
-
+public class ViewSecuritiesAccount extends viewAccounts implements ActionListener {
+	
 	private static JTextField accountText;
     private static JButton submit;
     private static JButton back;
     private static boolean answer=false;
     
-	public ViewSavingsAccount(Customer customer) {
+	public ViewSecuritiesAccount(Customer customer) {
 		super(customer);
-		setTitle ("View Saving Account");
+		setTitle ("View Securities Account");
 	}
 	
 	public void viewAccounts()
@@ -22,8 +22,8 @@ public class ViewSavingsAccount extends viewAccounts implements ActionListener {
 		//traverse through all checking accounts
 		int count=0;
 		int y=20;
-    	for(SavingsAccount savingAccount:currentCustomer.savingsAccounts) {
-    		JLabel account= new JLabel(count + ". "+ savingAccount.print());
+    	for(SecuritiesAccount securitiesAccount:currentCustomer.securitiesAccounts) {
+    		JLabel account= new JLabel(count + ". "+ securitiesAccount.print());
             account.setBounds(10, y, 500, 25);
             panel.add(account); 
             count++;
@@ -31,7 +31,7 @@ public class ViewSavingsAccount extends viewAccounts implements ActionListener {
         }
     	//if no accounts
     	if (count==0) {
-    		JLabel account= new JLabel("You do not have any savings accounts");
+    		JLabel account= new JLabel("You do not have any Securities accounts");
             account.setBounds(10, y, 400, 25);
             panel.add(account); 
             
@@ -51,7 +51,8 @@ public class ViewSavingsAccount extends viewAccounts implements ActionListener {
             accountText.setBounds(10, y + 30, 165, 25);
             panel.add(accountText);
             
-            //submit answer
+            //submit answer 
+            //add error checking
             submit = new JButton ("Submit");
             submit.setBounds(10, y + 60, 80, 25);
             panel.add(submit);
@@ -62,7 +63,6 @@ public class ViewSavingsAccount extends viewAccounts implements ActionListener {
     	
     	setVisible (true);
     }
-	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (answer) {

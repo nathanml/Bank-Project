@@ -15,6 +15,7 @@ public class viewAccounts extends JFrame implements ActionListener{
     private static JComboBox<Currency> currency;
     private static JLabel balance;
     private static JTextField balanceText;
+    private static JButton back;
     private static boolean initialize= true;
     
     protected Customer currentCustomer;
@@ -42,7 +43,7 @@ public class viewAccounts extends JFrame implements ActionListener{
         JButton savings = new JButton ("View Savings Accounts");
         savings.setBounds(10, 50, 400, 25);
         panel.add(savings);
-        /*
+        
         ActionListener savingsL = new ViewSavingsAccount (currentCustomer);
         savings.addActionListener (savingsL);
         
@@ -52,7 +53,13 @@ public class viewAccounts extends JFrame implements ActionListener{
         
         ActionListener securitiesL = new ViewSecuritiesAccount (currentCustomer);
         securities.addActionListener (securitiesL);
-        */
+        
+        back = new JButton ("back");
+        back.setBounds(10, 110, 400, 25);
+        panel.add(back);
+        
+        back.addActionListener(new ATM(currentCustomer));
+        
         setVisible( true );
     }
 	

@@ -44,7 +44,7 @@ public class ViewCheckingAccount extends viewAccounts implements ActionListener 
             
     	}else {
     		//get index number of account
-    		JLabel account= new JLabel("Please enter the number of the account");
+    		JLabel account= new JLabel("Please enter the number of the account and submit");
             account.setBounds(10, y, 500, 25);
             panel.add(account);
             
