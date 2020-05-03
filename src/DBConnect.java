@@ -37,8 +37,9 @@ public class DBConnect {
     {
         establishConnection ();
         Statement s = conn.createStatement ();
-        s.executeQuery ("INSERT INTO CUSTOMERS VALUES (" + customerID + ", " + firstName + " , " + lastName +
-                " , " + username + " , " + password);
+        s.executeQuery ("USE bankdb");
+        s.executeUpdate ("INSERT INTO customers VALUES (" + customerID + ", '" + firstName + "', '" + lastName +
+                "' , '" + username + "','" + password + "');");
     }
 
     public static void addAccount(int accountID, String name, int id, double balanceEuro, double balancePound,

@@ -11,6 +11,13 @@ public class Bank {
     public static Currency Pound = new Currency ("Pound", 0.81);
     public static Currency Yen = new Currency ("Yen", 107.9);
 
+    public Bank()
+    {
+        bankManager = new BankManager ();
+        clock = new Clock ();
+        Welcome w = new Welcome ();
+    }
+
     public static void main(String[] args)
     {
 

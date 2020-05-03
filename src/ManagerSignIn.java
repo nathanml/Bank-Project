@@ -16,8 +16,8 @@ public class ManagerSignIn extends SignIn
     //just for testing purposes
     public static void main( String[] args ) 
     {
-    	ManagerSignIn si= new ManagerSignIn();
-    	si.initializeframe();
+    	//ManagerSignIn si= new ManagerSignIn();
+    	//si.initializeframe();
     }
    
 }
