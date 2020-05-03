@@ -89,4 +89,19 @@ public class Customer extends User implements OPObserver{
     public int getID() {
         return customerID;
     }
+	@Override
+	public boolean registerObserver(OPObserver customer, int initBalance) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	@Override
+	public boolean unregisterObserver(OPObserver customer) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	@Override
+	public void notifyObserver() {
+		// TODO Auto-generated method stub
+		
+	}
 }

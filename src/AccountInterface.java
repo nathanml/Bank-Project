@@ -27,7 +27,7 @@ public class AccountInterface extends JFrame{
     	JButton removeAcc = new JButton("Remove Account");
         removeAcc.setBounds(10, 20, 400, 25);
         panel.add(removeAcc);
-        removeAcc.addActionListener (new AccountInterface (currentCustomer));
+        //removeAcc.addActionListener (new AccountInterface (currentCustomer));
         
         JButton withdraw = new JButton("Withdraw");
         withdraw.setBounds(10, 50, 400, 25);
@@ -67,7 +67,7 @@ public class AccountInterface extends JFrame{
     }
     public void removeaccount() {
     	
-    	currentCustomer.removeCheckingAccount(account);
+    	//currentCustomer.removeCheckingAccount(account);
     }
 	
 }

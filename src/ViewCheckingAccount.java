@@ -70,7 +70,7 @@ public class ViewCheckingAccount extends viewAccounts implements ActionListener 
 			answer=false;
 			int answernum= Integer.parseInt(accountText.getText());
 			CheckingAccount account= currentCustomer.checkingAccounts.get(answernum);
-			AccountInterface go= new AccountInterface(currentCustomer);
+			AccountInterface go= new AccountInterface(currentCustomer, account);
 			go.initialize();
 		}else {
 		viewAccounts();
