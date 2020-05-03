@@ -55,6 +55,15 @@ public class Customer extends User {
         loans.add(loan);
     }
     
+    public int getSavings() {
+        int savings = 0;
+        if (savingsAccounts.size() > 0) {
+            for (int i = 0; i<savingsAccounts.size(); i++) {
+                savings += savingsAccounts.get(i).getMoney();
+            }
+        }
+        return savings;
+    }
     
 
 

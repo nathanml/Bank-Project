@@ -19,7 +19,9 @@ public class Stock {
         double valueYen = Bank.Yen.convertFromDollar (valueUSD);
         DBConnect.addStock(stockID, name, owner.getID (), valueEuro, valuePound, valueUSD, valueYen);
     }
-
+    public String getName() {
+        return name; 
+    }
     public static void main(String[] args)
     {
 
