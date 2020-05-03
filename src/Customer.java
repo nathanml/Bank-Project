@@ -1,7 +1,7 @@
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class Customer extends User {
+public class Customer extends User implements OPObserver{
     /*
     * Customer class: Customers have accounts, stocks (if they have enough)
     * */
