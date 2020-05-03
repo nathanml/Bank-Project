@@ -34,7 +34,8 @@ public class Welcome extends JFrame implements ActionListener{
         signUpL.initializeframe ();
         signUp.addActionListener(signUpL);
 
-        ActionListener managerL = new ManagerSignIn ();
+        ManagerSignIn managerL = new ManagerSignIn ();
+        managerL.initializeframe ();
         managerSignIn.addActionListener(managerL);
 
         setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );

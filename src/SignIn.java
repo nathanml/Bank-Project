@@ -8,13 +8,13 @@ import javax.swing.*;
 public class SignIn extends JFrame implements ActionListener
 {
 	//Swing things
-	private static JPanel panel;
-	private static JLabel welcome;
-	private static JLabel userlabel;
-	private static JLabel passlabel;
-	private static JTextField userText;
-	private static JPasswordField passText;
-	private static JButton button;
+	protected static JPanel panel;
+	protected static JLabel welcome;
+	protected static JLabel userlabel;
+	protected static JLabel passlabel;
+	protected static JTextField userText;
+	protected static JPasswordField passText;
+	protected static JButton button;
 	
     // No-arg constructor to construct an instance of JFrame
     public SignIn () 
@@ -58,7 +58,7 @@ public class SignIn extends JFrame implements ActionListener
         panel.add(passText);
 
         //Create button
-        button= new JButton("Sign up");
+        button= new JButton("Sign in");
         button.setBounds(10, 80, 80, 25);
         panel.add(button);
         button.addActionListener(new SignIn());
@@ -81,8 +81,8 @@ public class SignIn extends JFrame implements ActionListener
 		if (!username.equals("") && !password.equals(""))
 		{
 			//make customer object
-			Customer c1= new Customer();
-			System.out.println("You have successfully signed in!");
+			//Customer c1= new Customer();
+			//System.out.println("You have successfully signed in!");
 			
 			//alert listener
 			//give customer to ATM

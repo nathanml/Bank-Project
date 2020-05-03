@@ -1,5 +1,9 @@
 public class BankManager extends User {
 
+    public BankManager(String username, String password) {
+        super(username, password);
+    }
+
     /*
     * Class for the bank manager:
     *       Can view customers and their accounts and transaction, stocks,

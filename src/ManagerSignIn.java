@@ -9,8 +9,23 @@ public class ManagerSignIn extends SignIn
 {
 
     // No-arg constructor to construct an instance of JFrame
-    public ManagerSignIn() 
+    public ManagerSignIn()
     {
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        setVisible( true );
+        String username= userText.getText();
+        String password= passText.getText();
+
+        if (username.equals(Bank.bankManager.username) && password.equals(Bank.bankManager.password))
+        {
+            ManagerPortal p = new ManagerPortal ();
+        }
+        else {
+            System.out.println("Incorrect input, please try again");
+        }
     }
 
     //just for testing purposes

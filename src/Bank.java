@@ -4,8 +4,8 @@ public class Bank {
     * Bank will have bank manager, customers, currencies, and ATM
     * */
 
-    private BankManager bankManager;
-    private Clock clock;
+    public static BankManager bankManager;
+    public static Clock clock;
     public static Currency USD = new Currency ("US Dollar", 1.0);
     public static Currency Euro = new Currency ("Euro", 0.92);
     public static Currency Pound = new Currency ("Pound", 0.81);
@@ -13,7 +13,7 @@ public class Bank {
 
     public Bank()
     {
-        bankManager = new BankManager ();
+        bankManager = new BankManager ("username", "password");
         clock = new Clock ();
         Welcome w = new Welcome ();
     }
