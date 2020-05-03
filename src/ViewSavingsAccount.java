@@ -69,7 +69,7 @@ public class ViewSavingsAccount extends viewAccounts implements ActionListener {
 			answer=false;
 			int answernum= Integer.parseInt(accountText.getText());
 			SavingsAccount account= currentCustomer.savingsAccounts.get(answernum);
-			AccountInterface go= new AccountInterface(currentCustomer);
+			AccountInterface go= new AccountInterface(currentCustomer, account);
 			go.initialize();
 		}else {
 		viewAccounts();

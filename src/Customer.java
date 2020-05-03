@@ -49,13 +49,30 @@ public class Customer extends User {
         securitiesAccounts.add (account);
         numberOfaccounts++;
     }
+    
+  //remove account
+    public void removeCheckingAccount(CheckingAccount account)
+    {
+        checkingAccounts.remove (account);
+        numberOfaccounts--;
+    }
+
+    public void removeSavingsAccount(SavingsAccount account)
+    {
+        savingsAccounts.remove (account);
+        numberOfaccounts--;
+    }
+
+    public void removeSecuritiesAccount(SecuritiesAccount account)
+    {
+        securitiesAccounts.remove (account);
+        numberOfaccounts--;
+    }
 
     public void requestLoan(Loan loan)
     {
         loans.add(loan);
     }
-    
-    
 
 
     public int getID() {

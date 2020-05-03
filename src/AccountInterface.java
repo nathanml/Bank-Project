@@ -7,9 +7,12 @@ public class AccountInterface extends JFrame{
 	private Customer currentCustomer;
     private static JPanel panel;
     private static JButton back;
+    private static Account account;
+
     
-    public AccountInterface(Customer c){
+    public AccountInterface(Customer c, Account account){
     	this.currentCustomer = c;
+    	this.account=account;
         panel = new JPanel();
         panel.setLayout(null);
         add(panel);
@@ -24,6 +27,8 @@ public class AccountInterface extends JFrame{
     	JButton removeAcc = new JButton("Remove Account");
         removeAcc.setBounds(10, 20, 400, 25);
         panel.add(removeAcc);
+        removeAcc.addActionListener (new AccountInterface (currentCustomer));
+        
         JButton withdraw = new JButton("Withdraw");
         withdraw.setBounds(10, 50, 400, 25);
         panel.add(withdraw);
@@ -59,6 +64,10 @@ public class AccountInterface extends JFrame{
         back.addActionListener(new viewAccounts(currentCustomer));
         
         setVisible(true);
+    }
+    public void removeaccount() {
+    	
+    	currentCustomer.removeCheckingAccount(account);
     }
 	
 }
