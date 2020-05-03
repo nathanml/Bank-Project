@@ -1,7 +1,7 @@
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class Customer extends User {
+public class Customer extends User implements OPObserver{
     /*
     * Customer class: Customers have accounts, stocks (if they have enough)
     * */
@@ -73,6 +73,17 @@ public class Customer extends User {
     {
         loans.add(loan);
     }
+    
+    public int getSavings() {
+        int savings = 0;
+        if (savingsAccounts.size() > 0) {
+            for (int i = 0; i<savingsAccounts.size(); i++) {
+                savings += savingsAccounts.get(i).getMoney();
+            }
+        }
+        return savings;
+    }
+    
 
 
     public int getID() {

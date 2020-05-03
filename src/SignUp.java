@@ -82,21 +82,18 @@ public class SignUp extends JFrame implements ActionListener
         button= new JButton("Sign up");
         button.setBounds(10, 140, 80, 25);
         panel.add(button);
-        button.addActionListener(new SignUp()); 
-        
-        setVisible( true );
+        button.addActionListener(new SignUp());
     }
     
     //just for testing purposes
     public static void main( String[] args ) 
     {
-    	SignUp si= new SignUp();
-    	si.initializeframe();
-    	
+
     }
     
 	@Override
 	public void actionPerformed(ActionEvent e) {
+        setVisible( true );
 		String firstname= fnameText.getText();
 		String lastname= lnameText.getText();
 		String username= userText.getText();
