@@ -74,11 +74,15 @@ public class Customer extends User implements OPObserver{
         loans.add(loan);
     }
     
+    /*
+    * Return the total savings in dollars
+    */
     public int getSavings() {
         int savings = 0;
         if (savingsAccounts.size() > 0) {
             for (int i = 0; i<savingsAccounts.size(); i++) {
-                savings += savingsAccounts.get(i).getMoney();
+                Currency c = savingsAccounts.get(i).getCurrency();
+		savings += c.convertToDollar(savingsAccounts.get(i).getMoney())
             }
         }
         return savings;
