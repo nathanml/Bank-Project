@@ -13,8 +13,8 @@ public class Bank {
     private static double acctRemovalFee; 
     private static StockMarket stockMarket;
     //exchange rate unsed in subclass of Currency;
-    private static ArrayList<String> currencies;
-    private static ArrayList<Double> exchangeRate;
+    private static ArrayList<String> currencies = new ArrayList<String> (Arrays.asList("Dollar, Euro, Pound, Yen"));
+    private static ArrayList<Double> exchangeRate = new ArrayList<Double> (Arrays.asList(1.0, 0.92, 0.81, 107.9));
     private static Euro euro = new Euro();
     private static Pound pound = new Pound();
     private static Yen yen = new Yen();
@@ -22,12 +22,11 @@ public class Bank {
     public Bank()
     {
         bankManager = new BankManager ("username", "password");
-        currencies = new ArrayList<String> (Arrays.asList("Dollar, Euro, Pound, Yen"));
-        exchangeRate = new ArrayList<Double> (Arrays.asList(1.0, 0.92, 0.81, 107.9));
+       
         loanRate = 1.003; //3% per day 
         savingsRate = 1.0001; //0.1% per day 
         acctRemovalFee = 1;
-        currentTime = bankManager.setTime(); //bank manager sets the current time 
+        currentTime = null; //need to create a method that allows the bank manager to set the time 
         Welcome w = new Welcome ();
     }
 
@@ -41,6 +40,9 @@ public class Bank {
         return set;
 
     } 
+    public static BankManager getBankManager() {
+    	return bankManager;
+    }
    
     public static double getRemovalfee()
     {
@@ -52,10 +54,7 @@ public class Bank {
     }
     
     public static StockMarket getStockMarket() {
-        return stockMarket;
-    }
-    public static BankManager getBankManager() {
-        return bankManager;
+    	return stockMarket;
     }
     /*
     * Return -1 if the input is not in the currencies list. 
