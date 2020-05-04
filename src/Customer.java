@@ -1,18 +1,17 @@
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class Customer extends User implements OPObserver{
+public class Customer extends User implements Comparable<Customer>{
     /*
     * Customer class: Customers have accounts, stocks (if they have enough)
     * */
-
     private String firstName;
     private String lastName;
     private int customerID;
-    public ArrayList<CheckingAccount> checkingAccounts= new ArrayList<CheckingAccount> ();
-    public ArrayList<SavingsAccount> savingsAccounts = new ArrayList<SavingsAccount> ();
-    public ArrayList<SecuritiesAccount> securitiesAccounts = new ArrayList<SecuritiesAccount> ();
-    private ArrayList<Loan> loans = new ArrayList<>(); //list of customer's loans
+    private ArrayList<CheckingAccount> checkingAccounts= new ArrayList<CheckingAccount> ();
+    private ArrayList<SavingsAccount> savingsAccounts = new ArrayList<SavingsAccount> ();
+    private ArrayList<SecuritiesAccount> securitiesAccounts = new ArrayList<SecuritiesAccount> ();
+    private ArrayList<Loan> loans = new ArrayList<Loan>(); //list of customer's loans
     private int numberOfaccounts=0;
     //need to add stocks
 
@@ -29,7 +28,31 @@ public class Customer extends User implements OPObserver{
     {
         super();
     }
+    //Compares the Amount of savings account because the Manager values his 
+    //most wealthy customers
+    public int compareTo(Customer other) {
+        return (int) (this.getSavings(new Dollar()) - other.getSavings(new Dollar()));
+    }
 
+    public boolean equals(Customer other) {
+        boolean equal = false;
+        if (customerID == other.getID()) {
+            equal = true;
+        }
+        return equal;
+    }
+    
+    public ArrayList<CheckingAccount> getCheckingAccounts() {
+        return checkingAccounts;
+    }
+    
+    public ArrayList<SavingsAccount> getSavingsAccounts() {
+        return savingsAccounts;
+    }
+    
+    public ArrayList<SecuritiesAccount> getSecuritiesAccounts() {
+        return securitiesAccounts;
+    }
     //add account
     public void addCheckingAccount(CheckingAccount account)
     {
@@ -76,24 +99,47 @@ public class Customer extends User implements OPObserver{
     /*
     * Return the total savings in dollars, change to getSavings (Currency x)
     */
-    public int getSavings() {
+    public double getSavings(Currency x) {
         int savings = 0;
         if (savingsAccounts.size() > 0) {
             for (int i = 0; i<savingsAccounts.size(); i++) {
-                Currency c = savingsAccounts.get(i).getCurrency();
-		savings += c.convertToDollar(savingsAccounts.get(i).getMoney());
+                savings += savingsAccounts.get(i).getMoney();
             }
         }
-        return savings;
+        return x.convertFromDollar(savings);
+    }
+
+    public double[][] savingsAccountInfo(Currency x) {
+        int numOfSavings = savingsAccounts.size();
+        double[][] summary = new double[numOfSavings][2]; //first col is balance, second col interest
+        for (int i = 0; i<numOfSavings; i++) {
+            summary[i][0] = x.convertFromDollar(savingsAccounts.get(i).getMoney());
+            summary[i][1] = x.convertFromDollar(savingsAccounts.get(i).calcInterest(Bank.getCurrentTime()));
+        }
+        return summary;
+    }
+
+    public double[] checkingAccount (Currency x) {
+        double[] summary = new double[checkingAccounts.size()];
+        for (int i = 0; i< checkingAccounts.size(); i++) {
+            summary[i] = x.convertFromDollar(checkingAccounts.get(i).getMoney());
+        }
+        return summary;
+    }
+
+    public double[][] loanSummary(Currency x) {
+        int length = loans.size();
+        double[][] summary = new double [length][3]; //first col amount, second interest, third days overdue
+        for (int i = 0; i< checkingAccounts.size(); i++) {
+            summary[i][0] = x.convertFromDollar(loans.get(i).getAmount());
+            summary[i][1] = x.convertFromDollar(loans.get(i).totalInterest(Bank.getCurrentTime()));
+            summary[i][2] = x.convertFromDollar(loans.get(i).overDue(Bank.getCurrentTime()));
+        }
+        return summary;
     }
 
     public int getID() {
         return customerID;
     }
-	@Override
-	public void update() {
-		// TODO Auto-generated method stub
-		
-	}
-	
+    
 }

@@ -6,32 +6,32 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 public class ViewSecuritiesAccount extends viewAccounts implements ActionListener {
-	
-	private static JTextField accountText;
+    
+    private static JTextField accountText;
     private static JButton submit;
     private static JButton back;
     private static boolean answer=false;
     
-	public ViewSecuritiesAccount(Customer customer) {
-		super(customer);
-		setTitle ("View Securities Account");
-	}
-	
-	public void viewAccounts()
+    public ViewSecuritiesAccount(Customer customer) {
+        super(customer);
+        setTitle ("View Securities Account");
+    }
+    
+    public void viewAccounts()
     {
-		//traverse through all checking accounts
-		int count=0;
-		int y=20;
-    	for(SecuritiesAccount securitiesAccount:currentCustomer.securitiesAccounts) {
-    		JLabel account= new JLabel(count + ". "+ securitiesAccount.print());
+        //traverse through all checking accounts
+        int count=0;
+        int y=20;
+        for(SecuritiesAccount securitiesAccount:currentCustomer.getSecuritiesAccounts()) {
+            JLabel account= new JLabel(count + ". "+ securitiesAccount.print());
             account.setBounds(10, y, 500, 25);
             panel.add(account); 
             count++;
             y= y+30;
         }
-    	//if no accounts
-    	if (count==0) {
-    		JLabel account= new JLabel("You do not have any Securities accounts");
+        //if no accounts
+        if (count==0) {
+            JLabel account= new JLabel("You do not have any Securities accounts");
             account.setBounds(10, y, 400, 25);
             panel.add(account); 
             
@@ -41,9 +41,9 @@ public class ViewSecuritiesAccount extends viewAccounts implements ActionListene
             
             back.addActionListener(new viewAccounts(currentCustomer));
             
-    	}else {
-    		//get index number of account
-    		JLabel account= new JLabel("Please enter the number of the account and submit");
+        }else {
+            //get index number of account
+            JLabel account= new JLabel("Please enter the number of the account and submit");
             account.setBounds(10, y, 500, 25);
             panel.add(account);
             
@@ -59,22 +59,22 @@ public class ViewSecuritiesAccount extends viewAccounts implements ActionListene
             
             answer= true;
             submit.addActionListener(this);
-    	}
-    	
-    	setVisible (true);
+        }
+        
+        setVisible (true);
     }
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		if (answer) {
-			answer=false;
-			int answernum= Integer.parseInt(accountText.getText());
-			SavingsAccount account= currentCustomer.savingsAccounts.get(answernum);
-			AccountInterface go= new AccountInterface(currentCustomer,account);
-			go.initialize();
-		}else {
-		viewAccounts();
-		}
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (answer) {
+            answer=false;
+            int answernum= Integer.parseInt(accountText.getText());
+            SecuritiesAccount account= currentCustomer.getSecuritiesAccounts().get(answernum);
+            AccountInterface go= new AccountInterface(currentCustomer,account);
+            go.initialize();
+        }else {
+        viewAccounts();
+        }
 
-	}
+    }
 
 }

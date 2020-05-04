@@ -14,10 +14,10 @@ public class Stock {
         currency = cur;
         stockID = System.identityHashCode (this);
         owner = null;
-        double valueUSD = currency.convertToDollar (value);
-        double valueEuro = Bank.Euro.convertFromDollar (valueUSD);
-        double valuePound = Bank.Pound.convertFromDollar (valueUSD);
-        double valueYen = Bank.Yen.convertFromDollar (valueUSD);
+        double valueUSD = cur.convertToDollar (value);
+        double valueEuro = Bank.getEuro().convertFromDollar (valueUSD);
+        double valuePound = Bank.getPound().convertFromDollar (valueUSD);
+        double valueYen = Bank.getYen().convertFromDollar (valueUSD);
         DBConnect.addStock(stockID, name, owner.getID (), valueEuro, valuePound, valueUSD, valueYen);
     }
     public String getName() {
@@ -29,11 +29,11 @@ public class Stock {
     }
 
     public double getPurchasedPrice(Currency x) {
-        return x.convertTo(priceAtPurchase);
+        return x.convertFromDollar(priceAtPurchase);
     }
 
     public double getCurrentValue(Currency x) {
-        return x.convertTo(value);
+        return x.convertFromDollar(value);
     }
     /*
     * return the profit in dollars 

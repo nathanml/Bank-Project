@@ -41,18 +41,18 @@ public class StockMarket implements OPSubject{
         stocks.add(stock);
     }
     //need to change getSavings in Customer so it return the value in dollars
-    public boolean registerObserver(OPObserver customer) {
+    public boolean registerObserver(OPObserver securityAccount) {
         boolean registered = false;
-        if (!observers.contains(customer)) {
-            observers.add(customer);
+        if (!observers.contains(securityAccount)) {
+            observers.add(securityAccount);
             //create a security account with initBalance (> 1000)
             registered = true;
         }
         return registered;
     }
 
-    public boolean unregisterObserver(OPObserver customer) {
-        return observers.remove(customer);
+    public boolean unregisterObserver(OPObserver securityAccount) {
+        return observers.remove(securityAccount);
     }
     /*
     * update the current stock price, customer's realized and unrealized profits etc
@@ -62,11 +62,7 @@ public class StockMarket implements OPSubject{
             observers.get(i).update();
         }
     }
-    //return the trade records of this date 
-    public String getLastTrade(int date) {
-
-    }
-
+    
     public double calcRealizedProfit(SecuritiesAccount account) {
         ArrayList<Stock> sold = account.getLastSold();
         double profit = 0; // in dollars

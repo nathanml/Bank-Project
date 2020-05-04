@@ -1,45 +1,56 @@
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public abstract class Account {
+public abstract class Account implements BankAccount {
 
     /*
     * Abstract class for various types of accounts. All accounts have a name, balance, and customer
     * */
     protected String name;
-    protected double balance;
-    protected Currency currency;
+    protected double balance; //recorded in USD
     protected ArrayList<Transaction> transactions;
     protected int accountID;
     protected Customer owner;
     protected double removalfee= 1;
+    protected Clock dateOpened;
 
     //Constructor
-    public Account(String name, double balance, Currency c) {
+    public Account(String name, double balance, Clock open) {
         this.name= name;
         this.balance= balance;
-        currency = c;
         accountID = java.lang.System.identityHashCode(this);
+        dateOpened = open;
     }
     //no-arg Constructor
     public Account() {
         name = "Account";
         balance = 0;
-        currency = new Dollar(); //make Currency an abstract class and Dollar a subclass
         accountID = java.lang.System.identityHashCode(this);
+    }
+    public boolean equals(Account other) {
+        boolean equals = false;
+        if (accountID == other.getID()) {
+            equals = true;
+        }
+        return equals;
     }
     public void deposit(double amount)
     {
         balance += amount;
     }
 
-    public void withdrawal(double amount)
-    {
-        if(amount > balance)
-        {
-            System.out.println("You cannot withdrawal more than " + balance + " dollars.");
+    public Clock getDateOpened() {
+        return dateOpened;
+    }
+
+    public boolean withdrawal(double amount)
+    {   
+        boolean withdrawed = false;
+        if (amount > balance) {
+            withdrawed = true;
+            balance -= amount;
         }
-        else balance -= amount;
+        return withdrawed;
     }
 
     //getters and setters
@@ -47,29 +58,18 @@ public abstract class Account {
     {
         return balance; 
     } 
-    public Currency getCurrency() 
-    {
-        return currency;
-    }
+    
     public String getName()
     {
         return name; 
     } 
     public void setMoney(double money)
     {
-        balance= money; 
+        balance = money; 
     } 
     public void setName(String str)
     {
         name= str; 
-    } 
-    public void setRemovalfee(double money)
-    {
-        removalfee= money; 
-    } 
-    public double getRemovalfee()
-    {
-        return removalfee; 
     } 
 
     public int getID(){

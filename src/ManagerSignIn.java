@@ -19,7 +19,7 @@ public class ManagerSignIn extends SignIn
         String username= userText.getText();
         String password= passText.getText();
 
-        if (username.equals(Bank.bankManager.username) && password.equals(Bank.bankManager.password))
+        if (username.equals(Bank.getBankManager().getUsername()) && password.equals(Bank.getBankManager().getPassword()))
         {
             ManagerPortal p = new ManagerPortal ();
         }
@@ -31,8 +31,8 @@ public class ManagerSignIn extends SignIn
     //just for testing purposes
     public static void main( String[] args ) 
     {
-    	//ManagerSignIn si= new ManagerSignIn();
-    	//si.initializeframe();
+        //ManagerSignIn si= new ManagerSignIn();
+        //si.initializeframe();
     }
    
 }

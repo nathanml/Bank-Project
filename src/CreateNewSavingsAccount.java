@@ -30,7 +30,7 @@ public class CreateNewSavingsAccount extends CreateNewAccount implements ActionL
         nameText.setBounds(150,20,165,25);
         panel.add(nameText);
 
-        Currency currencies[] = {Bank.Euro, Bank.Pound, Bank.USD, Bank.Yen};
+        Currency currencies[] = {new Euro(),new Pound(), new Dollar(), new Yen()};
         currency = new JComboBox<> (currencies);
 
         balance= new JLabel("Enter starting balance:");
