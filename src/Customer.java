@@ -13,7 +13,6 @@ public class Customer extends User implements OPObserver{
     public ArrayList<SavingsAccount> savingsAccounts = new ArrayList<SavingsAccount> ();
     public ArrayList<SecuritiesAccount> securitiesAccounts = new ArrayList<SecuritiesAccount> ();
     private ArrayList<Loan> loans = new ArrayList<>(); //list of customer's loans
-    private ArrayList<Stock> stocks = new ArrayList<> ();
     private int numberOfaccounts=0;
     //need to add stocks
 
@@ -75,7 +74,7 @@ public class Customer extends User implements OPObserver{
     }
     
     /*
-    * Return the total savings in dollars
+    * Return the total savings in dollars, change to getSavings (Currency x)
     */
     public int getSavings() {
         int savings = 0;
@@ -87,8 +86,6 @@ public class Customer extends User implements OPObserver{
         }
         return savings;
     }
-    
-
 
     public int getID() {
         return customerID;

@@ -21,7 +21,13 @@ public abstract class Account {
         currency = c;
         accountID = java.lang.System.identityHashCode(this);
     }
-
+    //no-arg Constructor
+    public Account() {
+        name = "Account";
+        balance = 0;
+        currency = new Dollar(); //make Currency an abstract class and Dollar a subclass
+        accountID = java.lang.System.identityHashCode(this);
+    }
     public void deposit(double amount)
     {
         balance += amount;
@@ -66,9 +72,9 @@ public abstract class Account {
         return removalfee; 
     } 
 
-    public abstract String print();
-
     public int getID(){
         return accountID;
     }
+    public abstract String print();
 }
+

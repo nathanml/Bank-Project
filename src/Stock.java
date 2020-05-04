@@ -6,6 +6,7 @@ public class Stock {
     protected Currency currency;
     protected double value;
     protected Customer owner;
+    private double priceAtPurchase;
 
     public Stock(String n, double val, Currency cur) throws SQLException {
         name = n;
@@ -21,6 +22,32 @@ public class Stock {
     }
     public String getName() {
         return name; 
+    }
+
+    public int getID() {
+        return stockID;
+    }
+
+    public double getPurchasedPrice(Currency x) {
+        return x.convertTo(priceAtPurchase);
+    }
+
+    public double getCurrentValue(Currency x) {
+        return x.convertTo(value);
+    }
+    /*
+    * return the profit in dollars 
+    */
+    public double calcProfit() {
+        return currency.convertToDollar(priceAtPurchase - value);
+    }
+
+    public boolean equals(String input) {
+        return input.equalsIgnoreCase(name);
+    }
+
+    public boolean equals(int id) {
+        return (id == stockID);
     }
     public static void main(String[] args)
     {
