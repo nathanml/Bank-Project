@@ -41,6 +41,10 @@ public abstract class Account {
     {
         return balance; 
     } 
+    public Currency getCurrency() 
+    {
+        return currency;
+    }
     public String getName()
     {
         return name; 
