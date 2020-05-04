@@ -12,7 +12,7 @@ public abstract class Account {
     protected ArrayList<Transaction> transactions;
     protected int accountID;
     protected Customer owner;
-    //I think the customer should have the account. Not the account have the customer. 
+    protected double removalfee= 1;
 
     //Constructor
     public Account(String name, double balance, Currency c) {
@@ -49,13 +49,21 @@ public abstract class Account {
     {
         return name; 
     } 
-    public void setMoney(int money)
+    public void setMoney(double money)
     {
         balance= money; 
     } 
     public void setName(String str)
     {
         name= str; 
+    } 
+    public void setRemovalfee(double money)
+    {
+        removalfee= money; 
+    } 
+    public double getRemovalfee()
+    {
+        return removalfee; 
     } 
 
     public abstract String print();

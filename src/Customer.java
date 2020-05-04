@@ -82,7 +82,7 @@ public class Customer extends User implements OPObserver{
         if (savingsAccounts.size() > 0) {
             for (int i = 0; i<savingsAccounts.size(); i++) {
                 Currency c = savingsAccounts.get(i).getCurrency();
-		savings += c.convertToDollar(savingsAccounts.get(i).getMoney())
+		savings += c.convertToDollar(savingsAccounts.get(i).getMoney());
             }
         }
         return savings;
@@ -93,5 +93,10 @@ public class Customer extends User implements OPObserver{
     public int getID() {
         return customerID;
     }
+	@Override
+	public void update() {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }
