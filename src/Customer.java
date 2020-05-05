@@ -13,6 +13,7 @@ public class Customer extends User implements Comparable<Customer>, OPObserver{
     private ArrayList<SecuritiesAccount> securitiesAccounts = new ArrayList<SecuritiesAccount> ();
     private ArrayList<Loan> loans = new ArrayList<Loan>(); //list of customer's loans
     private int numberOfaccounts=0;
+    private String availableStocks; 
     //need to add stocks
 
     //Constructor 
@@ -116,7 +117,7 @@ public class Customer extends User implements Comparable<Customer>, OPObserver{
     /*
     * update1 - returns a String of all the stocks currently available 
     */
-    public String update1() {
+    public void update1() {
         String str = "";
         if (securitiesAccounts.size() > 0) {
             ArrayList<Stock> stocks = Bank.getStockMarket().getStockAvailable();
@@ -124,7 +125,17 @@ public class Customer extends User implements Comparable<Customer>, OPObserver{
                 str = str + stocks.get(i).toString() + "\n";
             }
         }
-        return str;  
+        availableStocks = str;
+    }
+
+    public String getAvailableStock() {
+        String str = "";
+        if (dealingStocks()) {
+            str= availableStocks;
+        } else {
+            str = "Access Denied";
+        }
+        return str;
     }
     
     

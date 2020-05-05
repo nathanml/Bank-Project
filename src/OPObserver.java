@@ -2,8 +2,8 @@
 * OPObserver - Interface for the observer in the Observer Pattern
 */
 public interface OPObserver {
-	 String update1();
-	 void update2();
+	 void update1(); //update the current available stock
+	 void update2(); //clear securities account of this Observer
 	 boolean equals(OPObserver other);
 	 String getName();
 }
