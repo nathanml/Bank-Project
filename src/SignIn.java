@@ -78,14 +78,17 @@ public class SignIn extends JFrame implements ActionListener
 		String password= passText.getText();
 		
 		//check if user exists in database already
+        try{
+
+        }catch ()
 		if (!username.equals("") && !password.equals(""))
 		{
-		    if(DBConnect.hasCustomer(username,password))
+		    if(DBConnect.hasUsername (username) )
             {
 
             }
 		    else {
-		        panel.add(new JLabel ("Incorrect username or password."))
+		        panel.add(new JLabel ("Incorrect username or password."));
             }
 			//make customer object
 			Customer c1= new Customer();

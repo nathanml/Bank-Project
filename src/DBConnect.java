@@ -78,4 +78,13 @@ public class DBConnect {
         s.executeQuery ("INSERT INTO STOCKS VALUES (" + stockID + ", " + name + ", " + id + "," + valueEuro +
                 "," + valuePound + ","+ valueUSD + "," + valueYen);
     }
+
+    public static boolean hasUsername(String username) throws SQLException {
+        establishConnection ();
+        Statement s= conn.createStatement ();
+        s.executeQuery ("USE bankdb");
+        String sql_res= "select * from customers where username= '" + username + "'";
+        ResultSet rs=s.executeQuery(sql_res);
+        return (rs.next ());
+    }
 }
