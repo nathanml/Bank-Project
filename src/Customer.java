@@ -87,7 +87,10 @@ public class Customer extends User implements Comparable<Customer>, OPObserver{
         numberOfaccounts--;
     }
 
-    public void clearSecurityAccounts() throws SQLException {
+    /*
+    * update2 - allows the observer to get unregistered from the StockMarket
+    */
+    public void update2() throws SQLException {
         if (savingsAccounts.size() > 0) {
             savingsAccounts.get(0).deposit(totalSec(new Dollar()));
         } else {
@@ -96,6 +99,9 @@ public class Customer extends User implements Comparable<Customer>, OPObserver{
         }
     }
     
+    public boolean dealingStocks() {
+        return (securitiesAccount.size() > 0);
+    }
    
     public void requestLoan(Loan loan)
     {   
@@ -107,7 +113,10 @@ public class Customer extends User implements Comparable<Customer>, OPObserver{
     	return loans;
     }
 
-    public String update() {
+    /*
+    * update1 - returns a String of all the stocks currently available 
+    */
+    public String update1() {
         String str = "";
         if (securitiesAccounts.size() > 0) {
             ArrayList<Stock> stocks = Bank.getStockMarket().getStockAvailable();

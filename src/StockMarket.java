@@ -73,7 +73,7 @@ public class StockMarket implements OPSubject{
         boolean canUnReg = observers.contains(customer);
         if (canUnReg) {
             observers.remove(customer);
-            //customer.clearSecurityAccounts();
+            customer.update2(); //remove all securitiesAccount transfter into savings
         }
         return canUnReg;
     }
@@ -82,7 +82,7 @@ public class StockMarket implements OPSubject{
     */
     public void notifyObserver() {
         for (int i = 0; i < observers.size(); i++) {
-            observers.get(i).update();
+            observers.get(i).update1();
         }
     }
     
