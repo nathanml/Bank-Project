@@ -22,12 +22,12 @@ public class ManagerPortal extends JFrame implements ActionListener {
     	setSize(500, 600);
     	setLocation(400, 100);
     	setResizable(true);
-    	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE );
     	cbList.addActionListener(this);
     	panel.add(cbList);
     	panel.add(text);
     	add(panel);
     	setVisible(true);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE );
     }
     
     public void actionPerformed(ActionEvent e)

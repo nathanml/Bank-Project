@@ -2,7 +2,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Welcome extends JFrame implements ActionListener{
+public class Welcome extends JFrame{
 
     private static JPanel panel;
     public Welcome()
@@ -26,10 +26,6 @@ public class Welcome extends JFrame implements ActionListener{
         managerSignIn.setBounds(1000, 1000, 200, 25);
         panel.add(managerSignIn);
 
-        SignIn signInL = new SignIn ();
-        signInL.initializeframe ();
-        signIn.addActionListener(signInL);
-
         SignUp signUpL = new SignUp ();
         signUpL.initializeframe ();
         signUp.addActionListener(signUpL);
@@ -45,11 +41,6 @@ public class Welcome extends JFrame implements ActionListener{
 
     public static void main(String[] args)
     {
-
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
 
     }
 }

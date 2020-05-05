@@ -19,12 +19,17 @@ public class ManagerSignIn extends SignIn
         String username= userText.getText();
         String password= passText.getText();
 
-        if (username.equals(Bank.bankManager.username) && password.equals(Bank.bankManager.password))
+        if (!username.equals("") && !password.equals(""))
         {
-            ManagerPortal p = new ManagerPortal ();
-        }
-        else {
-            System.out.println("Incorrect input, please try again");
+            System.out.println("HERE");
+            if (username.equals(Bank.bankManager.username) && password.equals(Bank.bankManager.password))
+            {
+                ManagerPortal p = new ManagerPortal ();
+            }
+            else {
+                panel.add(new JLabel ("Incorrect username or password. Try again"));
+            }
+
         }
     }
 

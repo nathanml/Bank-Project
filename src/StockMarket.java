@@ -23,11 +23,13 @@ public class StockMarket implements OPSubject{
     	return removed;
     }
 
+
     public void addStock(Stock stock) {
     	stocks.add(stock);
     }
     //need to change getSavings in Customer so it return the value in dollars
     public boolean registerObserver(OPObserver customer, int initBalance) {
+        /*
     	boolean registered = false;
     	if (!observers.contains(customer) && customer.getSavings() > 5000) {
     		observers.add(customer);
@@ -35,6 +37,8 @@ public class StockMarket implements OPSubject{
     		registered = true;
     	}
     	return registered;
+         */
+        return true;
     }
 
     public boolean unregisterObserver(OPObserver customer) {
@@ -44,14 +48,19 @@ public class StockMarket implements OPSubject{
     * update the current stock price, customer's realized and unrealized profits etc
     */
     public void notifyObserver() {
+        /*
     	forEach(OPObserver o : observers) {
     		o.update();
     	}
+        */
     }
-    //return the trade records of this date 
+    //return the trade records of this date
+    /*
     public String getLastTrade(int date) {
 
     }
+
+     */
     public static void main(String[] args)
     {
 

@@ -105,11 +105,13 @@ public class SignUp extends JFrame implements ActionListener
 			//add user to database
             try {
                 Customer c1= new Customer(firstname, lastname, username, password);
+                ATM atm = new ATM(c1);
+                atm.initialize ();
             } catch (SQLException ex) {
                 ex.printStackTrace ();
             }
             System.out.println("You have successfully signed up!");
-			
+
 			//alert listener
 		}
 		else {
