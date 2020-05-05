@@ -7,7 +7,7 @@ import javax.swing.JPanel;
 
 public class AccountInterface extends JFrame implements ActionListener{
 
-	private Customer currentCustomer;
+    private Customer currentCustomer;
     private static JPanel mainpanel;
     private static JPanel removeaccpanel;
     private static JButton back;
@@ -15,8 +15,8 @@ public class AccountInterface extends JFrame implements ActionListener{
 
     
     public AccountInterface(Customer c, Account account){
-    	this.currentCustomer = c;
-    	this.account=account;
+        this.currentCustomer = c;
+        this.account=account;
         mainpanel = new JPanel();
         mainpanel.setLayout(null);
         add(mainpanel);
@@ -24,21 +24,21 @@ public class AccountInterface extends JFrame implements ActionListener{
         setSize( 500, 500 );
         setLocation( 400, 100 );
         setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
-    	
+        
     }
     
     public void initialize() {
-    	JButton removeAcc = new JButton("Remove Account");
+        JButton removeAcc = new JButton("Remove Account");
         removeAcc.setBounds(10, 20, 400, 25);
         mainpanel.add(removeAcc);
         removeAcc.addActionListener (new ActionListener()
         {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				removeaccount();
-				
-			}
-        	
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                removeaccount();
+                
+            }
+            
         });
         
         JButton withdraw = new JButton("Withdraw");
@@ -47,12 +47,12 @@ public class AccountInterface extends JFrame implements ActionListener{
         
         withdraw.addActionListener (new ActionListener()
         {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				//some method
-				
-			}
-        	
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //some method
+                
+            }
+            
         });
         
         JButton deposit = new JButton("Deposit");
@@ -60,12 +60,12 @@ public class AccountInterface extends JFrame implements ActionListener{
         mainpanel.add(deposit);
         deposit.addActionListener (new ActionListener()
         {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				//some method
-				
-			}
-        	
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //some method
+                
+            }
+            
         });
         
         JButton loan = new JButton ("Request Loan");
@@ -74,12 +74,12 @@ public class AccountInterface extends JFrame implements ActionListener{
         
         loan.addActionListener (new ActionListener()
         {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				//some method
-				
-			}
-        	
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //some method
+                
+            }
+            
         });
         
         JButton transaction = new JButton ("View Transactions");
@@ -101,30 +101,31 @@ public class AccountInterface extends JFrame implements ActionListener{
         setVisible(true);
     }
     public void removeaccount() {
-    	//charge fee
-		account.setMoney(account.getMoney()-account.getRemovalfee());
-		
-		//remove account
-    	if (account instanceof CheckingAccount) {
-    		currentCustomer.removeCheckingAccount((CheckingAccount) account);
-    	}else if (account instanceof SavingsAccount) {
-    		currentCustomer.removeSavingsAccount((SavingsAccount) account);
-    	}else if (account instanceof SecuritiesAccount) {
-    		currentCustomer.removeSecuritiesAccount((SecuritiesAccount) account);
-    	}
-    	// Go back to view accounts
-    	
+        //charge fee
+        account.setMoney(account.getMoney()-Bank.getRemovalfee());
+        
+        //remove account
+        if (account instanceof CheckingAccount) {
+            currentCustomer.removeCheckingAccount((CheckingAccount) account);
+        }else if (account instanceof SavingsAccount) {
+            currentCustomer.removeSavingsAccount((SavingsAccount) account);
+        }else if (account instanceof SecuritiesAccount) {
+            currentCustomer.removeSecuritiesAccount((SecuritiesAccount) account);
+        }
+        // Go back to view accounts
+        
     }
 
     public void requestloan() {
     
     }
     
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		initialize();
-		
-	}
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        initialize();
+        
+    }
     
-	
+    
 }
+

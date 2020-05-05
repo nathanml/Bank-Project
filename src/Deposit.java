@@ -4,10 +4,13 @@ public class Deposit extends Transaction{
 
     public Deposit(Account a, Double x, String s) throws SQLException {
         super (a, x, s);
-        double amountUSD = currency.convertToDollar (amount);
-        double amountEuro = Bank.Euro.convertFromDollar (amountUSD);
-        double amountPound = Bank.Pound.convertFromDollar (amountUSD);
-        double amountYen = Bank.Yen.convertFromDollar (amountUSD);
+        double amountUSD = amount;
+         Euro euro = new Euro();
+        Pound pound = new Pound();
+        Yen yen = new Yen();
+        double amountEuro = euro.convertFromDollar(amountUSD);
+        double amountPound = pound.convertFromDollar (amountUSD);
+        double amountYen = yen.convertFromDollar (amountUSD);
         DBConnect.addTransaction(transactionID, memo, date, account.getID(), amountEuro, amountPound, amountUSD, amountYen);
     }
 

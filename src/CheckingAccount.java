@@ -3,28 +3,18 @@ import java.sql.SQLException;
 public class CheckingAccount extends Account {
 
     //Constructor
-    public CheckingAccount(String name, int balance, Currency c) throws SQLException {
-        super(name, balance, c);
-        double balanceUSD = currency.convertToDollar (balance);
-        double balanceEuro = Bank.Euro.convertFromDollar (balanceUSD);
-        double balancePound = Bank.Pound.convertFromDollar (balanceUSD);
-        double balanceYen = Bank.Yen.convertFromDollar (balanceUSD);
+    public CheckingAccount(String name, int b, Currency c) throws SQLException {
+        super (name, c.convertToDollar(b), Bank.getCurrentTime());
+        double balanceUSD = c.convertToDollar(b);
+        
+        //For Database Connection
+        double balanceEuro = Bank.getEuro().convertFromDollar (balanceUSD);
+        double balancePound = Bank.getPound().convertFromDollar (balanceUSD);
+        double balanceYen = Bank.getYen().convertFromDollar (balanceUSD);
         String type = "Checking";
         //removed this line so I can test and run
         //DBConnect.addAccount(accountID, name, owner.getID(),balanceEuro, balancePound, balanceUSD, balanceYen, type);
     }
-
-    //deposit money 
-    public void deposit(int money)
-    {
-        balance += money; 
-    } 
-
-    //withdrawal
-    public void withdrawal(int money)
-    {
-        balance -= money; 
-    } 
 
     public String print()
     {

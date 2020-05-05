@@ -59,7 +59,7 @@ public class DBConnect {
                 "," + amountEuro + "," + amountPound + "," + amountUSD + "," + amountYen);
     }
 
-    public static void addLoan(int loanID, String name, Date dueDate, String collateral, double interestRate, int id,
+    public static void addLoan(int loanID, String name, Clock dueDate, String collateral, double interestRate, int id,
                                double amountEuro, double amountPound, double amountUSD, double amountYen) throws SQLException {
         establishConnection ();
         Statement s= conn.createStatement ();

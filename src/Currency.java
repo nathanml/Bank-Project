@@ -1,32 +1,34 @@
-public class Currency {
-    private String name;
-    private double conversionFactor;     //Conversion factor * universal rate = currency rate
+public abstract class Currency {
+    protected String name;
+    protected double conversionFactor;     //Conversion factor * universal rate = currency rate
 
     /*
     * Should a name and contain methods for conversion
     * */
 
-    public Currency(String n, double cf)
+    public Currency()
     {
-        name = n;
-        conversionFactor = cf;
+       name = null;
+       conversionFactor = 0;
     }
 
-    public int convertFromDollar(double x)
+    /*
+    * Convert from this currency to Dollar
+    */
+    public double convertToDollar(double x) {
+        return (x /conversionFactor);
+    }
+    /*
+    * Convert from Dollar to this currency
+    */
+    public double convertFromDollar(double x)
     {
-        return (int) (conversionFactor * x);
+        return (conversionFactor * x);
     }
 
-    public double convertToDollar(double x)
-    {
-        return (x / conversionFactor);
+    public double setConversionFactor() {
+        return Bank.getExchangeRate(name);
     }
-
-    public void setConversionFactor(double x)
-    {
-        conversionFactor = x;
-    }
-
     public static void main(String[] args)
     {
 
