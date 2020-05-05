@@ -12,6 +12,7 @@ public abstract class Account implements BankAccount {
     protected int accountID;
     //protected Customer owner;
     protected Clock dateOpened;
+    protected Customer owner;
 
     //Constructor
     public Account(String name, double balance, Currency x) {
