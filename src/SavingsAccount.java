@@ -30,7 +30,7 @@ public class SavingsAccount extends Account {
     //overrid withdraw method in case the Customer is dealing stock
     //must maintain $2500 in account
     public boolean withdraw(double amount) {
-       
+       return true; //just for it to run
     }
 
     public String print()

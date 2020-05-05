@@ -30,9 +30,11 @@ public class SecuritiesAccount extends Account implements OPObserver{
     }
 
     public void update() {
+        /*
         realizedProfit += stockMarket.calcRealizedProfit(this);
         lastSold = new ArrayList<Stock> (); //empty this list 
         unrealizedProfit = stockMarket.calcUnrealizedProfit(this);
+         */
 
     }
     /*

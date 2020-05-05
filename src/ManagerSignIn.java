@@ -16,25 +16,6 @@ public class ManagerSignIn extends SignIn
     @Override
     public void actionPerformed(ActionEvent e) {
         setVisible( true );
-        String username= userText.getText();
-        String password= passText.getText();
-
-<<<<<<< HEAD
-        if (!username.equals("") && !password.equals(""))
-=======
-        if (username.equals(Bank.getBankManager().getUsername()) && password.equals(Bank.getBankManager().getPassword()))
->>>>>>> b5f9293d7db143bc1ebeaca09752084c65cfc913
-        {
-            System.out.println("HERE");
-            if (username.equals(Bank.bankManager.username) && password.equals(Bank.bankManager.password))
-            {
-                ManagerPortal p = new ManagerPortal ();
-            }
-            else {
-                panel.add(new JLabel ("Incorrect username or password. Try again"));
-            }
-
-        }
     }
 
     //just for testing purposes
