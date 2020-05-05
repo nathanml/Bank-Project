@@ -82,6 +82,10 @@ public class Clock implements Comparable<Clock> {
 		return Date;
 	}
 
+	public String toString() {
+		return Date + "/" + Month + "/" + Year;
+	}
+
     public static void main(String[] args)
     {
 

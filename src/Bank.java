@@ -1,18 +1,20 @@
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 public class Bank {
 
     /*
     * Bank will have bank manager, customers, currencies, and ATM
     * */
-
+    private static Clock currentTime;
     private static BankManager bankManager;
-    public static Clock currentTime;
-    private static double loanRate; //loan rate per day an integer over 1
-    private static double savingsRate; //savings interest rate 
-    private static double acctRemovalFee; 
+    private static double loanRate = 1.003; //3% per day
+    private static double savingsRate = 1.001; //1% per day 
+    private static double savInterestBenchMark = 5000; // $5000 to start collect interest
+    private static double acctRemovalFee = 1;  //$1
+
     private static StockMarket stockMarket;
-    //exchange rate unsed in subclass of Currency;
+    //exchange rate used in subclass of Currency;
     private static ArrayList<String> currencies = new ArrayList<String> (Arrays.asList("Dollar, Euro, Pound, Yen"));
     private static ArrayList<Double> exchangeRate = new ArrayList<Double> (Arrays.asList(1.0, 0.92, 0.81, 107.9));
     private static Euro euro = new Euro();
@@ -22,11 +24,7 @@ public class Bank {
     public Bank()
     {
         bankManager = new BankManager ("username", "password");
-       
-        loanRate = 1.003; //3% per day 
-        savingsRate = 1.0001; //0.1% per day 
-        acctRemovalFee = 1;
-        currentTime = null; //need to create a method that allows the bank manager to set the time 
+        currentTime = new Clock(5, 5, 2020); //hard-coded value to start with 
         Welcome w = new Welcome ();
     }
 
@@ -41,7 +39,7 @@ public class Bank {
 
     } 
     public static BankManager getBankManager() {
-    	return bankManager;
+        return bankManager;
     }
    
     public static double getRemovalfee()
@@ -54,7 +52,7 @@ public class Bank {
     }
     
     public static StockMarket getStockMarket() {
-    	return stockMarket;
+        return stockMarket;
     }
     /*
     * Return -1 if the input is not in the currencies list. 

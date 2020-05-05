@@ -4,7 +4,7 @@ public class CheckingAccount extends Account {
 
     //Constructor
     public CheckingAccount(String name, int b, Currency c) throws SQLException {
-        super (name, c.convertToDollar(b), Bank.getCurrentTime());
+        super (name, b, c);
         double balanceUSD = c.convertToDollar(b);
         
         //For Database Connection
@@ -15,7 +15,8 @@ public class CheckingAccount extends Account {
         //removed this line so I can test and run
         //DBConnect.addAccount(accountID, name, owner.getID(),balanceEuro, balancePound, balanceUSD, balanceYen, type);
     }
-
+    
+ 
     public String print()
     {
         return "Account Name: " + name + ", Account Balance: " + balance +  ", Account type: Checking Account";

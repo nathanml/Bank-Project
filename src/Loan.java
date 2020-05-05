@@ -1,37 +1,61 @@
 import java.sql.SQLException;
 import java.util.Date;
 
-public class Loan {
+public class Loan extends Service{
     //basic info
     protected int loanID;
     protected String memo;
-    protected double amountUSD;
     protected double interestRate; //interestPerDay 
-    //dates
-    protected Clock startDate;
     protected Clock dueDate;
+    protected Clock lastPayDate;
     //people
     protected Customer customer;
     protected String collateral;
 
-    public Loan(String name, int a, Currency c, Clock due, Customer customer, String col) throws SQLException {
+    public Loan(String name, int a, Currency c, Clock due, String col) throws SQLException {
+        super(a, c);
         loanID = System.identityHashCode (this);
         this.memo = name;
-        amountUSD = c.convertToDollar(a); //store value in USD
         interestRate = Bank.getLoanRate();
-   
-        startDate = Bank.getCurrentTime();
+        lastPayDate = purchasedDate;
         dueDate = due; 
-        this.customer = customer;
+        //this.customer = customer;
         collateral = col;
 
         //For Database Connection
+        double amountUSD = c.convertToDollar(a); //store value in USD
         double amountEuro = Bank.getEuro().convertFromDollar(amountUSD);
         double amountPound = Bank.getPound().convertFromDollar (amountUSD);
         double amountYen = Bank.getYen().convertFromDollar (amountUSD);
         DBConnect.addLoan(loanID, name, dueDate, collateral, interestRate, customer.getID (), amountEuro, amountPound,
                 amountUSD, amountYen);
     }
+
+    public void diminish(int amount) {
+    	initialValueUSD -= amount;
+        Bank.getBankManager().collectMoney(interestOnService(0));
+        lastPayDate = Bank.getCurrentTime(); //update lastPay
+        close(); //check if the close condition is met 
+    }
+
+    public boolean diminishable(int amount) {
+        return (initialValueUSD <= amount);
+    }
+
+    public void close() {
+        if (closeCondition()) {
+            customer.getLoans().remove(this);
+        }
+    }
+
+    public boolean closeCondition() {
+        return (initialValueUSD == 0);
+    }
+
+    
+    public double interestOnService(int rate) {
+        return Bank.getCurrentTime().dayDifference(lastPayDate) * interestRate * initialValueUSD;
+    } 
 
     /*
     * Return the number of days this loan is overdued, a negative number 
@@ -47,16 +71,8 @@ public class Loan {
         return overdue;
     }
 
-    public double totalInterest(Clock currentTime) {
-        double interest = 0;
-        if (currentTime.compareTo(startDate) > 0) {
-            interest = currentTime.dayDifference(startDate) * interestRate;
-        }
-        return interest;
-    }
-
-    public double getAmount() {
-        return amountUSD;
+    public double getMoney() {
+        return initialValueUSD;
     }
 
     public static void main(String[] args)

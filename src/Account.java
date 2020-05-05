@@ -10,16 +10,16 @@ public abstract class Account implements BankAccount {
     protected double balance; //recorded in USD
     protected ArrayList<Transaction> transactions;
     protected int accountID;
-    protected Customer owner;
-    protected double removalfee= 1;
+    //protected Customer owner;
     protected Clock dateOpened;
 
     //Constructor
-    public Account(String name, double balance, Clock open) {
+    public Account(String name, double balance, Currency x) {
         this.name= name;
-        this.balance= balance;
+        this.balance= x.convertToDollar(balance);
         accountID = java.lang.System.identityHashCode(this);
-        dateOpened = open;
+        dateOpened = Bank.getCurrentTime();
+        //this.owner = owner;
     }
     //no-arg Constructor
     public Account() {
@@ -28,12 +28,9 @@ public abstract class Account implements BankAccount {
         accountID = java.lang.System.identityHashCode(this);
     }
     public boolean equals(Account other) {
-        boolean equals = false;
-        if (accountID == other.getID()) {
-            equals = true;
-        }
-        return equals;
+    	return (accountID == other.getID());
     }
+    
     public void deposit(double amount)
     {
         balance += amount;
@@ -59,14 +56,19 @@ public abstract class Account implements BankAccount {
         return balance; 
     } 
     
+    public void setMoney(double money)
+    {
+    	if (money >= 0) {
+    		balance = money;
+    	}  
+    } 
+    
     public String getName()
     {
         return name; 
     } 
-    public void setMoney(double money)
-    {
-        balance = money; 
-    } 
+    
+   
     public void setName(String str)
     {
         name= str; 

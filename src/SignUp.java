@@ -100,31 +100,21 @@ public class SignUp extends JFrame implements ActionListener
 		String password= passText.getText();
 		
 		//check if user exists in database already
-        try {
-            if(DBConnect.hasUsername(username))
-            {
-                JOptionPane.showMessageDialog(panel,"That username is already in use. Please try a different one.");
+		if (!username.equals("") && !password.equals(""))
+		{
+			//add user to database
+            try {
+                Customer c1= new Customer(firstname, lastname, username, password);
+            } catch (SQLException ex) {
+                ex.printStackTrace ();
             }
-            else if (!username.equals("") && !password.equals(""))
-            {
-                //add user to database
-                try {
-                    Customer c1= new Customer(firstname, lastname, username, password);
-                    ATM atm = new ATM(c1);
-                    atm.initialize ();
-                } catch (SQLException ex) {
-                    ex.printStackTrace ();
-                }
-                System.out.println("You have successfully signed up!");
-
-                //alert listener
-            }
-            else {
-                JOptionPane.showMessageDialog(panel,"Invalid input. Please try a different one.");
-            }
-        } catch (SQLException ex) {
-            ex.printStackTrace ();
-        }
-
-    }
+            System.out.println("You have successfully signed up!");
+			
+			//alert listener
+		}
+		else {
+		System.out.println("Incorrect input, please try again");
+		}
+		
+	}
 }

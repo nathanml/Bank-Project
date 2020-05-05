@@ -16,6 +16,16 @@ public class ManagerSignIn extends SignIn
     @Override
     public void actionPerformed(ActionEvent e) {
         setVisible( true );
+        String username= userText.getText();
+        String password= passText.getText();
+
+        if (username.equals(Bank.getBankManager().getUsername()) && password.equals(Bank.getBankManager().getPassword()))
+        {
+            ManagerPortal p = new ManagerPortal ();
+        }
+        else {
+            System.out.println("Incorrect input, please try again");
+        }
     }
 
     //just for testing purposes

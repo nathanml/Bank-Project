@@ -1,7 +1,7 @@
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class Customer extends User implements Comparable<Customer>{
+public class Customer extends User implements Comparable<Customer>, OPObserver{
     /*
     * Customer class: Customers have accounts, stocks (if they have enough)
     * */
@@ -23,16 +23,6 @@ public class Customer extends User implements Comparable<Customer>{
         customerID = System.identityHashCode (this);
         DBConnect.addCustomer(customerID, firstName, lastName, username, password);
     }
-
-    public Customer(int ID, String f, String l, String username, String password) throws SQLException {
-        super(username, password);
-        firstName = f;
-        lastName = l;
-        customerID = ID;
-
-        //checkingAccounts = DBConnect.getCheckingAccounts(customerID);
-    }
-
     //no args constructor
     public Customer()
     {
@@ -45,11 +35,7 @@ public class Customer extends User implements Comparable<Customer>{
     }
 
     public boolean equals(Customer other) {
-        boolean equal = false;
-        if (customerID == other.getID()) {
-            equal = true;
-        }
-        return equal;
+        return (customerID == other.getID());
     }
     
     public ArrayList<CheckingAccount> getCheckingAccounts() {
@@ -77,7 +63,7 @@ public class Customer extends User implements Comparable<Customer>{
     }
 
     public void addSecuritiesAccount(SecuritiesAccount account)
-    {
+    {   
         securitiesAccounts.add (account);
         numberOfaccounts++;
     }
@@ -101,22 +87,82 @@ public class Customer extends User implements Comparable<Customer>{
         numberOfaccounts--;
     }
 
+    public void clearSecurityAccounts() throws SQLException {
+        if (savingsAccounts.size() > 0) {
+            savingsAccounts.get(0).deposit(totalSec(new Dollar()));
+        } else {
+            SavingsAccount newAccount = new SavingsAccount("Deposit from Stocks", totalSec(new Dollar()), new Dollar());
+            savingsAccounts.add(newAccount);
+        }
+    }
+    
+   
     public void requestLoan(Loan loan)
-    {
+    {   
+        Bank.getBankManager().addLoan();
         loans.add(loan);
     }
     
-    /*
-    * Return the total savings in dollars, change to getSavings (Currency x)
-    */
-    public double getSavings(Currency x) {
-        int savings = 0;
-        if (savingsAccounts.size() > 0) {
-            for (int i = 0; i<savingsAccounts.size(); i++) {
-                savings += savingsAccounts.get(i).getMoney();
+    public ArrayList<Loan> getLoans() {
+    	return loans;
+    }
+
+    public String update() {
+        String str = "";
+        if (securitiesAccounts.size() > 0) {
+            ArrayList<Stock> stocks = Bank.getStockMarket().getStockAvailable();
+            for (int i = 0; i< stocks.size(); i++) {
+                str = str + stocks.get(i).toString() + "\n";
             }
         }
-        return x.convertFromDollar(savings);
+        return str;  
+    }
+    
+    
+    public double getLoan(Currency x) {
+        double totalLoans = 0;
+        if (loans.size() > 0) {
+            for (int i = 0; i<loans.size(); i++) {
+                Loan l = loans.get(i);
+                totalLoans = totalLoans + l.getMoney();
+            }
+        }
+        return x.convertFromDollar(totalLoans);
+    }
+    
+    
+    public double totalSec(Currency x) {
+    	double total = 0;
+        if (securitiesAccounts.size() > 0) {
+            for (int i = 0; i<securitiesAccounts.size(); i++) {
+                total += securitiesAccounts.get(i).total();
+            }
+        }
+        return x.convertFromDollar(total);
+    	
+    }
+    
+    /*
+     * Return the total savings in dollars, change to getSavings (Currency x)
+     */
+     public double getSavings(Currency x) {
+         int savings = 0;
+         if (savingsAccounts.size() > 0) {
+             for (int i = 0; i<savingsAccounts.size(); i++) {
+                 savings += savingsAccounts.get(i).getMoney();
+             }
+         }
+         return x.convertFromDollar(savings);
+     }
+     
+    public double totalAmount(ArrayList<Account> accounts, Currency x) {
+    	int total = 0;
+    	if (accounts.size() > 0) {
+    		for (int i = 0; i<accounts.size(); i++) {
+    			total += accounts.get(i).getMoney();
+            }
+    	}
+    	return x.convertFromDollar(total);
     }
 
     public double[][] savingsAccountInfo(Currency x) {
@@ -124,7 +170,7 @@ public class Customer extends User implements Comparable<Customer>{
         double[][] summary = new double[numOfSavings][2]; //first col is balance, second col interest
         for (int i = 0; i<numOfSavings; i++) {
             summary[i][0] = x.convertFromDollar(savingsAccounts.get(i).getMoney());
-            summary[i][1] = x.convertFromDollar(savingsAccounts.get(i).calcInterest(Bank.getCurrentTime()));
+            summary[i][1] = x.convertFromDollar((savingsAccounts.get(i)).calcInterest());
         }
         return summary;
     }
@@ -139,11 +185,10 @@ public class Customer extends User implements Comparable<Customer>{
 
     public double[][] loanSummary(Currency x) {
         int length = loans.size();
-        double[][] summary = new double [length][3]; //first col amount, second interest, third days overdue
+        double[][] summary = new double [length][2]; //first col amount, second interest, third days overdue
         for (int i = 0; i< checkingAccounts.size(); i++) {
-            summary[i][0] = x.convertFromDollar(loans.get(i).getAmount());
-            summary[i][1] = x.convertFromDollar(loans.get(i).totalInterest(Bank.getCurrentTime()));
-            summary[i][2] = x.convertFromDollar(loans.get(i).overDue(Bank.getCurrentTime()));
+            summary[i][0] = x.convertFromDollar(loans.get(i).getMoney());
+            summary[i][1] = x.convertFromDollar(loans.get(i).overDue(Bank.getCurrentTime()));
         }
         return summary;
     }
@@ -151,5 +196,13 @@ public class Customer extends User implements Comparable<Customer>{
     public int getID() {
         return customerID;
     }
+	
+	public boolean equals(OPObserver other) {
+		return (other.getName().equalsIgnoreCase(this.getName()));
+	}
+	
+	public String getName() {
+		return firstName;
+	}
     
 }

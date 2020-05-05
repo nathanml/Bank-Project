@@ -47,7 +47,6 @@ public class DBConnect {
     {
         establishConnection ();
         Statement s= conn.createStatement ();
-        s.executeQuery ("USE bankdb");
         s.executeQuery ("INSERT INTO ACCOUNTS VALUES (" + accountID + ", " + name + ", " + id + "," + balanceEuro +
                 "," + balancePound + "," + balanceUSD + "," + balanceYen + "," + type);
     }
@@ -56,7 +55,6 @@ public class DBConnect {
                                       double amountPound, double amountUSD, double amountYen) throws SQLException {
         establishConnection ();
         Statement s= conn.createStatement ();
-        s.executeQuery ("USE bankdb");
         s.executeQuery ("INSERT INTO TRANSACTIONS VALUES (" + transactionID + ", " + memo + ", " + date + "," + id +
                 "," + amountEuro + "," + amountPound + "," + amountUSD + "," + amountYen);
     }
@@ -65,7 +63,6 @@ public class DBConnect {
                                double amountEuro, double amountPound, double amountUSD, double amountYen) throws SQLException {
         establishConnection ();
         Statement s= conn.createStatement ();
-        s.executeQuery ("USE bankdb");
         s.executeQuery ("INSERT INTO LOANS VALUES (" + loanID + ", " + name + ", " + dueDate + "," + collateral +
                 "," + interestRate + "," + id + "," + amountEuro + "," + amountPound + ","+ amountUSD + "," + amountYen);
     }
@@ -78,38 +75,7 @@ public class DBConnect {
                                 double valueYen) throws SQLException {
         establishConnection ();
         Statement s= conn.createStatement ();
-        s.executeQuery ("USE bankdb");
         s.executeQuery ("INSERT INTO STOCKS VALUES (" + stockID + ", " + name + ", " + id + "," + valueEuro +
                 "," + valuePound + ","+ valueUSD + "," + valueYen);
-    }
-
-    public static boolean hasUsername(String username) throws SQLException {
-        establishConnection ();
-        Statement s= conn.createStatement ();
-        s.executeQuery ("USE bankdb");
-        String sql_res= "select * from customers where username= '" + username + "'";
-        ResultSet rs=s.executeQuery(sql_res);
-        return (rs.next ());
-    }
-
-    public static Customer getCustomer(String username) throws SQLException {
-        establishConnection ();
-        Statement s= conn.createStatement ();
-        s.executeQuery ("USE bankdb");
-        String sql_res= "select * from customers where username= '" + username + "'";
-        ResultSet rs=s.executeQuery(sql_res);
-        int ID = rs.getInt ("customerID");
-        String firstName = rs.getString ("firstName");
-        String lastName = rs.getString ("lastName");
-        String password = rs.getString("pass");
-        Customer c = new Customer (ID, firstName, lastName, username, password);
-        sql_res = "select * from accounts where customerID="+ID + "AND type = 'Checking'";
-        rs = s.executeQuery (sql_res);
-        for(int i=0; i<rs.getFetchSize (); i++)
-        {
-            int accountID = rs.getInt ("accountID");
-            CheckingAccount a = new CheckingAccount ()
-            c.addCheckingAccount ();
-        }
     }
 }

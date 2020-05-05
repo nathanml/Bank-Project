@@ -1,6 +1,5 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.SQLException;
 
 import javax.swing.*;
     /*
@@ -62,35 +61,36 @@ public class SignIn extends JFrame implements ActionListener
         button= new JButton("Sign in");
         button.setBounds(10, 80, 80, 25);
         panel.add(button);
-        button.addActionListener(new SignIn ());
+        button.addActionListener(new SignIn());
+    }
+
+    //just for testing purposes
+    public static void main( String[] args ) 
+    {
+    	SignIn si= new SignIn();
+    	si.initializeframe();
     }
     
 	@Override
 	public void actionPerformed(ActionEvent e) {
         setVisible( true );
-        String username= userText.getText();
-        String password= passText.getText();
-
-        //check if user exists in database already
-        try {
-            if(DBConnect.hasUsername(username))
-            {
-                Customer c = DBConnect.getCustomer(username);
-            }
-            else if (!username.equals("") && !password.equals(""))
-            {
-                JOptionPane.showMessageDialog(panel,"Invalid username or password. Please try a different one.");
-                //alert listener
-            }
-        } catch (SQLException ex) {
-            ex.printStackTrace ();
-        }
+		String username= userText.getText();
+		String password= passText.getText();
+		
+		//check if user exists in database already
+		if (!username.equals("") && !password.equals(""))
+		{
+			//make customer object
+			//Customer c1= new Customer();
+			//System.out.println("You have successfully signed in!");
+			
+			//alert listener
+			//give customer to ATM
+			
+		}
+		else {
+		System.out.println("Incorrect input, please try again");
+		}
+		
 	}
-
-    //just for testing purposes
-    public static void main( String[] args )
-    {
-        SignIn si= new SignIn();
-        si.initializeframe();
-    }
 }

@@ -1,127 +1,101 @@
 import java.util.ArrayList;
 public class StockMarket implements OPSubject{
-
+    private class Node {
+        private Stock stock;
+        private int shares;
+        public Node(Stock stock, int shares) {
+            this.stock = stock;
+            this.shares = shares;
+        }
+        private int getShares() {
+            return shares;
+        }
+        private void setShare(int newShares) {
+            if (newShares <= 0) {
+                shares = 0;
+            } else {
+                shares = newShares;
+            }
+        }
+    }
     /*
     * Class that maintains the value of all stocks
     * */
     private ArrayList<OPObserver> observers;
-    private ArrayList<Stock> stocks = new ArrayList<Stock> ();
+    private ArrayList<Node> stocks;
+    
     public StockMarket() {
-        observers = new ArrayList<OPObserver> ();
-        stocks = new ArrayList<Stock> ();
+    	observers = new ArrayList<OPObserver>();
+        stocks = new ArrayList<Node> ();
+        //addStocksForTesting();
     }
     /*
     * removeStock - should be called only after contains return true
     */
-    public Stock removeStock(String stockName) {
-        Stock removed = null;
+    public StockService clientBuyStock(String stockName, int numShares, SecuritiesAccount a) {
+        StockService bought = null;
         for (int i = 0; i < stocks.size(); i++) {
-            Stock s = stocks.get(i);
-            if (s.equals(stockName)) {
-                removed = s;
-                stocks.remove(i);
+            Node s = stocks.get(i); 
+            if (s.stock.equals(stockName)) {
+                if (numShares > s.shares){
+                    numShares = s.shares;
+                }
+                bought = new StockService(s.stock.getCurrentValue(new Dollar()), new Dollar(), numShares, s.stock, a);
+                s.setShare(s.shares - numShares);
                 break;
             }
         }
-        return removed;
+        notifyObserver();
+        return bought;
     }
 
-    public boolean contains(String stockName) {
-        boolean contains = false;
+    public void clientSellStock(Stock sell, int shares) {
         for (int i = 0; i < stocks.size(); i++) {
-            if (stocks.get(i).equals(stockName)) {
-                contains = true;
+            Node s = stocks.get(i); 
+            if (s.stock.equals(sell)) {
+                s.setShare(s.getShares() + shares);
                 break;
             }
-        }
-        return contains; 
+        } 
+        notifyObserver();
     }
 
-/*
-    public void addStock(Stock stock) {
-        stocks.add(stock);
-    }
     //need to change getSavings in Customer so it return the value in dollars
-    public boolean registerObserver(OPObserver customer, int initBalance) {
-        /*
-    	boolean registered = false;
-    	if (!observers.contains(customer) && customer.getSavings() > 5000) {
-    		observers.add(customer);
-    		//create a security account with initBalance (> 1000)
-    		registered = true;
-    	}
-    	return registered;
-         */
-        //return true;
-
-    @Override
     public boolean registerObserver(OPObserver customer) {
-        return false;
+        boolean canRegister = (!observers.contains(customer)); //customer's equals method
+        if (canRegister) {
+            observers.add(customer);
+        }
+        return canRegister;
     }
 
-    @Override
     public boolean unregisterObserver(OPObserver customer) {
-        return false;
-    }
-
-    /*
-        public boolean registerObserver(OPObserver securityAccount) {
-            boolean registered = false;
-            if (!observers.contains(securityAccount)) {
-                observers.add(securityAccount);
-                //create a security account with initBalance (> 1000)
-                registered = true;
-            }
-            return registered;
+        boolean canUnReg = observers.contains(customer);
+        if (canUnReg) {
+            observers.remove(customer);
+            //customer.clearSecurityAccounts();
         }
-
-        public boolean unregisterObserver(OPObserver securityAccount) {
-            return observers.remove(securityAccount);
-        }
-        /*
-        * update the current stock price, customer's realized and unrealized profits etc
-        */
-    public void notifyObserver(){
-        /*
-    	forEach(OPObserver o : observers) {
-    		o.update();
-    	}
-        */
+        return canUnReg;
     }
     /*
-    //return the trade records of this date
-    /*
-    public String getLastTrade(int date) {
-=======
+    * update the current stock price, customer's realized and unrealized profits etc
+    */
+    public void notifyObserver() {
         for (int i = 0; i < observers.size(); i++) {
             observers.get(i).update();
         }
     }
     
-    public double calcRealizedProfit(SecuritiesAccount account) {
-        ArrayList<Stock> sold = account.getLastSold();
-        double profit = 0; // in dollars
-        for (int i = 0; i < sold.size(); i++) {
-            profit += sold.get(i).calcProfit();
+    public ArrayList<Stock> getStockAvailable() {
+        ArrayList<Stock> available = new ArrayList<Stock>();
+        for (int i = 0; i < stocks.size(); i++) {
+            if (stocks.get(i).getShares() > 0) {
+                available.add(stocks.get(i).stock);
+            }
         }
-        return profit;
-    }
->>>>>>> b5f9293d7db143bc1ebeaca09752084c65cfc913
-
-    public double calcUnrealizedProfit(SecuritiesAccount account) {
-        ArrayList<Stock> holdings = account.getHoldings();
-        double profit = 0; // in dollars
-        for (Stock stock : holdings) {
-            profit += stock.calcProfit();
-        }
-        return profit;
-
-
+        return available;
     }
 
-
-    }
-*/
     public static void main(String[] args)
     {
 
