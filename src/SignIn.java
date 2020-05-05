@@ -1,5 +1,6 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 import javax.swing.*;
     /*
@@ -78,29 +79,24 @@ public class SignIn extends JFrame implements ActionListener
 		String password= passText.getText();
 		
 		//check if user exists in database already
-        try{
-
-        }catch ()
 		if (!username.equals("") && !password.equals(""))
 		{
-		    if(DBConnect.hasUsername (username) )
-            {
+            try {
+                if(DBConnect.hasUsername (username) && password.equals (DBConnect.getPassword(username)))
+                {
+                    Customer c = DBConnect.getCustomer(username);
+                    ATM atm = new ATM(c);
+                    atm.initialize ();
+                }
+                else {
+                    panel.add(new JLabel ("Incorrect username or password."));
+                }
+            }
+            catch (SQLException ex) {
+                ex.printStackTrace ();
+            }
+		}
 
-            }
-		    else {
-		        panel.add(new JLabel ("Incorrect username or password."));
-            }
-			//make customer object
-			Customer c1= new Customer();
-			//System.out.println("You have successfully signed in!");
-			
-			//alert listener
-			//give customer to ATM
-            ATM atm = new ATM(c);
-		}
-		else {
-		    System.out.println("Incorrect input, please try again");
-		}
 		
 	}
 }

@@ -28,6 +28,15 @@ public abstract class Account implements BankAccount {
         balance = 0;
         accountID = java.lang.System.identityHashCode(this);
     }
+
+    public Account(int id, String n, double b, Clock opened, Customer own)
+    {
+        accountID = id;
+        name = n;
+        balance = b;
+        dateOpened = opened;
+        owner = own;
+    }
     public boolean equals(Account other) {
     	return (accountID == other.getID());
     }

@@ -15,6 +15,11 @@ public class CheckingAccount extends Account {
         //removed this line so I can test and run
         //DBConnect.addAccount(accountID, name, owner.getID(),balanceEuro, balancePound, balanceUSD, balanceYen, type);
     }
+
+    public CheckingAccount(int id, String n, double b, Clock opened, Customer own)
+    {
+        super(id,n,b,opened,own);
+    }
     
  
     public String print()

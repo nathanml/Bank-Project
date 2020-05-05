@@ -17,6 +17,10 @@ public class SavingsAccount extends Account {
         DBConnect.addAccount(accountID, name, owner.getID(),balanceEuro, balancePound, balanceUSD, balanceYen, type);
 
     }
+
+    public SavingsAccount(int id, String n, double b, Clock opened, Customer own) throws SQLException {
+        super(id,n,b,opened,own);
+    }
    
 
     public double calcInterest() {
