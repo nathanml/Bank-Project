@@ -74,9 +74,9 @@ public class LoanFrame extends JFrame implements ActionListener{
     				String col= cText.getText();
     				Loan l = null;
 					try {
-						l = new Loan("loan", amountrnum, currentAccount.getCurrency(), currentAccount.getDateOpened(), col);
+						l = new Loan(currentAccount, "loan", amountrnum, currentAccount.getCurrency(), currentAccount.getDateOpened(), col);
 					} catch (SQLException e1) {
-						// TODO Auto-generated catch block
+
 						e1.printStackTrace();
 					}
     	            currentCustomer.getLoans().add(l);

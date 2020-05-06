@@ -8,18 +8,19 @@ public class Loan extends Service{
     protected double interestRate; //interestPerDay 
     protected Clock dueDate;
     protected Clock lastPayDate;
+    protected Account associatedAccount;
     //people
     protected Customer customer;
     protected String collateral;
 
-    public Loan(String name, int a, Currency c, Clock due, String col) throws SQLException {
+    public Loan(Account acc, String name, int a, Currency c, Clock due, String col) throws SQLException {
         super(a, c);
+        associatedAccount = acc;
         loanID = System.identityHashCode (this);
         this.memo = name;
         interestRate = Bank.getLoanRate();
         lastPayDate = purchasedDate;
-        dueDate = due; 
-        //this.customer = customer;
+        dueDate = due;
         collateral = col;
 
         //For Database Connection
@@ -27,8 +28,8 @@ public class Loan extends Service{
         double amountEuro = Bank.getEuro().convertFromDollar(amountUSD);
         double amountPound = Bank.getPound().convertFromDollar (amountUSD);
         double amountYen = Bank.getYen().convertFromDollar (amountUSD);
-        DBConnect.addLoan(loanID, name, dueDate, collateral, interestRate, customer.getID (), amountEuro, amountPound,
-                amountUSD, amountYen);
+        DBConnect.addLoan(loanID, name, collateral, interestRate, associatedAccount.getID (), amountEuro, amountPound,
+                amountUSD, amountYen, dueDate.getDate (), dueDate.getMonth (), dueDate.getYear (), associatedAccount.getID ());
     }
 
     public void diminish(int amount) {
