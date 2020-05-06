@@ -1,3 +1,4 @@
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -18,7 +19,7 @@ public class AccountInterface extends JFrame implements ActionListener{
         this.currentCustomer = c;
         this.account=account;
         mainpanel = new JPanel();
-        mainpanel.setLayout(null);
+        mainpanel.setLayout(new GridLayout(10,1));
         add(mainpanel);
         setTitle ("Account Interface");
         setSize( 500, 500 );
@@ -55,16 +56,7 @@ public class AccountInterface extends JFrame implements ActionListener{
         JButton loan = new JButton ("Request Loan");
         loan.setBounds(10, 110, 400, 25);
         mainpanel.add(loan);
-        
-        loan.addActionListener (new ActionListener()
-        {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                //some method
-                
-            }
-            
-        });
+        loan.addActionListener (new LoanFrame(currentCustomer, account));
         
         JButton transaction = new JButton ("View Transactions");
         transaction.setBounds(10, 140, 400, 25);

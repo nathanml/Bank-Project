@@ -1,6 +1,8 @@
 
 	import javax.swing.*;
-	import java.awt.event.ActionEvent;
+
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
 	import java.awt.event.ActionListener;
 	import java.sql.SQLException;
 
@@ -11,13 +13,14 @@
 	    private static JLabel amount;
 	    private static JTextField amountText;
 	    private static Account account;
+	    private static JButton back;
 
 	    public WithdrawFrame(Customer c, Account a)
 	    {
 	        customer = c;
 	        account=a;
 	        panel = new JPanel ();
-	        panel.setLayout(null);
+	        panel.setLayout(new GridLayout(10,1));
 	        add(panel);
 	        setTitle ("Withdraw");
 	        setSize( 500, 500 );
@@ -49,6 +52,11 @@
     	            go.initialize();
     			}
             });
+	      //back button
+            back = new JButton ("back");
+            panel.add(back);
+            
+            back.addActionListener(new AccountInterface(customer, account));
 	        
 	        setVisible (true);
 	    }

@@ -13,11 +13,13 @@ public abstract class Account implements BankAccount {
     //protected Customer owner;
     protected Clock dateOpened;
     protected Customer owner;
+    protected Currency currency;
 
     //Constructor
     public Account(String name, double balance, Currency x) {
         this.name= name;
         this.balance= x.convertToDollar(balance);
+        this.currency= x;
         accountID = java.lang.System.identityHashCode(this);
         dateOpened = Bank.getCurrentTime();
         //this.owner = owner;
@@ -87,6 +89,11 @@ public abstract class Account implements BankAccount {
     public int getID(){
         return accountID;
     }
+    
+    public Currency getCurrency()
+    {
+        return currency; 
+    } 
     public abstract String print();
 }
 

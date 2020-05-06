@@ -56,6 +56,10 @@ public class Loan extends Service{
     public double interestOnService(int rate) {
         return Bank.getCurrentTime().dayDifference(lastPayDate) * interestRate * initialValueUSD;
     } 
+    
+    public String print() {
+    	return "Amount: " + initialValueUSD + "Collateral: " + collateral;
+    }
 
     /*
     * Return the number of days this loan is overdued, a negative number 

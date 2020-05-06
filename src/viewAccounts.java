@@ -1,3 +1,4 @@
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -28,8 +29,8 @@ public class viewAccounts extends JFrame implements ActionListener{
 		this.currentCustomer= customer;
 		setTitle("View Accounts");
 		panel = new JPanel ();
-		panel.setLayout(null);
-        add(panel);
+		panel.setLayout(new GridLayout(10,1));
+		add(panel);
         setSize( 500, 500 );
         setLocation( 400, 100 );
         setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );

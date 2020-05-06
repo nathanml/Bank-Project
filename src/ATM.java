@@ -1,4 +1,6 @@
 import javax.swing.*;
+
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
@@ -17,7 +19,7 @@ public class ATM extends JFrame implements ActionListener {
     {
         customer = c;
         panel = new JPanel ();
-        panel.setLayout(null);
+        panel.setLayout(new GridLayout(10,1));
         add(panel);
         setTitle ("Bank ATM");
         setSize( 500, 500 );
