@@ -1,10 +1,10 @@
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 public class AccountInterface extends JFrame implements ActionListener{
 
@@ -61,14 +61,14 @@ public class AccountInterface extends JFrame implements ActionListener{
         JButton transaction = new JButton ("View Transactions");
         transaction.setBounds(10, 140, 400, 25);
         mainpanel.add(transaction);
-        /*
+
         TransactionListener transactionL = new TransactionListener ();
         transaction.addActionListener (transactionL);
-        */
+
         JButton buystock = new JButton ("Buy Stocks");
         buystock.setBounds(10, 140, 400, 25);
         mainpanel.add(buystock);
-        buystock.addActionListener(new BuyStock(currentCustomer, (SecuritiesAccount)account));
+       // buystock.addActionListener(new BuyStock(currentCustomer, (SecuritiesAccount)account));
         
         back = new JButton ("back");
         back.setBounds(10, 170, 400, 25);
@@ -77,6 +77,24 @@ public class AccountInterface extends JFrame implements ActionListener{
         back.addActionListener(new viewAccounts(currentCustomer));
         
         setVisible(true);
+    }
+
+    private class TransactionListener implements ActionListener{
+        JTable table;
+        JPanel panel;
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            add(panel);
+            ResultSet rs = null;
+            try {
+                rs = DBConnect.getTransaction (account);
+            } catch (SQLException ex) {
+                ex.printStackTrace ();
+            }
+            table = ManagerPortal.generateTable (rs);
+            panel.add(table);
+            setVisible (true);
+        }
     }
     public void removeaccount() {
     	Bank.chargeFee(account);

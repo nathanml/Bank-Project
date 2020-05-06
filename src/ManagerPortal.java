@@ -68,8 +68,9 @@ public class ManagerPortal extends JFrame implements ActionListener {
     	}
     }
 
-    public static void generateTable(ResultSet rs, JTable t)
+    public static JTable generateTable(ResultSet rs)
 	{
+		JTable t = new JTable ();
 		try {
 			ResultSetMetaData metaData = rs.getMetaData ();
 			int numberOfColumns = metaData.getColumnCount ();
@@ -92,9 +93,11 @@ public class ManagerPortal extends JFrame implements ActionListener {
 
 				rows.addElement (newRow);
 			}
-			t = new JTable (rows, columnNames);
+			t = new JTable (rows, columnNames) ;
+			return t;
 		} catch (Exception e) {
 			e.printStackTrace ();
+			return t;
 		}
 	}
 

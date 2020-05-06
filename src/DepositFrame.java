@@ -67,8 +67,12 @@
 						e1.printStackTrace();
 					}
     	            d.updateBalance();
-    	            account.addTransaction((Transaction)d);
-    	            Bank.chargeFee(account);
+					try {
+						account.addTransaction(d);
+					} catch (SQLException ex) {
+						ex.printStackTrace ();
+					}
+					Bank.chargeFee(account);
     	            AccountInterface go= new AccountInterface(customer, account);
     	            go.initialize();
     			}

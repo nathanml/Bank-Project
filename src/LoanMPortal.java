@@ -31,7 +31,8 @@ public class LoanMPortal extends JFrame implements ActionListener {
         } catch (SQLException ex) {
             ex.printStackTrace ();
         }
-        ManagerPortal.generateTable (rsLoans, loans);
+        loans = ManagerPortal.generateTable (rsLoans);
+        panel.add(loans);
     }
     
 }

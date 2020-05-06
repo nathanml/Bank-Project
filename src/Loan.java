@@ -22,13 +22,14 @@ public class Loan extends Service{
         lastPayDate = purchasedDate;
         dueDate = due;
         collateral = col;
+        customer = acc.getOwner();
 
         //For Database Connection
         double amountUSD = c.convertToDollar(a); //store value in USD
         double amountEuro = Bank.getEuro().convertFromDollar(amountUSD);
         double amountPound = Bank.getPound().convertFromDollar (amountUSD);
         double amountYen = Bank.getYen().convertFromDollar (amountUSD);
-        DBConnect.addLoan(loanID, name, collateral, interestRate, associatedAccount.getID (), amountEuro, amountPound,
+        DBConnect.addLoan(loanID, name, collateral, interestRate, customer.getID (), amountEuro, amountPound,
                 amountUSD, amountYen, dueDate.getDate (), dueDate.getMonth (), dueDate.getYear (), associatedAccount.getID ());
     }
 
