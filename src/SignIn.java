@@ -66,30 +66,7 @@ public class SignIn extends JFrame implements ActionListener
         button= new JButton("Sign in");
         button.setBounds(10, 140, 80, 25);
         panel.add(button);
-        button.addActionListener(new SignInListener());
-    }
-
-    private class SignInListener implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            String username = userText.getText ();
-            String password = passText.getText ();
-
-            //check if user exists in database already
-            if (!username.equals ("") && !password.equals ("")) {
-                try {
-                    if (DBConnect.hasUsername (username) && password.equals (DBConnect.getPassword (username))) {
-                        Customer c = DBConnect.getCustomer (username);
-                        ATM atm = new ATM (c);
-                        atm.initialize ();
-                    } else {
-                        panel.add (new JLabel ("Incorrect username or password."));
-                    }
-                } catch (SQLException ex) {
-                    ex.printStackTrace ();
-                }
-            }
-        }
+        button.addActionListener(this);
     }
 
     //just for testing purposes
@@ -98,9 +75,27 @@ public class SignIn extends JFrame implements ActionListener
     	//SignIn si= new SignIn();
     	//si.initializeframe();
     }
-    
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
         setVisible( true );
+        String username = userText.getText ();
+        String password = passText.getText ();
+
+        System.out.println("USER " + username);
+        //check if user exists in database already
+        if (!username.equals ("") && !password.equals ("")) {
+            try {
+                if (DBConnect.hasUsername (username) && password.equals (DBConnect.getPassword (username))) {
+                    Customer c = DBConnect.getCustomer (username);
+                    ATM atm = new ATM (c);
+                    atm.initialize ();
+                } else {
+                    panel.add (new JLabel ("Incorrect username or password."));
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace ();
+            }
+        }
 	}
 }
