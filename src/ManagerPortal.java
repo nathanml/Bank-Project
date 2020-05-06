@@ -7,7 +7,8 @@ import java.awt.event.ActionListener;
 
 
 public class ManagerPortal extends JFrame implements ActionListener {
-	public static String[] options = {"", "Check on Customer", "Stock", "Loan"};
+	private BankManager bm;
+	public static String[] options = {"", "Check on Customer", "Transactions", "Loan"};
 	public static JComboBox cbList = new JComboBox(options);
 	JLabel text = new JLabel("Welcome to the Manager Portal");
 	JPanel panel = new JPanel();
@@ -17,8 +18,9 @@ public class ManagerPortal extends JFrame implements ActionListener {
     /*
     * Class for the bank manager's portal
     * */
-    public ManagerPortal() {
+    public ManagerPortal(BankManager bankmanager) {
     	super("Manager Portal");
+    	bm = bankmanager;
     	setSize(500, 600);
     	setLocation(400, 100);
     	setResizable(true);
@@ -43,10 +45,10 @@ public class ManagerPortal extends JFrame implements ActionListener {
     			CheckCustomer check = new CheckCustomer();
     			check.setVisible(true);
     			break;
-    		case "Stock":
-    			JOptionPane.showMessageDialog(panel, "You will be directed to the Stock Portal.");
-    			StockMPortal stock = new StockMPortal();
-    			stock.setVisible(true);
+    		case "Transactions":
+    			JOptionPane.showMessageDialog(panel, "You will be directed to the Transactions.");
+    			//TransactionsFrame t = new TransactionsFrame();
+    			//t.setVisible(true);
     			break;
     		case "Loan":
     			JOptionPane.showMessageDialog(panel, "You will be directed to the Loan Portal.");
@@ -60,6 +62,7 @@ public class ManagerPortal extends JFrame implements ActionListener {
     }
     public static void main(String[] args) 
     {
-    	
+    	BankManager bm = new BankManager("username", "password");
+    	ManagerPortal mp = new ManagerPortal(bm);
     }
 }
