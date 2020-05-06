@@ -67,8 +67,8 @@ public class ATM extends JFrame implements ActionListener {
         Customer customer= new Customer();
         //customer.addCheckingAccount(new CheckingAccount("check1", 200, new Currency("USD", 0.12)));
         try {
-            customer.addCheckingAccount(new CheckingAccount("check1", 300, new Dollar()));
-            customer.addCheckingAccount(new CheckingAccount("check2", 500, new Dollar()));
+            customer.addCheckingAccount(new CheckingAccount("check1",customer, 300, new Dollar()));
+            customer.addCheckingAccount(new CheckingAccount("check2", customer,500, new Dollar()));
             //customer.addSavingsAccount(new SavingsAccount("check3", 8900, new Dollar()));
         } catch (SQLException e) {
             // TODO Auto-generated catch block

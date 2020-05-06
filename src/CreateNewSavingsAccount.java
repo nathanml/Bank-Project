@@ -58,13 +58,13 @@ public class CreateNewSavingsAccount extends CreateNewAccount implements ActionL
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String name = nameText.getText ();
-	            int balance = Integer.parseInt (balanceText.getText());
+	            double balance = Double.parseDouble (balanceText.getText());
 	            if(accountCurrency != null)
 	            {
 	                SavingsAccount a = null;
 	                try {
 	                	//create account
-	                    a = new SavingsAccount (name, balance, accountCurrency);
+	                    a = new SavingsAccount (name, currentCustomer, balance, accountCurrency);
 	                } catch (SQLException ex) {
 	                    ex.printStackTrace ();
 	                }

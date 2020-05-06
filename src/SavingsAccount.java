@@ -4,8 +4,8 @@ public class SavingsAccount extends Account {
 
 
     //Constructor
-    public SavingsAccount(String name, double b, Currency c) throws SQLException {
-        super(name, b, c);
+    public SavingsAccount(String name, Customer o, double b, Currency c) throws SQLException {
+        super(name, o, b, c);
         double balanceUSD = c.convertToDollar(b);
         
 

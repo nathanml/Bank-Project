@@ -16,10 +16,11 @@ public abstract class Account implements BankAccount {
     protected Currency currency;
 
     //Constructor
-    public Account(String name, double balance, Currency x) {
+    public Account(String name, Customer o, double balance, Currency x) {
         this.name= name;
         this.balance= x.convertToDollar(balance);
         this.currency= x;
+        this.owner = o;
         accountID = java.lang.System.identityHashCode(this);
         dateOpened = Bank.getCurrentTime();
         //this.owner = owner;
@@ -77,8 +78,8 @@ public abstract class Account implements BankAccount {
     {
     	if (money >= 0) {
     		balance = money;
-    	}  
-    } 
+    	}
+    }
     
     public String getName()
     {

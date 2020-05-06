@@ -3,8 +3,8 @@ import java.sql.SQLException;
 public class CheckingAccount extends Account {
 
     //Constructor
-    public CheckingAccount(String name, int b, Currency c) throws SQLException {
-        super (name, b, c);
+    public CheckingAccount(String name, Customer o, double b, Currency c) throws SQLException {
+        super (name, o, b, c);
         double balanceUSD = c.convertToDollar(b);
         
         //For Database Connection

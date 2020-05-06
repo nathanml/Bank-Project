@@ -64,7 +64,7 @@ public class CreateNewSecuritiesAccount extends CreateNewAccount implements Acti
 	            	SecuritiesAccount a = null;
 	                try {
 	                	//create account
-	                    a = new SecuritiesAccount (name, balance, accountCurrency);
+	                    a = new SecuritiesAccount (name, currentCustomer,balance, accountCurrency);
 	                } catch (SQLException ex) {
 	                    ex.printStackTrace ();
 	                }

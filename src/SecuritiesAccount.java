@@ -8,8 +8,8 @@ public class SecuritiesAccount extends Account{
     private static StockMarket stockMarket = Bank.getStockMarket();
     
 
-    public SecuritiesAccount(String name, double b, Currency c) throws SQLException {
-        super (name, b, c);
+    public SecuritiesAccount(String name, Customer o, double b, Currency c) throws SQLException {
+        super (name,o, b, c);
         
         
         realizedProfit = 0; //need to Store 

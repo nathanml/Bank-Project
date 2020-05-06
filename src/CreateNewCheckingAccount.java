@@ -58,20 +58,16 @@ public class CreateNewCheckingAccount extends CreateNewAccount implements Action
             @Override
             public void actionPerformed(ActionEvent e) {
                 String name = nameText.getText ();
-                int balance = Integer.parseInt (balanceText.getText());
-                if(accountCurrency != null)
-                {
+                double balance = Double.parseDouble (balanceText.getText ()) - Bank.getRemovalfee ();
+                if(accountCurrency != null) {
                     CheckingAccount a = null;
                     try {
                         //create account
-                        a = new CheckingAccount (name, balance, accountCurrency);
+                        a = new CheckingAccount (name, currentCustomer, balance, accountCurrency);
+                        currentCustomer.addCheckingAccount (a);
                     } catch (SQLException ex) {
                         ex.printStackTrace ();
                     }
-                    //add account
-                    currentCustomer.addCheckingAccount (a);
-
-                    Bank.chargeFee((Account) a);
                 }
                 //return
                 ATM driver= new ATM(currentCustomer);
@@ -89,7 +85,6 @@ public class CreateNewCheckingAccount extends CreateNewAccount implements Action
     @Override
     public void actionPerformed(ActionEvent e) {
         initialize();
-
     }
 
     @Override
