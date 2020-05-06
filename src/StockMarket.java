@@ -83,6 +83,7 @@ public class StockMarket implements OPSubject{
     public void notifyObserver() {
         for (int i = 0; i < observers.size(); i++) {
             observers.get(i).update1();
+            Bank.getBankManager().updateStocks();
         }
     }
     
