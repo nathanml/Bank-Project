@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.Color.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -12,7 +13,6 @@ public class CreateNewCheckingAccount extends CreateNewAccount implements Action
     private static JComboBox<Currency> currency;
     private static JLabel balance;
     private static JTextField balanceText;
-    private static boolean initialize= true;
 
     public CreateNewCheckingAccount(Customer customer) {
         super(customer);
@@ -28,8 +28,19 @@ public class CreateNewCheckingAccount extends CreateNewAccount implements Action
         nameText.setBounds(150, 20, 165, 25);
         panel.add(nameText);
 
-        Currency currencies[] = {new Euro(),new Pound(), new Dollar(), new Yen()};
-        currency = new JComboBox<> (currencies);
+        JLabel curr= new JLabel("Choose a Currency:");
+        panel.add(curr);
+        Currency currencies[] = {new Euro(), new Pound(), new Dollar(), new Yen()};
+        currency = new JComboBox (currencies);
+        panel.add(currency);
+        currency.addActionListener(new ActionListener()
+        {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JComboBox cd= (JComboBox)e.getSource();
+				accountCurrency= (Currency)cd.getSelectedItem();
+			}
+        });
 
         balance= new JLabel("Enter starting balance:");
         balance.setBounds(10, 50, 200, 25);
@@ -42,32 +53,42 @@ public class CreateNewCheckingAccount extends CreateNewAccount implements Action
         JButton submit = new JButton ("Submit");
         submit.setBounds(10, 80, 80, 25);
         panel.add(submit);
+        submit.addActionListener (new ActionListener()
+        {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String name = nameText.getText ();
+	            int balance = Integer.parseInt (balanceText.getText());
+	            if(accountCurrency != null)
+	            {
+	                CheckingAccount a = null;
+	                try {
+	                	//create account
+	                    a = new CheckingAccount (name, balance, accountCurrency);
+	                } catch (SQLException ex) {
+	                    ex.printStackTrace ();
+	                }
+	                //add account
+	                currentCustomer.addCheckingAccount (a);
+	                
+	                Bank.chargeFee(a);
+	            }
+	          //return
+                ATM driver= new ATM(currentCustomer);
+                driver.initialize();
+			}
+        });
+        JButton back = new JButton ("back");
+        panel.add(back);
         
-        submit.addActionListener(this);
-        
+        back.addActionListener(new ATM(currentCustomer));
+  
         setVisible (true);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
-        if (initialize==true){
             initialize();
-            initialize=false;
-        }else {
-            String name = nameText.getText ();
-            int balance = Integer.parseInt (balanceText.getText());
-            if(accountCurrency != null)
-            {
-                CheckingAccount a = null;
-                try {
-                    a = new CheckingAccount (name, balance, accountCurrency);
-                } catch (SQLException ex) {
-                    ex.printStackTrace ();
-                }
-                currentCustomer.addCheckingAccount (a);
-            }
-    }
 
     }
 

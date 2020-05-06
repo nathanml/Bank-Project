@@ -80,6 +80,7 @@ public class LoanFrame extends JFrame implements ActionListener{
 						e1.printStackTrace();
 					}
     	            currentCustomer.getLoans().add(l);
+    	            currentAccount.setMoney(currentAccount.getMoney() + amountrnum);
     	            //return to account interface
     	            AccountInterface go= new AccountInterface(currentCustomer, currentAccount);
     	            go.initialize();

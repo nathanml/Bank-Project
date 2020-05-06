@@ -33,4 +33,7 @@ public abstract class Currency {
     {
 
     }
+    public String toString() {
+    	return name;
+    }
 }

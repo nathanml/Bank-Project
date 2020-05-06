@@ -38,6 +38,10 @@ public class Bank {
         return set;
 
     } 
+	  public static void chargeFee(Account account) {
+	    account.setMoney(account.getMoney()- getRemovalfee());
+	  }
+	  
     public static BankManager getBankManager() {
         return bankManager;
     }

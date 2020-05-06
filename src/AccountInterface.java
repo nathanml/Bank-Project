@@ -77,8 +77,7 @@ public class AccountInterface extends JFrame implements ActionListener{
         setVisible(true);
     }
     public void removeaccount() {
-        //charge fee
-        account.setMoney(account.getMoney()-Bank.getRemovalfee());
+    	Bank.chargeFee(account);
         
         //remove account
         if (account instanceof CheckingAccount) {
@@ -88,13 +87,9 @@ public class AccountInterface extends JFrame implements ActionListener{
         }else if (account instanceof SecuritiesAccount) {
             currentCustomer.removeSecuritiesAccount((SecuritiesAccount) account);
         }
-        // Go back to view accounts
         
     }
 
-    public void requestloan() {
-    
-    }
     
     @Override
     public void actionPerformed(ActionEvent e) {

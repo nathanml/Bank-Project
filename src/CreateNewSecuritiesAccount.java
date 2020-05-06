@@ -1,41 +1,46 @@
+import javax.swing.*;
+import java.awt.Color.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.sql.SQLException;
 
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-
 public class CreateNewSecuritiesAccount extends CreateNewAccount implements ActionListener, ItemListener {
-	
     private static JLabel name;
     private static JTextField nameText;
     private static Currency accountCurrency;
     private static JComboBox<Currency> currency;
     private static JLabel balance;
     private static JTextField balanceText;
-    private static boolean initialize= true;
-    
+
     public CreateNewSecuritiesAccount(Customer customer) {
-        super (customer);
+        super(customer);
         setTitle ("Create New Securities Account");
     }
-
     public void initialize() {
-
         name= new JLabel("Account Name:");
         name.setBounds(10, 20, 200, 25);
         panel.add(name);
+        
 
         nameText = new JTextField();
-        nameText.setBounds(150,20,165,25);
+        nameText.setBounds(150, 20, 165, 25);
         panel.add(nameText);
 
-        Currency currencies[] = {new Euro(),new Pound(), new Dollar(), new Yen()};
-        currency = new JComboBox<> (currencies);
+        JLabel curr= new JLabel("Choose a Currency:");
+        panel.add(curr);
+        Currency currencies[] = {new Euro(), new Pound(), new Dollar(), new Yen()};
+        currency = new JComboBox (currencies);
+        panel.add(currency);
+        currency.addActionListener(new ActionListener()
+        {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JComboBox cd= (JComboBox)e.getSource();
+				accountCurrency= (Currency)cd.getSelectedItem();
+			}
+        });
 
         balance= new JLabel("Enter starting balance:");
         balance.setBounds(10, 50, 200, 25);
@@ -48,38 +53,51 @@ public class CreateNewSecuritiesAccount extends CreateNewAccount implements Acti
         JButton submit = new JButton ("Submit");
         submit.setBounds(10, 80, 80, 25);
         panel.add(submit);
-        submit.addActionListener (this);
+        submit.addActionListener (new ActionListener()
+        {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String name = nameText.getText ();
+	            int balance = Integer.parseInt (balanceText.getText());
+	            if(accountCurrency != null)
+	            {
+	            	SecuritiesAccount a = null;
+	                try {
+	                	//create account
+	                    a = new SecuritiesAccount (name, balance, accountCurrency);
+	                } catch (SQLException ex) {
+	                    ex.printStackTrace ();
+	                }
+	                //add account
+	                currentCustomer.addSecuritiesAccount (a);
+	                Bank.chargeFee(a);
+	            }
+	          //return
+                ATM driver= new ATM(currentCustomer);
+                driver.initialize();
+			}
+        });
+        JButton back = new JButton ("back");
+        panel.add(back);
         
+        back.addActionListener(new ATM(currentCustomer));
+  
         setVisible (true);
     }
-    
+
     @Override
     public void actionPerformed(ActionEvent e) {
-    	if (initialize==true){
-    		initialize();
-    		initialize=false;
-    	}else {
-	        String name = nameText.getText ();
-	        int balance = Integer.parseInt (balanceText.getText());
-	        if(accountCurrency != null)
-	        {
-                SavingsAccount a = null;
-                try {
-                    a = new SavingsAccount (name, balance, accountCurrency);
-                } catch (SQLException ex) {
-                    ex.printStackTrace ();
-                }
-                currentCustomer.addSavingsAccount (a);
-	        }
-	    }
+            initialize();
+
     }
 
     @Override
     public void itemStateChanged(ItemEvent e) {
-    	accountCurrency = (Currency) currency.getSelectedItem ();
+        accountCurrency = (Currency) currency.getSelectedItem ();
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
 
     }
 }

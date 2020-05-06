@@ -19,7 +19,7 @@ public class ViewSecuritiesAccount extends viewAccounts implements ActionListene
     public void viewAccounts()
     {
         //traverse through all checking accounts
-        int count=0;
+        int count=1;
         int y=20;
         for(SecuritiesAccount securitiesAccount:currentCustomer.getSecuritiesAccounts()) {
             JLabel account= new JLabel(count + ". "+ securitiesAccount.print());
@@ -29,7 +29,7 @@ public class ViewSecuritiesAccount extends viewAccounts implements ActionListene
             y= y+30;
         }
         //if no accounts
-        if (count==0) {
+        if (count==1) {
             JLabel account= new JLabel("You do not have any Securities accounts");
             account.setBounds(10, y, 400, 25);
             panel.add(account); 
@@ -60,7 +60,7 @@ public class ViewSecuritiesAccount extends viewAccounts implements ActionListene
             {
     			@Override
     			public void actionPerformed(ActionEvent e) {
-    				int answernum= Integer.parseInt(accountText.getText());
+    				int answernum= Integer.parseInt(accountText.getText())-1;
     	            CheckingAccount account= currentCustomer.getCheckingAccounts().get(answernum);
     	            AccountInterface go= new AccountInterface(currentCustomer, account);
     	            go.initialize();

@@ -40,6 +40,6 @@ public class SavingsAccount extends Account {
 
     public String print()
     {
-        return "Account Name: " + name + ", Account Balance: " + balance + ", Account type: Savings Account";
+        return "Account Name: " + name + ", Account Balance: " + balance;
     }
 }

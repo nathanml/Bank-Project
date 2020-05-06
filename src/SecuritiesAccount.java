@@ -113,6 +113,6 @@ public class SecuritiesAccount extends Account{
     }
     public String print()
     {
-        return "Account Name: " + name + ", Account Balance: " + balance + ", Account type: Securities Account";
+        return "Account Name: " + name + ", Account Balance: " + balance ;
     }
 }

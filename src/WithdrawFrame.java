@@ -48,6 +48,7 @@ import java.awt.event.ActionEvent;
     			public void actionPerformed(ActionEvent e) {
     				int answernum= Integer.parseInt(amountText.getText());
     	            account.withdrawal(answernum);
+    	            Bank.chargeFee(account);
     	            AccountInterface go= new AccountInterface(customer, account);
     	            go.initialize();
     			}

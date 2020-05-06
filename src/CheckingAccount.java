@@ -12,8 +12,7 @@ public class CheckingAccount extends Account {
         double balancePound = Bank.getPound().convertFromDollar (balanceUSD);
         double balanceYen = Bank.getYen().convertFromDollar (balanceUSD);
         String type = "Checking";
-        //removed this line so I can test and run
-        //DBConnect.addAccount(accountID, name, owner.getID(),balanceEuro, balancePound, balanceUSD, balanceYen, type);
+        DBConnect.addAccount(accountID, name, owner.getID(),balanceEuro, balancePound, balanceUSD, balanceYen, type);
     }
 
     public CheckingAccount(int id, String n, double b, Clock opened, Customer own)
@@ -24,6 +23,6 @@ public class CheckingAccount extends Account {
  
     public String print()
     {
-        return "Account Name: " + name + ", Account Balance: " + balance +  ", Account type: Checking Account";
+        return "Account Name: " + name + ", Account Balance: " + balance;
     }
 }
