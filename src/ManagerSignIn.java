@@ -21,7 +21,7 @@ public class ManagerSignIn extends SignIn
 
         if (username.equals(Bank.getBankManager().getUsername()) && password.equals(Bank.getBankManager().getPassword()))
         {
-            ManagerPortal p = new ManagerPortal ();
+            ManagerPortal p = new ManagerPortal (Bank.getBankManager ());
         }
         else {
             System.out.println("Incorrect input, please try again");

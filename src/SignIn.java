@@ -67,6 +67,8 @@ public class SignIn extends JFrame implements ActionListener
         button.setBounds(10, 140, 80, 25);
         panel.add(button);
         button.addActionListener(this);
+        setVisible( true );
+        panel.setVisible( true );
     }
 
     //just for testing purposes
@@ -78,11 +80,9 @@ public class SignIn extends JFrame implements ActionListener
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-        setVisible( true );
         String username = userText.getText ();
         String password = passText.getText ();
 
-        System.out.println("USER " + username);
         //check if user exists in database already
         if (!username.equals ("") && !password.equals ("")) {
             try {

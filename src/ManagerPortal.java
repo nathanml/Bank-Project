@@ -3,7 +3,9 @@ import javax.swing.*;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.util.Vector;
 
 
 public class ManagerPortal extends JFrame implements ActionListener {
@@ -47,8 +49,8 @@ public class ManagerPortal extends JFrame implements ActionListener {
     			break;
     		case "Transactions":
     			JOptionPane.showMessageDialog(panel, "You will be directed to the Transactions.");
-    			//TransactionsFrame t = new TransactionsFrame();
-    			//t.setVisible(true);
+    			CheckTransaction t = new CheckTransaction ();
+    			t.setVisible(true);
     			break;
     		case "Loan":
     			JOptionPane.showMessageDialog(panel, "You will be directed to the Loan Portal.");
@@ -60,6 +62,38 @@ public class ManagerPortal extends JFrame implements ActionListener {
     		}
     	}
     }
+
+    public static void generateTable(ResultSet rs, JTable t)
+	{
+		try {
+			ResultSetMetaData metaData = rs.getMetaData ();
+			int numberOfColumns = metaData.getColumnCount ();
+			Vector columnNames = new Vector ();
+
+			// Get the column names
+			for (int column = 0; column < numberOfColumns; column++) {
+				columnNames.addElement (metaData.getColumnLabel (column + 1));
+			}
+
+			// Get all rows.
+			Vector rows = new Vector ();
+
+			while (rs.next ()) {
+				Vector newRow = new Vector ();
+
+				for (int i = 1; i <= numberOfColumns; i++) {
+					newRow.addElement (rs.getObject (i));
+				}
+
+				rows.addElement (newRow);
+			}
+			t = new JTable (rows, columnNames);
+		} catch (Exception e) {
+			e.printStackTrace ();
+		}
+	}
+
+
     public static void main(String[] args) 
     {
     	BankManager bm = new BankManager("username", "password");

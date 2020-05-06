@@ -23,7 +23,6 @@ public class CustomerView extends JFrame {
         panel = new JPanel ();
         add (panel);
         customer = c;
-        System.out.println (customer.getName ());
         setTitle (c.getName ());
         setSize (500, 500);
         setLocation (400, 100);
@@ -34,13 +33,13 @@ public class CustomerView extends JFrame {
         customerID = new JLabel (String.valueOf (customer.getID ()));
 
         ResultSet rsAccounts = DBConnect.getAccounts (customer.getID ());
-        generateTable (rsAccounts, accounts);
+        ManagerPortal.generateTable (rsAccounts, accounts);
 
         ResultSet rsLoans = DBConnect.getLoans (customer.getID ());
-        generateTable (rsLoans, loans);
+        ManagerPortal.generateTable (rsLoans, loans);
 
         ResultSet rsStocks = DBConnect.getStocks (customer.getID ());
-        generateTable (rsStocks, stocks);
+        ManagerPortal.generateTable (rsStocks, stocks);
 
         panel.add (username);
         panel.add (firstname);
@@ -53,34 +52,5 @@ public class CustomerView extends JFrame {
 
     public static void main() {
 
-    }
-
-    public void generateTable(ResultSet rs, JTable t) {
-        try {
-            ResultSetMetaData metaData = rs.getMetaData ();
-            int numberOfColumns = metaData.getColumnCount ();
-            Vector columnNames = new Vector ();
-
-            // Get the column names
-            for (int column = 0; column < numberOfColumns; column++) {
-                columnNames.addElement (metaData.getColumnLabel (column + 1));
-            }
-
-            // Get all rows.
-            Vector rows = new Vector ();
-
-            while (rs.next ()) {
-                Vector newRow = new Vector ();
-
-                for (int i = 1; i <= numberOfColumns; i++) {
-                    newRow.addElement (rs.getObject (i));
-                }
-
-                rows.addElement (newRow);
-            }
-            t = new JTable (rows, columnNames);
-        } catch (Exception e) {
-            e.printStackTrace ();
-        }
     }
 }

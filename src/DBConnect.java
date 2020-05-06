@@ -208,4 +208,13 @@ public class DBConnect {
         ResultSet rs=s.executeQuery(sql_res);
         return rs;
     }
+
+    public static ResultSet getTransactions(int d, int m, int y) throws SQLException {
+        establishConnection ();
+        Statement s= conn. createStatement ();
+        s.executeQuery ("USE bankdb");
+        String sql_res= "select * from transactions where day= " + d + " AND " + "month = " + m + " AND " + "year = " + y;
+        ResultSet rs = s.executeQuery (sql_res);
+        return rs;
+    }
 }
