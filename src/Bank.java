@@ -10,7 +10,7 @@ public class Bank {
     private static BankManager bankManager;
     private static double loanRate = 1.003; //3% per day
     private static double savingsRate = 1.001; //1% per day 
-    private static double savInterestBenchMark = 5000; // $5000 to start collect interest
+    public static double savInterestBenchMark = 5000; // $5000 to start collect interest
     private static double acctRemovalFee = 1;  //$1
 
     private static StockMarket stockMarket;

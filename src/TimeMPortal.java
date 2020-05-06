@@ -50,7 +50,9 @@ public class TimeMPortal extends JFrame implements ActionListener {
         int month= Integer.parseInt(monthf.getText());
         int day= Integer.parseInt(dayf.getText());
         int year= Integer.parseInt(yearf.getText());
-        clock.setClock(day, month, year);
+        if (!clock.setToFuture(day, month, year)) {
+            JOptionPane.showMessageDialog(panel, "Can only set time to the future!");
+        }
         
         //go back
         ManagerPortal mp = new ManagerPortal(Main.bm);
