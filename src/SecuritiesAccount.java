@@ -23,6 +23,10 @@ public class SecuritiesAccount extends Account{
         double balanceYen = Bank.getYen().convertFromDollar (balanceUSD);
         DBConnect.addAccount(accountID, name, owner.getID(),balanceEuro, balancePound, balanceUSD, balanceYen, type);
     }
+
+    public SecuritiesAccount(int id, String n, double b, Clock opened, Customer own) throws SQLException {
+        super(id,n,b,opened,own);
+    }
     /*
      * Assume transfer is already converted to dollars. 
      */

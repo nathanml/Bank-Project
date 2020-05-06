@@ -79,8 +79,7 @@ public class SignUp extends JFrame implements ActionListener
         button= new JButton("Sign up");
         button.setBounds(10, 140, 80, 25);
         panel.add(button);
-        if(!userText.getText ().isEmpty () && !passText.getText().isEmpty ())
-            button.addActionListener(new SignUpListener());
+        button.addActionListener(new SignUpListener());
     }
 
     private class SignUpListener implements ActionListener{

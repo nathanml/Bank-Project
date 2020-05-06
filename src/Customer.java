@@ -234,5 +234,10 @@ public class Customer extends User implements Comparable<Customer>, OPObserver{
 	public String getName() {
 		return firstName;
 	}
+
+	public String getLastName(){
+         return lastName;
+    }
+
     
 }

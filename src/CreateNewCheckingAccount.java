@@ -71,7 +71,7 @@ public class CreateNewCheckingAccount extends CreateNewAccount implements Action
 	                //add account
 	                currentCustomer.addCheckingAccount (a);
 	                
-	                Bank.chargeFee(a);
+	                Bank.chargeFee((Account) a);
 	            }
 	          //return
                 ATM driver= new ATM(currentCustomer);

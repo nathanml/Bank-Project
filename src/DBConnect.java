@@ -1,5 +1,6 @@
 import java.sql.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 
 // Notice, do not import com.mysql.jdbc.*
@@ -98,67 +99,113 @@ public class DBConnect {
     }
 
     public static Customer getCustomer(String username) throws SQLException {
-        Customer ret;
+        Customer ret = null;
         establishConnection ();
         Statement s= conn.createStatement ();
         s.executeQuery ("USE bankdb");
         String sql_res= "select * from customers where username= '" + username + "'";
         ResultSet rs=s.executeQuery(sql_res);
-        int ID = rs.getInt ("customerID");
-        String firstName = rs.getString ("firstName");
-        String lastName = rs.getString ("lastName");
-        String password = rs.getString("pass");
-        //Create customer from row
-        ret = new Customer (ID, firstName, lastName, username, password);
+        try{
+            while(rs.next ())
+            {
+                int ID = rs.getInt (1);
+                String firstName = rs.getString ("firstName");
+                String lastName = rs.getString ("lastName");
+                String password = rs.getString("pass");
+                ret = new Customer (ID, firstName, lastName, username, password);
+            }
+        }finally {
+            rs.close ();
+        }
+        //Create customer from rowv
 
         //Add checking accounts
-        sql_res = "select * from accounts where customerID="+ID + "AND type = 'Checking'";
+        sql_res = "select * from accounts where customerID="+ret.getID () + " AND type = 'Checking'";
         rs = s.executeQuery (sql_res);
-        for(int i=0; i<rs.getFetchSize (); i++)
-        {
-            int accountID = rs.getInt ("accountID");
-            String name = rs.getString ("name");
-            double balance = rs.getDouble ("balanceUSD");
-            int date = rs.getInt ("date");
-            int month = rs.getInt ("month");
-            int year = rs.getInt ("year");
-            Clock c = new Clock(date,month,year);
-            CheckingAccount a = new CheckingAccount (accountID,name,balance,c,ret);
-            ret.addCheckingAccount (a);
+        try{
+            while(rs.next ())
+            {
+                int accountID = rs.getInt ("accountID");
+                String name = rs.getString ("name");
+                double balance = rs.getDouble ("balanceUSD");
+                int date = rs.getInt ("date");
+                int month = rs.getInt ("month");
+                int year = rs.getInt ("year");
+                Clock c = new Clock(date,month,year);
+                CheckingAccount a = new CheckingAccount (accountID,name,balance,c,ret);
+                ret.addCheckingAccount (a);
+            }
+        }finally {
+            rs.close ();
         }
 
         //Add Savings accounts
-        sql_res = "select * from accounts where customerID="+ID + "AND type = 'Savings'";
+        sql_res = "select * from accounts where customerID="+ret.getID () + " AND type = 'Savings'";
         rs = s.executeQuery (sql_res);
-        for(int i=0; i<rs.getFetchSize (); i++)
-        {
-            int accountID = rs.getInt ("accountID");
-            String name = rs.getString ("name");
-            double balance = rs.getDouble ("balanceUSD");
-            int date = rs.getInt ("date");
-            int month = rs.getInt ("month");
-            int year = rs.getInt ("year");
-            Clock c = new Clock(date,month,year);
-            SavingsAccount a = new SavingsAccount (accountID,name,balance,c,ret);
-            ret.addSavingsAccount (a);
+
+        try{
+            while(rs.next ())
+            {
+                int accountID = rs.getInt ("accountID");
+                String name = rs.getString ("name");
+                double balance = rs.getDouble ("balanceUSD");
+                int date = rs.getInt ("date");
+                int month = rs.getInt ("month");
+                int year = rs.getInt ("year");
+                Clock c = new Clock(date,month,year);
+                SavingsAccount a = new SavingsAccount (accountID,name,balance,c,ret);
+                ret.addSavingsAccount (a);
+            }
+        }finally {
+            rs.close ();
         }
 
         //Add Securities accounts
-        sql_res = "select * from accounts where customerID="+ID + "AND type = 'Securities'";
+        sql_res = "select * from accounts where customerID="+ret.getID () + " AND type = 'Securities'";
         rs = s.executeQuery (sql_res);
-        for(int i=0; i<rs.getFetchSize (); i++)
-        {
-            int accountID = rs.getInt ("accountID");
-            String name = rs.getString ("name");
-            double balance = rs.getDouble ("balanceUSD");
-            int date = rs.getInt ("date");
-            int month = rs.getInt ("month");
-            int year = rs.getInt ("year");
-            Clock c = new Clock(date,month,year);
-            SavingsAccount a = new SavingsAccount (accountID,name,balance,c,ret);
-            ret.addSavingsAccount (a);
+        try{
+            while(rs.next ())
+            {
+                int accountID = rs.getInt ("accountID");
+                String name = rs.getString ("name");
+                double balance = rs.getDouble ("balanceUSD");
+                int date = rs.getInt ("date");
+                int month = rs.getInt ("month");
+                int year = rs.getInt ("year");
+                Clock c = new Clock(date,month,year);
+                SecuritiesAccount a = new SecuritiesAccount (accountID,name,balance,c,ret);
+                ret.addSecuritiesAccount (a);
+            }
+        }finally {
+            rs.close ();
         }
-
         return ret;
+    }
+
+    public static ResultSet getAccounts(int id) throws SQLException {
+        establishConnection ();
+        Statement s= conn.createStatement ();
+        s.executeQuery ("USE bankdb");
+        String sql_res= "select * from accounts where customerID= " + id;
+        ResultSet rs=s.executeQuery(sql_res);
+        return rs;
+    }
+
+    public static ResultSet getLoans(int id) throws SQLException {
+        establishConnection ();
+        Statement s= conn.createStatement ();
+        s.executeQuery ("USE bankdb");
+        String sql_res= "select * from loans where customerID= " + id;
+        ResultSet rs=s.executeQuery(sql_res);
+        return rs;
+    }
+
+    public static ResultSet getStocks(int id) throws SQLException {
+        establishConnection ();
+        Statement s= conn.createStatement ();
+        s.executeQuery ("USE bankdb");
+        String sql_res= "select * from stocks where customerID= " + id;
+        ResultSet rs=s.executeQuery(sql_res);
+        return rs;
     }
 }
