@@ -28,7 +28,7 @@ public class SignUp extends JFrame implements ActionListener
     
     public void initializeframe() {
 
-        setTitle( "Sign up" );
+        setTitle( "Sign in" );
         setSize( 500, 500 );
         setLocation( 400, 100 );
         setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
@@ -37,10 +37,7 @@ public class SignUp extends JFrame implements ActionListener
         panel= new JPanel();
         add(panel);
         panel.setLayout(null);
-        
-        //Add welcome text
-        welcome= new JLabel("Welcome to our Bank, Please sign up!");
-        panel.add(welcome);
+
         
         //Create label and textbox for first name
         fnamelabel= new JLabel("First Name:");
@@ -82,7 +79,8 @@ public class SignUp extends JFrame implements ActionListener
         button= new JButton("Sign up");
         button.setBounds(10, 140, 80, 25);
         panel.add(button);
-        button.addActionListener(new SignUpListener());
+        if(!userText.getText ().isEmpty () && !passText.getText().isEmpty ())
+            button.addActionListener(new SignUpListener());
     }
 
     private class SignUpListener implements ActionListener{
@@ -107,6 +105,7 @@ public class SignUp extends JFrame implements ActionListener
                         ATM atm = new ATM(c1);
                         atm.initialize ();
                     } catch (SQLException ex) {
+                        ex.printStackTrace ();
                         ex.printStackTrace ();
                     }
                     System.out.println("You have successfully signed up!");

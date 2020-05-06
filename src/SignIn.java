@@ -44,24 +44,6 @@ public class SignIn extends JFrame implements ActionListener
         welcome= new JLabel("Welcome to our Bank, Please sign up!");
         panel.add(welcome);
 
-        //Create label and textbox for first name
-        fnamelabel= new JLabel("First Name:");
-        fnamelabel.setBounds(10, 20, 80, 25);
-        panel.add(fnamelabel);
-
-        fnameText= new JTextField();
-        fnameText.setBounds(100, 20, 165, 25);
-        panel.add(fnameText);
-
-        //Create label and textbox for last name
-        lnamelabel= new JLabel("Last Name:");
-        lnamelabel.setBounds(10, 50, 80, 25);
-        panel.add(lnamelabel);
-
-        lnameText= new JTextField();
-        lnameText.setBounds(100, 50, 165, 25);
-        panel.add(lnameText);
-
         //Create label and textbox for username
         userlabel= new JLabel("Username:");
         userlabel.setBounds(10, 80, 80, 25);
@@ -81,47 +63,35 @@ public class SignIn extends JFrame implements ActionListener
         panel.add(passText);
 
         //Create button
-        button= new JButton("Sign up");
+        button= new JButton("Sign in");
         button.setBounds(10, 140, 80, 25);
         panel.add(button);
         button.addActionListener(new SignInListener());
     }
 
-    private class SignInListener implements ActionListener{
+    private class SignInListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            String firstname= fnameText.getText();
-            String lastname= lnameText.getText();
-            String username= userText.getText();
-            String password= passText.getText();
+            String username = userText.getText ();
+            String password = passText.getText ();
 
-            try {
-                if(DBConnect.hasUsername(username))
-                {
-                    JOptionPane.showMessageDialog(panel,"That username is already in use. Please try a different one.");
-                }
-                else if (!username.equals("") && !password.equals(""))
-                {
-                    //add user to database
-                    try {
-                        Customer c1= new Customer(firstname, lastname, username, password);
-                        ATM atm = new ATM(c1);
+            //check if user exists in database already
+            if (!username.equals ("") && !password.equals ("")) {
+                try {
+                    if (DBConnect.hasUsername (username) && password.equals (DBConnect.getPassword (username))) {
+                        Customer c = DBConnect.getCustomer (username);
+                        ATM atm = new ATM (c);
                         atm.initialize ();
-                    } catch (SQLException ex) {
-                        ex.printStackTrace ();
+                    } else {
+                        panel.add (new JLabel ("Incorrect username or password."));
                     }
-                    System.out.println("You have successfully signed up!");
-
-                    //alert listener
+                } catch (SQLException ex) {
+                    ex.printStackTrace ();
                 }
-                else {
-                    JOptionPane.showMessageDialog(panel,"Invalid input. Please try a different one.");
-                }
-            } catch (SQLException ex) {
-                ex.printStackTrace ();
             }
         }
     }
+
     //just for testing purposes
     public static void main( String[] args ) 
     {

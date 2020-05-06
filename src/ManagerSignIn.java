@@ -16,8 +16,8 @@ public class ManagerSignIn extends SignIn
     @Override
     public void actionPerformed(ActionEvent e) {
         setVisible( true );
-        String username= userT.getText();
-        String password= pass.getText();
+        String username= userText.getText();
+        String password= passText.getText();
 
         if (username.equals(Bank.getBankManager().getUsername()) && password.equals(Bank.getBankManager().getPassword()))
         {
