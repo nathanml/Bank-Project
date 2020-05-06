@@ -1,3 +1,4 @@
+import java.sql.SQLException;
 import java.util.ArrayList;
 public class StockMarket implements OPSubject{
     private class Node {
@@ -69,7 +70,7 @@ public class StockMarket implements OPSubject{
         return canRegister;
     }
 
-    public boolean unregisterObserver(OPObserver customer) {
+    public boolean unregisterObserver(OPObserver customer) throws SQLException {
         boolean canUnReg = observers.contains(customer);
         if (canUnReg) {
             observers.remove(customer);

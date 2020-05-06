@@ -61,7 +61,7 @@ public class ViewSavingsAccount extends viewAccounts implements ActionListener {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				int answernum= Integer.parseInt(accountText.getText())-1;
-	            CheckingAccount account= currentCustomer.getCheckingAccounts().get(answernum);
+	            SavingsAccount account= currentCustomer.getSavingsAccounts ().get(answernum);
 	            AccountInterface go= new AccountInterface(currentCustomer, account);
 	            go.initialize();
 			}

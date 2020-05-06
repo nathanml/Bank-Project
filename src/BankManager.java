@@ -15,6 +15,7 @@ public class BankManager extends User {
     private int loanListLength;
     private double moneyEarned;
     private static String stocks;
+    private ArrayList<SecuritiesAccount> securitiesAccounts;
     
     
     public BankManager(String username, String password) {

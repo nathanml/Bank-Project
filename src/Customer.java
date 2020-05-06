@@ -101,11 +101,11 @@ public class Customer extends User implements Comparable<Customer>, OPObserver{
     /*
     * update2 - allows the observer to get unregistered from the StockMarket
     */
-    public void update2() {
+    public void update2() throws SQLException {
         if (savingsAccounts.size() > 0) {
             savingsAccounts.get(0).deposit(totalSec(new Dollar()));
         } else {
-            SavingsAccount newAccount = new SavingsAccount("Deposit from Stocks", totalSec(new Dollar()), new Dollar());
+            SavingsAccount newAccount = new SavingsAccount("Deposit from Stocks",this, totalSec(new Dollar()), new Dollar());
             savingsAccounts.add(newAccount);
         }
     }
