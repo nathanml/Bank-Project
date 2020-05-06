@@ -24,6 +24,7 @@ public class ATM extends JFrame implements ActionListener {
         setLocation( 400, 100 );
         setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
     }
+    
     public void initialize() {
         JButton newacct = new JButton ("Open new Account");
         newacct.setBounds(10, 20, 400, 25);
@@ -64,7 +65,7 @@ public class ATM extends JFrame implements ActionListener {
         Customer customer= new Customer();
         //customer.addCheckingAccount(new CheckingAccount("check1", 200, new Currency("USD", 0.12)));
         try {
-            customer.addCheckingAccount(new CheckingAccount("check1", 200, new Dollar()));
+            customer.addCheckingAccount(new CheckingAccount("check1", 300, new Dollar()));
             customer.addCheckingAccount(new CheckingAccount("check2", 500, new Dollar()));
         } catch (SQLException e) {
             // TODO Auto-generated catch block

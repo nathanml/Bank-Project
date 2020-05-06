@@ -11,7 +11,6 @@ public class ViewCheckingAccount extends viewAccounts implements ActionListener 
     private static JTextField accountText;
     private static JButton submit;
     private static JButton back;
-    private static boolean answer=false;
     
     public ViewCheckingAccount(Customer customer) {
         super(customer);
@@ -56,9 +55,18 @@ public class ViewCheckingAccount extends viewAccounts implements ActionListener 
             submit = new JButton ("Submit");
             submit.setBounds(10, y + 60, 80, 25);
             panel.add(submit);
+
+            submit.addActionListener (new ActionListener()
+            {
+    			@Override
+    			public void actionPerformed(ActionEvent e) {
+    				int answernum= Integer.parseInt(accountText.getText());
+    	            CheckingAccount account= currentCustomer.getCheckingAccounts().get(answernum);
+    	            AccountInterface go= new AccountInterface(currentCustomer, account);
+    	            go.initialize();
+    			}
+            });
             
-            answer= true;
-            submit.addActionListener(this);
         }
         
         setVisible (true);
@@ -66,15 +74,9 @@ public class ViewCheckingAccount extends viewAccounts implements ActionListener 
     
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (answer) {
-            answer=false;
-            int answernum= Integer.parseInt(accountText.getText());
-            CheckingAccount account= currentCustomer.getCheckingAccounts().get(answernum);
-            AccountInterface go= new AccountInterface(currentCustomer, account);
-            go.initialize();
-        }else {
+
         viewAccounts();
-        }
+        
     }
 
 }

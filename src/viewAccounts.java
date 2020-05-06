@@ -1,5 +1,6 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -19,6 +20,8 @@ public class viewAccounts extends JFrame implements ActionListener{
     private static boolean initialize= true;
     
     protected Customer currentCustomer;
+    protected Account currentAccount;
+    
     protected JPanel panel;
     
 	public viewAccounts(Customer customer){
@@ -36,42 +39,34 @@ public class viewAccounts extends JFrame implements ActionListener{
 		JButton checking = new JButton ("View Checking Accounts");
         checking.setBounds(10, 20, 400, 25);
         panel.add(checking);
-        
         ActionListener checkingL = new ViewCheckingAccount (currentCustomer);
-        checking.addActionListener(checkingL);
+        checking.addActionListener (checkingL);
+
         
         JButton savings = new JButton ("View Savings Accounts");
         savings.setBounds(10, 50, 400, 25);
         panel.add(savings);
-        
         ActionListener savingsL = new ViewSavingsAccount (currentCustomer);
         savings.addActionListener (savingsL);
         
         JButton securities = new JButton ("View Securities Accounts");
         securities.setBounds(10, 80, 400, 25);
         panel.add(securities);
-        
         ActionListener securitiesL = new ViewSecuritiesAccount (currentCustomer);
         securities.addActionListener (securitiesL);
         
         back = new JButton ("back");
         back.setBounds(10, 110, 400, 25);
-        panel.add(back);
-        
+        panel.add(back);   
         back.addActionListener(new ATM(currentCustomer));
         
         setVisible( true );
     }
 	
-	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		initialize();
 		
-		
-		
 	}
-	
-		
 	
 }
