@@ -217,4 +217,13 @@ public class DBConnect {
         ResultSet rs = s.executeQuery (sql_res);
         return rs;
     }
+
+    public static ResultSet viewAllLoans() throws SQLException {
+        establishConnection ();
+        Statement s= conn. createStatement ();
+        s.executeQuery ("USE bankdb");
+        String sql_res= "select * from loans";
+        ResultSet rs = s.executeQuery (sql_res);
+        return rs;
+    }
 }
