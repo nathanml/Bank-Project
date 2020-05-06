@@ -27,8 +27,9 @@ public class SavingsAccount extends Account {
     public double calcInterest() {
         double interest = 0;
         Clock currentTime = Bank.getCurrentTime();
-        if (currentTime.compareTo(dateOpened) > 0) {
+        if ((currentTime.compareTo(dateOpened) > 0) && (getMoney() > Bank.savInterestBenchMark) {
             interest = currentTime.dayDifference(dateOpened) * Bank.getSavingsRate();
+            deposit(interest);
         }
         return interest;
     }
