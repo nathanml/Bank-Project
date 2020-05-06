@@ -81,7 +81,7 @@ public class BuyStock extends JFrame implements ActionListener, ItemListener {
         JButton back = new JButton ("back");
         panel.add(back);
 
-        back.addActionListener(new ATM(customer));
+        back.addActionListener(new AccountInterface(customer, security));
 
         setVisible (true);
     }
