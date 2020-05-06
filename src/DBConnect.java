@@ -122,7 +122,7 @@ public class DBConnect {
             int date = rs.getInt ("date");
             int month = rs.getInt ("month");
             int year = rs.getInt ("year");
-            Clock c = new Clock(date,month,year)
+            Clock c = new Clock(date,month,year);
             CheckingAccount a = new CheckingAccount (accountID,name,balance,c,ret);
             ret.addCheckingAccount (a);
         }

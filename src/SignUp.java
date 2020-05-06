@@ -82,7 +82,44 @@ public class SignUp extends JFrame implements ActionListener
         button= new JButton("Sign up");
         button.setBounds(10, 140, 80, 25);
         panel.add(button);
-        button.addActionListener(new SignUp());
+        button.addActionListener(new SignUpListener());
+    }
+
+    private class SignUpListener implements ActionListener{
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            String firstname= fnameText.getText();
+            String lastname= lnameText.getText();
+            String username= userText.getText();
+            String password= passText.getText();
+
+            try {
+                if(DBConnect.hasUsername(username))
+                {
+                    JOptionPane.showMessageDialog(panel,"That username is already in use. Please try a different one.");
+                }
+                else if (!username.equals("") && !password.equals(""))
+                {
+                    //add user to database
+                    try {
+                        Customer c1= new Customer(firstname, lastname, username, password);
+                        ATM atm = new ATM(c1);
+                        atm.initialize ();
+                    } catch (SQLException ex) {
+                        ex.printStackTrace ();
+                    }
+                    System.out.println("You have successfully signed up!");
+
+                    //alert listener
+                }
+                else {
+                    JOptionPane.showMessageDialog(panel,"Invalid input. Please try a different one.");
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace ();
+            }
+        }
     }
     
     //just for testing purposes
@@ -94,35 +131,5 @@ public class SignUp extends JFrame implements ActionListener
 	@Override
 	public void actionPerformed(ActionEvent e) {
         setVisible( true );
-		String firstname= fnameText.getText();
-		String lastname= lnameText.getText();
-		String username= userText.getText();
-		String password= passText.getText();
-
-        try {
-            if(DBConnect.hasUsername(username))
-            {
-                JOptionPane.showMessageDialog(panel,"That username is already in use. Please try a different one.");
-            }
-            else if (!username.equals("") && !password.equals(""))
-            {
-                //add user to database
-                try {
-                    Customer c1= new Customer(firstname, lastname, username, password);
-                    ATM atm = new ATM(c1);
-                    atm.initialize ();
-                } catch (SQLException ex) {
-                    ex.printStackTrace ();
-                }
-                System.out.println("You have successfully signed up!");
-
-                //alert listener
-            }
-            else {
-                JOptionPane.showMessageDialog(panel,"Invalid input. Please try a different one.");
-            }
-        } catch (SQLException ex) {
-            ex.printStackTrace ();
-        }
     }
 }

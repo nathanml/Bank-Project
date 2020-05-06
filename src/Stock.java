@@ -4,6 +4,7 @@ public class Stock {
     protected int stockID;
     protected String name;
     protected double valueUSD; //current price
+    protected Customer owner;
     
 
     public Stock(String n, double val, Currency cur) throws SQLException {
