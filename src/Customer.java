@@ -95,8 +95,8 @@ public class Customer extends User implements Comparable<Customer>, OPObserver{
         if (savingsAccounts.size() > 0) {
             savingsAccounts.get(0).deposit(totalSec(new Dollar()));
         } else {
-            //SavingsAccount newAccount = new SavingsAccount("Deposit from Stocks", totalSec(new Dollar()), new Dollar());
-            //savingsAccounts.add(newAccount);
+            SavingsAccount newAccount = new SavingsAccount("Deposit from Stocks", totalSec(new Dollar()), new Dollar());
+            savingsAccounts.add(newAccount);
         }
     }
     
