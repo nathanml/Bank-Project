@@ -2,7 +2,7 @@ import java.sql.SQLException;
 
 public class Deposit extends Transaction{
 
-    public Deposit(Account a, Double x, String s) throws SQLException {
+    public Deposit(Account a, Double x, String s, Currency c) throws SQLException {
         super (a, x, s);
         double amountUSD = amount;
          Euro euro = new Euro();

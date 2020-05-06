@@ -80,11 +80,11 @@ public class AccountInterface extends JFrame implements ActionListener{
     	Bank.chargeFee(account);
         
         //remove account
-        if (account instanceof CheckingAccount) {
+        if (currentCustomer.getCheckingAccounts().contains(account)) {
             currentCustomer.removeCheckingAccount((CheckingAccount) account);
-        }else if (account instanceof SavingsAccount) {
+        }else if (currentCustomer.getSavingsAccounts().contains(account)) {
             currentCustomer.removeSavingsAccount((SavingsAccount) account);
-        }else if (account instanceof SecuritiesAccount) {
+        }else if (currentCustomer.getSecuritiesAccounts().contains(account)) {
             currentCustomer.removeSecuritiesAccount((SecuritiesAccount) account);
         }
         

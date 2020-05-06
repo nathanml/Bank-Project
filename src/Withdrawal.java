@@ -4,7 +4,7 @@ public class Withdrawal extends Transaction {
 
     public Withdrawal(Account a, Double x, String s) throws SQLException {
         super (a, x, s);
-        double amountUSD = currency.convertToDollar (amount) * -1;
+        double amountUSD = a.currency.convertToDollar (amount) * -1;
         double amountEuro = Bank.getEuro().convertFromDollar (amountUSD);
         double amountPound = Bank.getPound().convertFromDollar (amountUSD);
         double amountYen = Bank.getYen().convertFromDollar (amountUSD);

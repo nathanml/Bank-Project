@@ -46,6 +46,11 @@ public abstract class Account implements BankAccount {
     public void deposit(double amount)
     {
         balance += amount;
+        
+    }
+    public void withdraw(double amount)
+    {
+        balance -= amount;
     }
 
     public Clock getDateOpened() {
@@ -94,6 +99,15 @@ public abstract class Account implements BankAccount {
     {
         return currency; 
     } 
+    
+    public ArrayList<Transaction> getTransactions() {
+        return transactions;
+    }
+    //add transaction
+    public void addTransaction(Transaction t)
+    {
+    	transactions.add(t);
+    }
     public abstract String print();
 }
 

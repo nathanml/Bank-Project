@@ -59,10 +59,10 @@ public class Bank {
         return stockMarket;
     }
     /*
-    * Return -1 if the input is not in the currencies list. 
+    * Return 1 if the input is not in the currencies list. 
     */
     public static double getExchangeRate(String currency) {
-        double rate = -1;
+        double rate = 1;
         int index = -1;
         if (currencies.contains(currency)) {
             index = currencies.indexOf(currency);

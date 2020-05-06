@@ -46,9 +46,18 @@ import java.awt.event.ActionEvent;
             {
     			@Override
     			public void actionPerformed(ActionEvent e) {
-    				int answernum= Integer.parseInt(amountText.getText());
-    	            account.withdrawal(answernum);
+    				double answernum= Double.parseDouble(amountText.getText());
+    				Transaction w= null;
+					try {
+						w = new Withdrawal(account, answernum, "withdrawl made");
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+    	            w.updateBalance();
+    	            //account.addTransaction(w);
     	            Bank.chargeFee(account);
+    	            
     	            AccountInterface go= new AccountInterface(customer, account);
     	            go.initialize();
     			}
