@@ -1,4 +1,6 @@
 import javax.swing.*;
+
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -11,7 +13,7 @@ public class CreateNewAccount extends JFrame implements ActionListener {
     {
         currentCustomer = c;
         panel = new JPanel ();
-        panel.setLayout(null);
+        panel.setLayout(new GridLayout(10,1));
         add(panel);
         setTitle ("Create a new Account");
         setSize( 500, 500 );
