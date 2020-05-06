@@ -63,8 +63,13 @@ public class CreateNewSecuritiesAccount extends CreateNewAccount implements Acti
                     SecuritiesAccount a = null;
                     try {
                         //create account
-                        a = new SecuritiesAccount (name, currentCustomer, balance, accountCurrency);
-                        currentCustomer.addSecuritiesAccount (a);
+                    	if (SecuritiesAccount.openCondition(currentCustomer, balance, accountCurrency)) {
+                    		 a = new SecuritiesAccount (name, currentCustomer, balance, accountCurrency);
+                             currentCustomer.addSecuritiesAccount (a);
+                    	} else {
+                    		JOptionPane.showMessageDialog(panel, "Not Enough Balance!");
+                    	}
+                       
                     }
                     catch (SQLException ex) {
                         ex.printStackTrace ();
