@@ -87,4 +87,78 @@ public class DBConnect {
         ResultSet rs=s.executeQuery(sql_res);
         return (rs.next ());
     }
+
+    public static String getPassword(String username) throws SQLException{
+        establishConnection ();
+        Statement s= conn.createStatement ();
+        s.executeQuery ("USE bankdb");
+        String sql_res = "select password from customers where username= '" + username + "'";
+        ResultSet rs=s.executeQuery(sql_res);
+        return (rs.getString (0));
+    }
+
+    public static Customer getCustomer(String username) throws SQLException {
+        Customer ret;
+        establishConnection ();
+        Statement s= conn.createStatement ();
+        s.executeQuery ("USE bankdb");
+        String sql_res= "select * from customers where username= '" + username + "'";
+        ResultSet rs=s.executeQuery(sql_res);
+        int ID = rs.getInt ("customerID");
+        String firstName = rs.getString ("firstName");
+        String lastName = rs.getString ("lastName");
+        String password = rs.getString("pass");
+        //Create customer from row
+        ret = new Customer (ID, firstName, lastName, username, password);
+
+        //Add checking accounts
+        sql_res = "select * from accounts where customerID="+ID + "AND type = 'Checking'";
+        rs = s.executeQuery (sql_res);
+        for(int i=0; i<rs.getFetchSize (); i++)
+        {
+            int accountID = rs.getInt ("accountID");
+            String name = rs.getString ("name");
+            double balance = rs.getDouble ("balanceUSD");
+            int date = rs.getInt ("date");
+            int month = rs.getInt ("month");
+            int year = rs.getInt ("year");
+            Clock c = new Clock(date,month,year)
+            CheckingAccount a = new CheckingAccount (accountID,name,balance,c,ret);
+            ret.addCheckingAccount (a);
+        }
+
+        //Add Savings accounts
+        sql_res = "select * from accounts where customerID="+ID + "AND type = 'Savings'";
+        rs = s.executeQuery (sql_res);
+        for(int i=0; i<rs.getFetchSize (); i++)
+        {
+            int accountID = rs.getInt ("accountID");
+            String name = rs.getString ("name");
+            double balance = rs.getDouble ("balanceUSD");
+            int date = rs.getInt ("date");
+            int month = rs.getInt ("month");
+            int year = rs.getInt ("year");
+            Clock c = new Clock(date,month,year);
+            SavingsAccount a = new SavingsAccount (accountID,name,balance,c,ret);
+            ret.addSavingsAccount (a);
+        }
+
+        //Add Securities accounts
+        sql_res = "select * from accounts where customerID="+ID + "AND type = 'Securities'";
+        rs = s.executeQuery (sql_res);
+        for(int i=0; i<rs.getFetchSize (); i++)
+        {
+            int accountID = rs.getInt ("accountID");
+            String name = rs.getString ("name");
+            double balance = rs.getDouble ("balanceUSD");
+            int date = rs.getInt ("date");
+            int month = rs.getInt ("month");
+            int year = rs.getInt ("year");
+            Clock c = new Clock(date,month,year);
+            SavingsAccount a = new SavingsAccount (accountID,name,balance,c,ret);
+            ret.addSavingsAccount (a);
+        }
+
+        return ret;
+    }
 }

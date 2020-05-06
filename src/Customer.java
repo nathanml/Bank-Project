@@ -24,6 +24,16 @@ public class Customer extends User implements Comparable<Customer>, OPObserver{
         customerID = System.identityHashCode (this);
         DBConnect.addCustomer(customerID, firstName, lastName, username, password);
     }
+
+    public Customer(int ID, String f, String l, String username, String password) throws SQLException {
+        super(username, password);
+        firstName = f;
+        lastName = l;
+        customerID = ID;
+
+        //checkingAccounts = DBConnect.getCheckingAccounts(customerID);
+    }
+
     //no args constructor
     public Customer()
     {
