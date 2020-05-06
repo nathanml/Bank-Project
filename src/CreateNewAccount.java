@@ -38,12 +38,12 @@ public class CreateNewAccount extends JFrame implements ActionListener {
         ActionListener savingsL = new CreateNewSavingsAccount (currentCustomer);
         savings.addActionListener (savingsL);
 
-        JButton securities = new JButton ("Create Securities Account");
-        securities.setBounds(10, 80, 400, 25);
-        panel.add(securities);
+        //JButton securities = new JButton ("Create Securities Account");
+        //securities.setBounds(10, 80, 400, 25);
+        //panel.add(securities);
 
-        ActionListener securitiesL = new CreateNewSecuritiesAccount (currentCustomer);
-        securities.addActionListener (securitiesL);
+        //ActionListener securitiesL = new CreateNewSecuritiesAccount (currentCustomer);
+        //securities.addActionListener (securitiesL);
 
         back = new JButton ("back");
         back.setBounds(10, 110, 400, 25);
