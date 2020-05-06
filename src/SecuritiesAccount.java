@@ -21,7 +21,8 @@ public class SecuritiesAccount extends Account{
         double balanceEuro = Bank.getEuro().convertFromDollar (balanceUSD);
         double balancePound = Bank.getPound().convertFromDollar (balanceUSD);
         double balanceYen = Bank.getYen().convertFromDollar (balanceUSD);
-        DBConnect.addAccount(accountID, name, owner.getID(),balanceEuro, balancePound, balanceUSD, balanceYen, type);
+        DBConnect.addAccount(accountID, name, owner.getID(),balanceEuro, balancePound, balanceUSD, balanceYen,
+                type,dateOpened.getDate (), dateOpened.getMonth (), dateOpened.getYear ());
     }
 
     public SecuritiesAccount(int id, String n, double b, Clock opened, Customer own) throws SQLException {

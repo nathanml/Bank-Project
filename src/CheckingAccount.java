@@ -12,7 +12,8 @@ public class CheckingAccount extends Account {
         double balancePound = Bank.getPound().convertFromDollar (balanceUSD);
         double balanceYen = Bank.getYen().convertFromDollar (balanceUSD);
         String type = "Checking";
-        DBConnect.addAccount(accountID, name, owner.getID(),balanceEuro, balancePound, balanceUSD, balanceYen, type);
+        DBConnect.addAccount(accountID, name, owner.getID(),balanceEuro, balancePound, balanceUSD, balanceYen, type,
+                dateOpened.getDate (), dateOpened.getMonth (), dateOpened.getYear ());
     }
 
     public CheckingAccount(int id, String n, double b, Clock opened, Customer own)

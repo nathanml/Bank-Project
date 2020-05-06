@@ -44,12 +44,12 @@ public class DBConnect {
     }
 
     public static void addAccount(int accountID, String name, int id, double balanceEuro, double balancePound,
-                                  double balanceUSD, double balanceYen, String type) throws SQLException
+                                  double balanceUSD, double balanceYen, String type, int d, int m, int y) throws SQLException
     {
         establishConnection ();
         Statement s= conn.createStatement ();
-        s.executeQuery ("INSERT INTO ACCOUNTS VALUES (" + accountID + ", " + name + ", " + id + "," + balanceEuro +
-                "," + balancePound + "," + balanceUSD + "," + balanceYen + "," + type);
+        s.executeQuery ("INSERT INTO accounts VALUES (" + accountID + ", '"+ name + "', "+id+"," + balanceEuro +
+                "," + balancePound + "," + balanceUSD + "," + balanceYen + ",'"+type+"'," + d + ","+m+","+y +");");
     }
 
     public static void addTransaction(int transactionID, String memo, LocalDate date, int id, double amountEuro,
@@ -182,15 +182,6 @@ public class DBConnect {
         return ret;
     }
 
-    public static ResultSet getAccounts(int id) throws SQLException {
-        establishConnection ();
-        Statement s= conn.createStatement ();
-        s.executeQuery ("USE bankdb");
-        String sql_res= "select * from accounts where customerID= " + id;
-        ResultSet rs=s.executeQuery(sql_res);
-        return rs;
-    }
-
     public static ResultSet getLoans(int id) throws SQLException {
         establishConnection ();
         Statement s= conn.createStatement ();
@@ -224,6 +215,42 @@ public class DBConnect {
         s.executeQuery ("USE bankdb");
         String sql_res= "select * from loans";
         ResultSet rs = s.executeQuery (sql_res);
+        return rs;
+    }
+
+    public static ResultSet getAccounts(int id) throws SQLException {
+        establishConnection ();
+        Statement s= conn.createStatement ();
+        s.executeQuery ("USE bankdb");
+        String sql_res= "select * from accounts where customerID= " + id + ";";
+        ResultSet rs=s.executeQuery(sql_res);
+        return rs;
+    }
+
+    public static ResultSet getCheckingAccounts(int id) throws SQLException {
+        establishConnection ();
+        Statement s= conn.createStatement ();
+        s.executeQuery ("USE bankdb");
+        String sql_res= "select * from accounts where customerID = " + id + " AND type = 'Checking';";
+        ResultSet rs=s.executeQuery(sql_res);
+        return rs;
+    }
+
+    public static ResultSet getSavingsAccounts(int id) throws SQLException {
+        establishConnection ();
+        Statement s= conn.createStatement ();
+        s.executeQuery ("USE bankdb");
+        String sql_res= "select * from accounts where customerID= " + id + " AND type = 'Savings';";
+        ResultSet rs=s.executeQuery(sql_res);
+        return rs;
+    }
+
+    public static ResultSet getSecuritiesAccounts(int id) throws SQLException {
+        establishConnection ();
+        Statement s= conn.createStatement ();
+        s.executeQuery ("USE bankdb");
+        String sql_res= "select * from accounts where customerID= " + id + " AND type = 'Securities';";
+        ResultSet rs=s.executeQuery(sql_res);
         return rs;
     }
 }
