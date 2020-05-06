@@ -55,24 +55,20 @@ public class CreateNewSavingsAccount extends CreateNewAccount implements ActionL
         panel.add(submit);
         submit.addActionListener (new ActionListener()
         {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				String name = nameText.getText ();
-	            double balance = Double.parseDouble (balanceText.getText());
-	            if(accountCurrency != null)
-	            {
-	                SavingsAccount a = null;
-	                try {
-	                	//create account
-	                    a = new SavingsAccount (name, currentCustomer, balance, accountCurrency);
-	                } catch (SQLException ex) {
-	                    ex.printStackTrace ();
-	                }
-	                //add account
-	                currentCustomer.addSavingsAccount(a);
-	                Bank.chargeFee(a);
-	                
-	            }
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String name = nameText.getText ();
+                double balance = Double.parseDouble (balanceText.getText ()) - Bank.getRemovalfee ();
+                if(accountCurrency != null) {
+                    SavingsAccount a = null;
+                    try {
+                        //create account
+                        a = new SavingsAccount (name, currentCustomer, balance, accountCurrency);
+                        currentCustomer.addSavingsAccount (a);
+                    } catch (SQLException ex) {
+                        ex.printStackTrace ();
+                    }
+                }
 	          //return
                 ATM driver= new ATM(currentCustomer);
                 driver.initialize();

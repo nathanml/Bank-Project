@@ -61,7 +61,7 @@ public class ViewSecuritiesAccount extends viewAccounts implements ActionListene
     			@Override
     			public void actionPerformed(ActionEvent e) {
     				int answernum= Integer.parseInt(accountText.getText())-1;
-    	            CheckingAccount account= currentCustomer.getCheckingAccounts().get(answernum);
+    	            SecuritiesAccount account= currentCustomer.getSecuritiesAccounts ().get(answernum);
     	            AccountInterface go= new AccountInterface(currentCustomer, account);
     	            go.initialize();
     			}

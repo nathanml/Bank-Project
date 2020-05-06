@@ -55,27 +55,21 @@ public class CreateNewSecuritiesAccount extends CreateNewAccount implements Acti
         panel.add(submit);
         submit.addActionListener (new ActionListener()
         {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				String name = nameText.getText ();
-	            int balance = Integer.parseInt (balanceText.getText());
-	            if(accountCurrency != null)
-	            {
-	            	SecuritiesAccount a = null;
-	                try {
-	                	//create account
-	                    a = new SecuritiesAccount (name, currentCustomer,balance, accountCurrency);
-	                } catch (SQLException ex) {
-	                    ex.printStackTrace ();
-	                }
-	                //add account
-	                currentCustomer.addSecuritiesAccount (a);
-	                Bank.chargeFee(a);
-	            }
-	          //return
-                ATM driver= new ATM(currentCustomer);
-                driver.initialize();
-			}
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String name = nameText.getText ();
+                double balance = Double.parseDouble (balanceText.getText ()) - Bank.getRemovalfee ();
+                if(accountCurrency != null) {
+                    SecuritiesAccount a = null;
+                    try {
+                        //create account
+                        a = new SecuritiesAccount (name, currentCustomer, balance, accountCurrency);
+                        currentCustomer.addSecuritiesAccount (a);
+                    }
+                    catch (SQLException ex) {
+                        ex.printStackTrace ();
+                    } }
+            }
         });
         JButton back = new JButton ("back");
         panel.add(back);
