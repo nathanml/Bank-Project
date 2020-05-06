@@ -10,7 +10,7 @@ import java.util.Vector;
 
 public class ManagerPortal extends JFrame implements ActionListener {
 	private BankManager bm;
-	public static String[] options = {"", "Check on Customer", "Transactions", "Loan"};
+	public static String[] options = {"", "Check on Customer", "Transactions", "Loan", "Change Time"};
 	public static JComboBox cbList = new JComboBox(options);
 	JLabel text = new JLabel("Welcome to the Manager Portal");
 	JPanel panel = new JPanel();
@@ -57,6 +57,11 @@ public class ManagerPortal extends JFrame implements ActionListener {
     			LoanMPortal loan = new LoanMPortal();
     			loan.setVisible(true);
     			break;
+    		case "Change Time":
+    			JOptionPane.showMessageDialog(panel, "You will be directed to the Time Portal.");
+    			TimeMPortal time = new TimeMPortal();
+    			time.setVisible(true);
+    			break;
     		default: 
     			break;
     		}
@@ -98,5 +103,6 @@ public class ManagerPortal extends JFrame implements ActionListener {
     {
     	BankManager bm = new BankManager("username", "password");
     	ManagerPortal mp = new ManagerPortal(bm);
+    	Bank b = new Bank();
     }
 }

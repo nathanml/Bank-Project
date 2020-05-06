@@ -64,10 +64,12 @@ public class AccountInterface extends JFrame implements ActionListener{
         /*
         TransactionListener transactionL = new TransactionListener ();
         transaction.addActionListener (transactionL);
-        
-        BalanceListener balanceL = new BalanceListener ();
-        balance.addActionListener (balanceL);
         */
+        JButton buystock = new JButton ("Buy Stocks");
+        buystock.setBounds(10, 140, 400, 25);
+        mainpanel.add(buystock);
+        buystock.addActionListener(new BuyStock(currentCustomer, (SecuritiesAccount)account));
+        
         back = new JButton ("back");
         back.setBounds(10, 170, 400, 25);
         mainpanel.add(back);
