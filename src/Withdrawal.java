@@ -8,7 +8,7 @@ public class Withdrawal extends Transaction {
         double amountEuro = Bank.getEuro().convertFromDollar (amountUSD);
         double amountPound = Bank.getPound().convertFromDollar (amountUSD);
         double amountYen = Bank.getYen().convertFromDollar (amountUSD);
-        DBConnect.addTransaction(transactionID, memo, date, account.getID(), amountEuro, amountPound, amountUSD, amountYen);
+        //DBConnect.addTransaction(transactionID, memo, date, account.getID(), amountEuro, amountPound, amountUSD, amountYen);
     }
 
     @Override

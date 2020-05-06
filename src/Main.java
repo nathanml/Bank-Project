@@ -3,8 +3,14 @@ public class Main {
     /*
     * Driver Class
     * */
+	public static Bank b;
+	public static BankManager bm;
+	public static ManagerPortal mp;
+	
     public static void main(String[] args) {
 	// write your code here
-        Bank b = new Bank();
+        b = new Bank();
+        bm = new BankManager("username", "password");
+    	
     }
 }

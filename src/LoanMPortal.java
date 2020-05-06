@@ -33,4 +33,5 @@ public class LoanMPortal extends JFrame implements ActionListener {
         }
         ManagerPortal.generateTable (rsLoans, loans);
     }
+    
 }

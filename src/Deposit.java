@@ -11,7 +11,7 @@ public class Deposit extends Transaction{
         double amountEuro = euro.convertFromDollar(amountUSD);
         double amountPound = pound.convertFromDollar (amountUSD);
         double amountYen = yen.convertFromDollar (amountUSD);
-        DBConnect.addTransaction(transactionID, memo, date, account.getID(), amountEuro, amountPound, amountUSD, amountYen);
+        //DBConnect.addTransaction(transactionID, memo, date, account.getID(), amountEuro, amountPound, amountUSD, amountYen);
     }
 
     @Override

@@ -27,8 +27,8 @@ public class Loan extends Service{
         double amountEuro = Bank.getEuro().convertFromDollar(amountUSD);
         double amountPound = Bank.getPound().convertFromDollar (amountUSD);
         double amountYen = Bank.getYen().convertFromDollar (amountUSD);
-        DBConnect.addLoan(loanID, name, dueDate, collateral, interestRate, customer.getID (), amountEuro, amountPound,
-                amountUSD, amountYen);
+        //DBConnect.addLoan(loanID, name, dueDate, collateral, interestRate, customer.getID (), amountEuro, amountPound,
+                //amountUSD, amountYen);
     }
 
     public void diminish(int amount) {
