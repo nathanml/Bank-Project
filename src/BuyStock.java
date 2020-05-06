@@ -67,7 +67,7 @@ public class BuyStock extends JFrame implements ActionListener, ItemListener {
                 openings.setBounds(10, 20, 200, 25);
                 panel.add(openings);
                 String[][] display = security.openingsSummary();
-                JLabel overview= new JLabel("Stock Name         Number of Shares       DOP");
+                JLabel overview= new JLabel("Stock Name/Number of Share/DOP");
                 overview.setBounds(10, 20, 200, 25);
                 panel.add(overview);
             
