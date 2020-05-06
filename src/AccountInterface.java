@@ -36,7 +36,8 @@ public class AccountInterface extends JFrame implements ActionListener{
             @Override
             public void actionPerformed(ActionEvent e) {
                 removeaccount();
-                
+                ATM driver= new ATM(currentCustomer);
+                driver.initialize();   
             }
             
         });
@@ -44,30 +45,13 @@ public class AccountInterface extends JFrame implements ActionListener{
         JButton withdraw = new JButton("Withdraw");
         withdraw.setBounds(10, 50, 400, 25);
         mainpanel.add(withdraw);
-        
-        withdraw.addActionListener (new ActionListener()
-        {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                //some method
-                
-            }
-            
-        });
+        withdraw.addActionListener (new WithdrawFrame(currentCustomer, account));
         
         JButton deposit = new JButton("Deposit");
         deposit.setBounds(10, 80, 400, 25);
         mainpanel.add(deposit);
-        deposit.addActionListener (new ActionListener()
-        {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                //some method
-                
-            }
-            
-        });
-        
+        deposit.addActionListener (new DepositFrame(currentCustomer, account));
+        		
         JButton loan = new JButton ("Request Loan");
         loan.setBounds(10, 110, 400, 25);
         mainpanel.add(loan);
