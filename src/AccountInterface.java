@@ -1,10 +1,10 @@
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 public class AccountInterface extends JFrame implements ActionListener{
 
@@ -75,6 +75,24 @@ public class AccountInterface extends JFrame implements ActionListener{
         back.addActionListener(new viewAccounts(currentCustomer));
         
         setVisible(true);
+    }
+
+    private class TransactionListener implements ActionListener{
+        JTable table;
+        JPanel panel;
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            ResultSet rs = null;
+            try {
+                rs = DBConnect.getTransaction (account);
+            } catch (SQLException ex) {
+                ex.printStackTrace ();
+            }
+            table = ManagerPortal.generateTable (rs);
+            panel.add(table);
+            add(panel);
+            setVisible (true);
+        }
     }
     public void removeaccount() {
     	Bank.chargeFee(account);

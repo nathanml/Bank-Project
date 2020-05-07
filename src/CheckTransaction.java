@@ -57,7 +57,10 @@ public class CheckTransaction extends JFrame implements ActionListener {
             ex.printStackTrace ();
         }
         if(transactions == null) panel.add(new JLabel ("No transactions from that date"));
-        else ManagerPortal.generateTable (rsTransactions, transactions);
+        else {
+            transactions = ManagerPortal.generateTable (rsTransactions);
+            panel.add(transactions);
+        }
 
     }
 }

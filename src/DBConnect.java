@@ -54,22 +54,25 @@ public class DBConnect {
         System.out.println("ACCOUNT successfully added to DB");
     }
 
-    public static void addTransaction(int transactionID, String memo, LocalDate date, int id, double amountEuro,
-                                      double amountPound, double amountUSD, double amountYen) throws SQLException {
+    public static void addTransaction(int transactionID, String memo, int id, double amountEuro,
+                                      double amountPound, double amountUSD, double amountYen, int day, int m, int y) throws SQLException {
         establishConnection ();
         Statement s= conn.createStatement ();
         s.executeQuery ("USE bankdb");
-        s.executeUpdate ("INSERT INTO TRANSACTIONS VALUES (" + transactionID + ", " + memo + ", " + date + "," + id +
-                "," + amountEuro + "," + amountPound + "," + amountUSD + "," + amountYen);
+        s.executeUpdate ("INSERT INTO transactions VALUES (" + transactionID + ", " + memo + ", " + id +
+                "," + amountEuro + "," + amountPound + "," + amountUSD + "," + amountYen + "," + day + "," + m + "," + y
+                + ");");
     }
 
-    public static void addLoan(int loanID, String name, Clock dueDate, String collateral, double interestRate, int id,
-                               double amountEuro, double amountPound, double amountUSD, double amountYen) throws SQLException {
+    public static void addLoan(int loanID, String name, String collateral, double interestRate, int id,
+                               double amountEuro, double amountPound, double amountUSD, double amountYen, int d, int m,
+                               int y, int accID) throws SQLException {
         establishConnection ();
         Statement s= conn.createStatement ();
         s.executeQuery ("USE bankdb");
-        s.executeUpdate ("INSERT INTO LOANS VALUES (" + loanID + ", " + name + ", " + dueDate + "," + collateral +
-                "," + interestRate + "," + id + "," + amountEuro + "," + amountPound + ","+ amountUSD + "," + amountYen);
+        s.executeUpdate ("INSERT INTO loans VALUES (" + loanID + ", '" + name + "', '"  + collateral +
+                "'," + interestRate + "," + id + "," + amountEuro + "," + amountPound + ","+ amountUSD + "," + amountYen
+                + ", " + d + "," + m + "," + y+", " + accID + ");");
     }
 
     public static void main(String[] args) {
@@ -80,8 +83,8 @@ public class DBConnect {
                                 double valueYen) throws SQLException {
         establishConnection ();
         Statement s= conn.createStatement ();
-        s.executeQuery ("INSERT INTO STOCKS VALUES (" + stockID + ", " + name + ", " + id + "," + valueEuro +
-                "," + valuePound + ","+ valueUSD + "," + valueYen);
+        s.executeQuery ("INSERT INTO stocks VALUES (" + stockID + ", " + name + ", " + id + "," + valueEuro +
+                "," + valuePound + ","+ valueUSD + "," + valueYen + ");");
     }
 
     public static boolean hasUsername(String username) throws SQLException {
@@ -254,6 +257,15 @@ public class DBConnect {
         Statement s= conn.createStatement ();
         s.executeQuery ("USE bankdb");
         String sql_res= "select * from accounts where customerID= " + id + " AND type = 'Securities';";
+        ResultSet rs=s.executeQuery(sql_res);
+        return rs;
+    }
+
+    public static ResultSet getTransaction(Account account) throws SQLException {
+        establishConnection ();
+        Statement s= conn.createStatement ();
+        s.executeQuery ("USE bankdb");
+        String sql_res= "select * from transactions where accountID= " + account.getID () +";";
         ResultSet rs=s.executeQuery(sql_res);
         return rs;
     }

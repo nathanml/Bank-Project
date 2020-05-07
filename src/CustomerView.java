@@ -33,13 +33,13 @@ public class CustomerView extends JFrame {
         customerID = new JLabel (String.valueOf (customer.getID ()));
 
         ResultSet rsAccounts = DBConnect.getAccounts (customer.getID ());
-        ManagerPortal.generateTable (rsAccounts, accounts);
+        accounts = ManagerPortal.generateTable (rsAccounts);
 
         ResultSet rsLoans = DBConnect.getLoans (customer.getID ());
-        ManagerPortal.generateTable (rsLoans, loans);
+        loans = ManagerPortal.generateTable (rsLoans);
 
         ResultSet rsStocks = DBConnect.getStocks (customer.getID ());
-        ManagerPortal.generateTable (rsStocks, stocks);
+        stocks = ManagerPortal.generateTable (rsStocks);
 
         panel.add (username);
         panel.add (firstname);

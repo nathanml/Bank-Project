@@ -5,8 +5,8 @@ public abstract class User {
     * hashed password
     * */
 
-    String username;
-    String password;
+    private String username;
+    private String password;
 
     //constructor
     public User(String username, String password)

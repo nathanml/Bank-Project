@@ -10,7 +10,6 @@ public abstract class Account implements BankAccount {
     protected double balance; //recorded in USD
     protected ArrayList<Transaction> transactions;
     protected int accountID;
-    //protected Customer owner;
     protected Clock dateOpened;
     protected Customer owner;
     protected Currency currency;
@@ -23,7 +22,6 @@ public abstract class Account implements BankAccount {
         this.owner = o;
         accountID = java.lang.System.identityHashCode(this);
         dateOpened = Bank.getCurrentTime();
-        //this.owner = owner;
     }
     //no-arg Constructor
     public Account() {
@@ -105,10 +103,20 @@ public abstract class Account implements BankAccount {
         return transactions;
     }
     //add transaction
-    public void addTransaction(Transaction t)
-    {
+    public void addTransaction(Transaction t) throws SQLException {
     	transactions.add(t);
+        Euro e = new Euro ();
+        Pound p = new Pound();
+        Yen y = new Yen();
+    	double balanceUSD = t.currency.convertToDollar (t.amount);
+    	DBConnect.addTransaction (t.transactionID,t.memo, accountID,e.convertFromDollar (balanceUSD),
+                p.convertFromDollar (balanceUSD), balanceUSD, y.convertFromDollar (balanceUSD),dateOpened.getDate (),
+                dateOpened.getMonth (), dateOpened.getYear ());
     }
     public abstract String print();
+
+    public Customer getOwner(){
+        return owner;
+    }
 }
 
