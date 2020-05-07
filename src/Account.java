@@ -10,7 +10,6 @@ public abstract class Account implements BankAccount {
     protected double balance; //recorded in USD
     protected ArrayList<Transaction> transactions;
     protected int accountID;
-    //protected Customer owner;
     protected Clock dateOpened;
     protected Customer owner;
     protected Currency currency;
@@ -23,7 +22,6 @@ public abstract class Account implements BankAccount {
         this.owner = o;
         accountID = java.lang.System.identityHashCode(this);
         dateOpened = Bank.getCurrentTime();
-        //this.owner = owner;
     }
     //no-arg Constructor
     public Account() {
