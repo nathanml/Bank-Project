@@ -63,7 +63,19 @@ public class ATM extends JFrame implements ActionListener {
 
     public static void main(String[] args)
     {
-       
+        //for testing purposes only
+        Customer customer= new Customer();
+        //customer.addCheckingAccount(new CheckingAccount("check1", 200, new Currency("USD", 0.12)));
+        try {
+            customer.addCheckingAccount(new CheckingAccount("check1",customer, 300, new Dollar()));
+            //customer.addSecuritiesAccount(new SecuritiesAccount("check2", customer,500, new Dollar()));
+            //customer.addSavingsAccount(new SavingsAccount("check3", 8900, new Dollar()));
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        ATM driver= new ATM(customer);
+        driver.initialize();
         
     }
 
