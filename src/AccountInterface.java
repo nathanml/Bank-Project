@@ -84,7 +84,6 @@ public class AccountInterface extends JFrame implements ActionListener{
         JPanel panel;
         @Override
         public void actionPerformed(ActionEvent e) {
-            add(panel);
             ResultSet rs = null;
             try {
                 rs = DBConnect.getTransaction (account);
@@ -93,6 +92,7 @@ public class AccountInterface extends JFrame implements ActionListener{
             }
             table = ManagerPortal.generateTable (rs);
             panel.add(table);
+            add(panel);
             setVisible (true);
         }
     }
