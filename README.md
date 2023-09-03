@@ -1,4 +1,4 @@
-# 591-Bank-Project
+# Bank-Project
 An online banking application built in Java and MySQL that allows users to open accounts, sign in, view account information, deposit and withdraw funds, open loan accounts, make payments, view transactions, and interact with an ATM and virtual stock market.
 
 ## Setup-Run the following commands from the src folder:
